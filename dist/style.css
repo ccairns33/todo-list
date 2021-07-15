@@ -2,10 +2,11 @@
 html, body{
     height:100%;
     width:100%;
-    font-family: 'Pacifico', 'cursive';
+    font-family: "Roboto", sans-serif;
     box-sizing: border-box;
     color:white;
     background-color: #ffff;
+    font-weight: 400;
 }
 body{ 
     margin:auto;
@@ -29,18 +30,29 @@ header{
     margin: 0;
     border-bottom: 1px solid rgb(223, 223, 223);
     padding-left: 3%;
-    margin-top: 5%;
+    padding-top: 5%;
     padding-bottom: 5%;
-    box-shadow: 0 4px 1px -2px rgb(226, 226, 226);
+    box-shadow: 0 2px 1px -1px rgb(226, 226, 226);
     letter-spacing: 1px;
+    font-size:1.2rem;
+    background-color:#b281a3ba ;
+    color:white;
+    font-weight:500;
+}
+h2>span{
+    margin-right:.2rem;
+}
+.starfish{
+    width: 1.6rem;
+position: absolute;
 }
 
 .left-col{
-    color:#363636;
-    font-family: 'Merriweather', serif;
-    background-color:#fdf9ff;
+    color:#383838;
+    background-color:#ffff;
     width:25%;
-    height:100vh
+    height:100vh;
+    border-radius:3px;
     
 }
 .projects{
@@ -64,13 +76,15 @@ header{
 } */
 .projects>h3, .notes>h3, .dates>h3, .todo-list>h3{
     text-align: left;
-    font-size: 1.2rem;
-    padding: 0% 10% 0% 15%;
+    font-size: 1rem;
+    padding: 0% 10% 0% 10%;
     letter-spacing: 1px;
+    transition: transform 0.3s;
+    font-weight:400;
 
 }
 .projects>h3:hover, .notes>h3:hover ,.dates>h3:hover, .todo-list>h3:hover{
-    opacity:.8;
+    transform: translateY(-20%);
     cursor:pointer;
 }
 
@@ -80,7 +94,10 @@ input{
 .project-input{
 }
 
-
+h3>i {
+    color: #f78f8f;
+    font-size:1.25rem;
+}
 .new-list{
     width:75%
 }
@@ -98,7 +115,7 @@ input{
 }
 
 .background-pic{
-    background-image: url(trees.jpg);
+    background-image: url(ocean.webp);
     width:100%;
-    background-position: center bottom;
+    background-position: 50% 50%
 }
