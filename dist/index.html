@@ -21,8 +21,8 @@
         <h1 class="title">To-Do <i class="far fa-list-alt"></i></h1>
       </header> -->
   <div class=" d-flex">
-    <div class="left-col content  ">
-      <h2 class="title"> <span>To-Do </span><img class="starfish" src="starfish.png"> </h2>
+    <nav class="left-col content  ">
+      <h2 class="title"> <span>To-Do <img class="starfish" src="starfish.png"></span> </h2>
       <div class="todo-list">
         <h3> <i class="fas fa-clipboard-list"></i> ToDo List</h3>
       </div>
@@ -52,9 +52,9 @@
       <div class="new-todo d-flex">
         +
       </div>
-    </div>
+    </nav>
     <div class="main todo-list content background-pic">
-      <div class="todo-item d-flex">
+      <!-- <div class="todo-item d-flex">
         <div class="todo-checkmark"></div>
         <div class="todo-title"> Example</div>
         <div class="todo-detail">details</div>
@@ -65,7 +65,18 @@
         <div class="todo-delete todo-icon">
           <i class="far fa-trash-alt"></i>
         </div>
-      </div>
+      </div> -->
+        <form class="new-item-container d-flex overlay">
+          <div class="new-item-header"></div>
+          <div class="new-item-content">
+            <div class="new-item-sidebar"></div>
+            <div class="new-item-main"></div>
+          </div>
+          
+
+        </form>
+      
+      
     </div>
   </div>
 
