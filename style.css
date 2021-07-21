@@ -38,7 +38,10 @@ header{
     background-color:#b281a3ba ;
     color:white;
     font-weight:500;
+
+   
 }
+
 h2>span{
     margin-right:.2rem;
 }
@@ -53,14 +56,9 @@ position: absolute;
     width:25%;
     height:100vh;
     border-radius:3px;
-    
+    z-index: 1;
 }
-.projects{
-}
-.todo-list{
-    padding-top:5%;
 
-}
 /* .projects>ul>li{
     padding:0 .5rem .5rem .5rem;
     letter-spacing: 1px;
@@ -117,6 +115,7 @@ h3>i {
 .background-pic{
     background-image: url(ocean.webp);
     width:100%;
+    height:100vh;
     background-position: 50% 50%
 }
 .new-todo{
@@ -210,4 +209,15 @@ h3>i {
 .todo-edit:hover, .todo-delete:hover{
     opacity:.6;
     cursor:pointer;
+}
+/* new item popup */
+.overlay{
+    
+}
+.new-item-container{
+    width:20rem;
+    height:20rem;
+    background-color: #ffff;
+    justify-content: center;
+    align-items:center;
 }
