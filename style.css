@@ -241,8 +241,17 @@ h3>i {
     height:3rem;
     width:100%;
     margin-top: -3rem;
+    justify-content: space-between;
+    align-items: center;
 
     
+}
+.exit{
+    font-weight:600;
+    margin-right: 1rem;
+}
+.exit:hover{
+    cursor:pointer;
 }
 .new-item-header>h2{
     font-weight: 500;
@@ -250,23 +259,22 @@ h3>i {
     margin-top:0;
     margin-bottom:0;
     padding-left:3%;
-    padding-top: 0.75rem;
 }
 .new-item-sidebar{
-    color:#383838;
+    color:#141414;
     width:10rem;
     min-width: 8rem;
     background: #eee;
-    border-left: 1px solid rgb(175, 175, 175);
+    border-right: 1px solid rgb(207, 207, 207);
 }
 .new-item-sidebar>ul{
-    padding-left:2rem;
+    padding-left:1rem;
 }
 .new-item-sidebar>ul>li:hover{
     cursor:pointer;
     font-size: 1rem;
     font-weight: 600;
-    color:#f16969;
+    color:#966c89ba;
 }
 .new-item-options>li{
     list-style-type: none;
@@ -278,4 +286,92 @@ h3>i {
     line-height: 1rem;
     transition: .2s ease-in-out;
 
+}
+.new-item-main-content{
+    width:100%;
+    margin-top:1rem;
+    margin-left:1rem;
+    margin-right:1rem;
+}
+.new-input-base{
+    width: 100%;
+    border: none;
+    background-color: transparent;
+    color: #141414;
+    font-size: 1rem;
+    resize: none;
+}
+.new-input-base:focus{
+    outline:none;
+}
+.new-input-title{
+    height:2rem;
+}
+.new-input-details{
+    height:10rem;
+    margin-bottom: 5rem;
+    font-size:.8rem;
+    
+}
+
+.new-item-date{
+    align-items: center;
+    margin-bottom:.5rem;
+}
+.date-title, .priority-title{
+    color:#141414;
+    font-size:.9rem;
+    margin-right:.5rem;
+}
+.priority-title{
+    margin-right:1.7rem;
+}
+.new-item-date-input{
+    padding: .3rem .2rem;
+    border: 1px solid #3ba395;
+    border-radius: 5px;
+    color: #3ba395;
+    background-color: transparent;
+    font-size: .7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+.new-item-date-input:focus{
+    outline:none;
+}
+.new-item-priority{
+    color:black;
+    align-items: center;
+}
+.new-item-priority input[type="radio"] {
+    position: relative;
+    left: 2.2rem;
+    height: 1px;
+    width: 1px;
+    padding: 0;
+    margin: 0;
+    opacity: 0;
+}
+.priority-btn{
+    display: inline-block;
+    margin: 0 .5rem 0 -5px;
+    padding: .2rem .5rem;
+    border-radius: 3px;
+    font-size: .7rem;
+    text-transform: uppercase;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all .3s;
+}
+.priority-btn-low{
+    border: 1px solid green;
+    color: green;
+}
+.priority-btn-medium{
+    border: 1px solid orange;
+    color: orange;
+}
+.priority-btn-high{
+    border: 1px solid red;
+    color: red;
 }
