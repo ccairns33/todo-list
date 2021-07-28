@@ -81,7 +81,7 @@
                 <li class="new-item-project">
                   Project
                 </li>
-                <li class="new-item-date_sidebar">
+                <li class="new-item-date">
                   Date
                 </li>
                 <li class="new-item-note">
@@ -90,26 +90,38 @@
               </ul>
             </div>
             <div class="new-item-main-content ">
-              <!-- todo input -->
-              <textarea class="new-input-title new-input-base" placeholder="Title: Pay bills" id="new-todo-title" name="new-todo" maxlength="40" required=""></textarea>
-              <textarea class="new-input-details new-input-base " placeholder="Details: e.g internet, phone, rent." id="new-todo-details" name="new-todo"></textarea>
-              <!-- date due -->
-              <div class="new-item-date d-flex">
-                <div class="date-title">Due Date: </div>
-                <input type="date" class="new-item-date-input" id="new-item-date" name="new-todo" required="">
-              </div>
-              <div class="new-item-priority d-flex">
-                <div class="priority-title">Priority: </div>
+              <!-- //for new todo panel
+              <div class="todo-panel">
+                <textarea class="new-input-title new-input-base" placeholder="Title: Pay bills" id="new-todo-title" name="new-todo" maxlength="40" required=""></textarea>
+                <textarea class="new-input-details new-input-base " placeholder="Details: e.g internet, phone, rent." id="new-todo-details" name="new-todo"></textarea>
 
-                <input type="radio" id="new-item-low" name="new-item-priority" value="low" required="">
-                <label for="new-item-low" class="priority-btn priority-btn-low">Low</label>
+                <div class="new-item-date-due d-flex">
+                  <div class="date-title">Due Date: </div>
+                  <input type="date" class="new-item-date-input" id="new-item-date" name="new-todo" required="">
+                </div>
+                <div class="wrapper-priority-submit d-flex"> 
+                  <div class="new-item-priority d-flex">
+                      <div class="priority-title">Priority: </div>
 
-                <input type="radio" id="new-item-medium" name="new-item-priority" value="medium" required="">
-                <label for="new-item-medium" class="priority-btn priority-btn-medium">Medium</label>
+                      <input type="radio" id="new-item-low" name="new-item-priority" value="low" required="">
+                      <label for="new-item-low" class="priority-btn priority-btn-low">Low</label>
 
-                <input type="radio" id="new-item-high" name="new-item-priority" value="high" required="">
-                <label for="new-item-high" class="priority-btn priority-btn-high">high</label>
-              </div>
+                      <input type="radio" id="new-item-medium" name="new-item-priority" value="medium" required="">
+                      <label for="new-item-medium" class="priority-btn priority-btn-medium">Medium</label>
+
+                      <input type="radio" id="new-item-high" name="new-item-priority" value="high" required="">
+                      <label for="new-item-high" class="priority-btn priority-btn-high">high</label>
+                  </div>
+                  <input type="submit" class="create-new-todo-submit" id="todo-submit" value="Add To Do">
+                </div> 
+            </div>
+            -->
+
+<!-- //project panel
+              <div class="project-panel d-flex">
+                <textarea class="create-new-project-input new-input-base" placeholder="Title: Sew Dress" id="new-project-title" name="new-project" maxlength="40"></textarea>
+                <div class="create-new-project-submit">Create Project</div>
+              </div> -->
             </div>
           </div>
         </form>

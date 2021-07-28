@@ -315,7 +315,7 @@ h3>i {
     
 }
 
-.new-item-date{
+.new-item-date-due{
     align-items: center;
     margin-bottom:.5rem;
 }
@@ -376,3 +376,51 @@ h3>i {
     border: 1px solid red;
     color: red;
 }
+.wrapper-priority-submit{
+    justify-content: space-between;
+}
+.create-new-todo-submit{
+    text-align: center;
+    align-self: center;
+    padding: .5rem .5rem;
+    border-radius: 3px;
+    border: 1px solid #3ba395;
+    font-size: .8rem;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: #3ba395;
+    background-color: transparent;
+    cursor: pointer;
+    transition: all .3s;
+}
+.create-new-todo-submit:hover{
+    background-color:#3ba395;
+    color:white;
+}
+/* project menu */
+.project-panel{
+    flex-direction: column;
+    justify-content: space-between;
+    height:100%;
+}
+.create-new-project-submit{
+    text-align: center;
+    align-self: flex-start;
+    padding: .5rem .5rem;
+    border-radius: 3px;
+    border: 1px solid #3ba395;
+    font-size: .8rem;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: #3ba395;
+    background-color: transparent;
+    cursor: pointer;
+    transition: all .3s;
+    margin-bottom:1.5rem;
+}
+.create-new-project-submit:hover{
+    background-color: #3ba395;
+    color:white;
+
+}
+
