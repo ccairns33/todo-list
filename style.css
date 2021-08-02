@@ -418,6 +418,9 @@ h3>i {
     transition: all .3s;
     margin-bottom:1.5rem;
 }
+.display-none{
+    display:none;
+}
 .create-new-project-submit:hover{
     background-color: #3ba395;
     color:white;
