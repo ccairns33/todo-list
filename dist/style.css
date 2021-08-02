@@ -336,6 +336,7 @@ h3>i {
     font-size: .7rem;
     font-weight: 700;
     text-transform: uppercase;
+    cursor:pointer;
 }
 .new-item-date-input:focus{
     outline:none;
@@ -418,12 +419,39 @@ h3>i {
     transition: all .3s;
     margin-bottom:1.5rem;
 }
-.display-none{
-    display:none;
-}
+
 .create-new-project-submit:hover{
     background-color: #3ba395;
     color:white;
 
 }
+.display-none{
+    display:none;
+}
 
+.date-panel{
+    flex-direction: column;
+    justify-content: space-between;
+    height:100%;
+
+}
+
+.create-new-date-submit{
+    text-align: center;
+    align-self: flex-start;
+    padding: .5rem .5rem;
+    border-radius: 3px;
+    border: 1px solid #3ba395;
+    font-size: .8rem;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: #3ba395;
+    background-color: transparent;
+    cursor: pointer;
+    transition: all .3s;
+    margin-bottom:1.5rem;
+}
+.create-new-date-submit:hover{
+    color:white;
+    background-color:#3ba395;
+}
