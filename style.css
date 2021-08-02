@@ -455,3 +455,9 @@ h3>i {
     color:white;
     background-color:#3ba395;
 }
+
+.note-panel{
+    flex-direction: column;
+    justify-content: space-between;
+    height:100%;
+}
