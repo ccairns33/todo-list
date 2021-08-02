@@ -8,6 +8,7 @@ html, body{
     color:white;
     background-color: #ffff;
     font-weight: 400;
+    
 }
 body{ 
     margin:auto;
@@ -142,7 +143,7 @@ h3>i {
     
     transition: all .2s ease-out;
     background-color: rgba(255, 255, 255, 0.863);
-    margin: 0 10% 0 10%;
+    margin: 5% 10% 0 10%;
     padding:.5rem;
     justify-content: center;
     align-items: center;
@@ -231,13 +232,14 @@ h3>i {
     height: 25rem;
     background-color: #ffff;
     margin:auto;
+    margin-left:34.4%
 }
 .new-item-content{
     min-height:100%;
     width:100%;
 }
 .new-item-header{
-    background-color: #b281a3ba;
+    background-color: #b281a3;
     height:3rem;
     width:100%;
     margin-top: -3rem;
@@ -287,6 +289,9 @@ h3>i {
     line-height: 1rem;
     transition: .2s ease-in-out;
 
+}
+.main{
+    overflow-y: scroll;
 }
 .new-item-main-content{
     width:100%;
@@ -338,6 +343,8 @@ h3>i {
     text-transform: uppercase;
     cursor:pointer;
 }
+
+
 .new-item-date-input:focus{
     outline:none;
 }
@@ -368,14 +375,31 @@ h3>i {
 .priority-btn-low{
     border: 1px solid green;
     color: green;
+    transition: all .3s;
+}
+.priority-btn-low:hover{
+    color:white;
+    background:green;
 }
 .priority-btn-medium{
     border: 1px solid orange;
     color: orange;
+    transition: all .3s;
+
+}
+.priority-btn-medium:hover{
+    color:white;
+    background:orange;
 }
 .priority-btn-high{
     border: 1px solid red;
     color: red;
+    transition: all .3s;
+
+}
+.priority-btn-high:hover{
+    color:white;
+    background:red;
 }
 .wrapper-priority-submit{
     justify-content: space-between;
