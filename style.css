@@ -139,11 +139,11 @@ h3>i {
     box-shadow: none;
     cursor: pointer;
 }
-.todo-item, .project-item{
+.todo-item, .project-item, .date-item_page{
     
     transition: all .2s ease-out;
     background-color: rgba(255, 255, 255, 0.918);
-    margin: 5% 10% 0 10%;
+    margin: 0% 10% 0 10%;
     padding:.5rem;
     justify-content: center;
     align-items: center;
@@ -151,7 +151,7 @@ h3>i {
     margin-bottom:.5rem;
 }
 
-.todo-item:hover, .project-item:hover{
+.todo-item:hover, .project-item:hover, .date-item:hover{
     box-shadow: 3px 3px 5px 2px rgba(0, 0, 0, 0.2);
 }
 .todo-checkmark, .project-checkmark{
@@ -165,7 +165,7 @@ h3>i {
 .todo-checkmark:hover, .project-checkmark:hover{
     cursor:pointer;
 }
-.todo-title, .project-title{
+.todo-title, .project-title, .date-title_page{
     margin-right:auto;
     color:#b35495ba;
     font-size: .9rem;
@@ -174,7 +174,7 @@ h3>i {
 .project-title{
     color: #32929e;
 }
-.todo-detail, .project-detail{
+.todo-detail, .project-detail, .date-detail{
     padding:.3rem;
     text-transform: uppercase;
     font-size: .55rem;
@@ -186,27 +186,28 @@ h3>i {
     transition: all .2s ease-out;
 
 }
-.todo-detail:hover, .project-detail:hover{
+.todo-detail:hover, .project-detail:hover, .date-detail:hover{
     cursor:pointer;
     color:white;
     background-color: #1ba872;
 }
-.todo-date, .project-date{
+.todo-date, .project-date, .date-item-date{
     color:#b35495ba;
     font-size: .7rem;
     margin-right:1rem;
 }
- .todo-delete, .project-delete{
+ .todo-delete, .project-delete, .date-delete{
     margin-right:1rem;
     color: #f16969;
     transition: all .2s ease-out;
 }
-.todo-edit, .project-edit{
+.todo-edit, .project-edit, .date-edit{
     color:#1ba872;
     margin-right:1rem;
     transition: all .2s ease-out;
 }
-.todo-edit:hover, .todo-delete:hover, .project-edit:hover, .project-delete:hover{
+.todo-edit:hover, .todo-delete:hover, .project-edit:hover, .project-delete:hover, .date-edit:hover
+, .date-delete:hover{
     opacity:.6;
     cursor:pointer;
 }
@@ -292,6 +293,7 @@ h3>i {
 }
 .main{
     overflow-y: scroll;
+    padding-top:5%;
 }
 .new-item-main-content{
     width:100%;
