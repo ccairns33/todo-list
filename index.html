@@ -54,7 +54,7 @@
       </div>
     </nav>
     <div class="main todo-list content background-pic">
-      <div class="todo-item d-flex">
+      <div class="todo-item d-flex display-none">
         <div class="todo-checkmark"></div>
         <div class="todo-title"> Example</div>
         <div class="todo-detail">details</div>
@@ -66,7 +66,21 @@
           <i class="far fa-trash-alt"></i>
         </div>
       </div>
-      <div class="overlay">
+
+      <div class="project-item d-flex ">
+        <div class="project-checkmark"></div>
+        <div class="project-title"> Project</div>
+        <div class="project-detail"> Project details</div>
+        <div class="project-date">Aug 17</div>
+        <div class="project-edit project-icon">
+          <i class="far fa-edit"></i>
+        </div>
+        <div class="project-delete project-icon">
+          <i class="far fa-trash-alt"></i>
+        </div>
+      </div>
+
+      <div class="overlay display-none">
         <form class="new-item-container ">
           <div class="new-item-header d-flex">
             <h2>Create a new...</h2>
