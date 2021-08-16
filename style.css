@@ -501,7 +501,7 @@ h3>i {
 
 }
 .note-item{
-    height: 15rem;
+    height: 14rem;
 width: 12rem;
 background-color: #c7a3bc;
 margin: 1rem, auto;
@@ -511,6 +511,7 @@ position: relative;
 transition: all .3s;
 overflow: hidden;
 padding: 1rem;
+padding-bottom: 2rem;
 border-radius: 0 0 0 30px/45px;
 box-shadow: inset 0 -40px 40px rgba(254, 254, 254, 0.54), inset 0 35px 8px rgba(192, 192, 192, 0.39), 0 5px 6px 5px rgba(115, 115, 115, 0.42);
 line-height: 1.7em;
@@ -551,5 +552,14 @@ font-size: 1rem;
     letter-spacing: 1px;
 }
     
-.note-item:hover{
+.note-item_content{
+    height:100%;
+    -ms-word-wrap: break-word;
+    word-wrap: break-word;
+
+    overflow-y: hidden;
 }
+
+.note-item_title:focus, .note-item_content:focus {
+    outline:none;
+} 
