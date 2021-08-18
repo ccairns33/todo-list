@@ -1,1 +1,2 @@
-console.log("hi");
+import {initEventListeners } from "./website.js";
+initEventListeners();
