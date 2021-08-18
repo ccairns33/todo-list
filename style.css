@@ -118,7 +118,7 @@ h3>i {
     height:100vh;
     background-position: 50% 50%
 }
-.new-todo{
+.new-todo_btn{
     height:3rem;
     width:3rem;
     background-color: #b281a3ba;
@@ -134,7 +134,7 @@ h3>i {
     transition: all .2s ease-out;
 
 }
-.new-todo:hover{
+.new-todo_btn:hover{
     opacity:.7;
     box-shadow: none;
     cursor: pointer;
@@ -249,11 +249,11 @@ h3>i {
 
     
 }
-.exit{
+.exit-new-item{
     font-weight:600;
     margin-right: 1rem;
 }
-.exit:hover{
+.exit-new-item:hover{
     cursor:pointer;
 }
 .new-item-header>h2{

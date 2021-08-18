@@ -28,20 +28,6 @@
       </div>
       <div class="projects">
         <h3> <i class="fas fa-folder-open"></i> Projects</h3>
-        <!-- <ul>
-              <li>Todo List</li>
-              <li>Sewing</li>
-              <li>Gardening</li>
-            </ul> -->
-        <!-- <form class="d-flex flex-col"action="">
-              <input 
-                type="text"
-                class="new-list project-input"
-                placeholder="New project"
-                aria-label="newlist name"
-              />
-              <button class="btn create " aria-label="create new list">+</button>
-            </form> -->
       </div>
       <div class="dates">
         <h3> <i class="far fa-calendar-alt"></i></i> Important Dates</h3>
@@ -49,7 +35,7 @@
       <div class="notes">
         <h3> <i class="fas fa-sticky-note"></i> Notes</h3>
       </div>
-      <div class="new-todo d-flex">
+      <div class="new-todo_btn d-flex">
         +
       </div>
     </nav>
@@ -92,7 +78,8 @@
           </div>
         </div>
 
-        <div class="notes-container grid">
+        <div class="notes-container d-flex display-none">
+
           <div class= "note-item d-flex">
             <div class="note-item_close">
               <i class="fas fa-times"></i>
@@ -101,14 +88,7 @@
 
             <div class="note-item_content" contentEditable="true" >Example note text. </div>
           </div>
-          <div class= "note-item ">
-
-          </div>
-          <div class= "note-item ">
-
-          </div>
-          
-          
+                   
         </div>
       </div>
 
@@ -116,7 +96,7 @@
         <form class="new-item-container ">
           <div class="new-item-header d-flex">
             <h2>Create a new...</h2>
-            <div class="exit">X</div>
+            <div class="exit-new-item">X</div>
           </div>
           <div class="new-item-content d-flex">
             <div class="new-item-sidebar">
