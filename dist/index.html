@@ -40,8 +40,8 @@
       </div>
     </nav>
     <div class="main todo-list content background-pic">
-      <div class= "items-container">
-        <div class="todo-item d-flex display-none">
+      <div id="items-container" class= "items-container">
+        <div id="item-display_page" class="todo-item d-flex display-none">
           <div class="todo-checkmark"></div>
           <div class="todo-title"> Example</div>
           <div class="todo-detail">details</div>
@@ -54,7 +54,7 @@
           </div>
         </div>
 
-        <div class="project-item d-flex display-none">
+        <div id="item-display_page" class="project-item d-flex display-none">
           <div class="project-checkmark"></div>
           <div class="project-title"> Project</div>
           <div class="project-detail"> Project details</div>
@@ -67,7 +67,7 @@
           </div>
         </div>
 
-        <div class="date-item_page d-flex  display-none">
+        <div id="item-display_page" class="date-item_page d-flex  display-none">
           <div class="date-title_page"> My Birthday</div>
           <div class="date-item-date">Aug 17</div>
           <div class="date-edit date-icon">
@@ -78,8 +78,7 @@
           </div>
         </div>
 
-        <div class="notes-container d-flex display-none">
-
+        <div id = "item-display_page" class="notes-container d-flex display-none">
           <div class= "note-item d-flex">
             <div class="note-item_close">
               <i class="fas fa-times"></i>
@@ -115,8 +114,8 @@
                 </li>
               </ul>
             </div>
-            <div class="new-item-main-content ">
-              <div class="todo-panel ">
+            <div id = "new-item-main-content" class="new-item-main-content ">
+              <div class="todo-panel" id="item-panel">
                 <textarea class="new-input-title new-input-base" placeholder="Title: Pay bills" id="new-todo-title" name="new-todo" maxlength="40" required=""></textarea>
                 <textarea class="new-input-details new-input-base " placeholder="Details: e.g internet, phone, rent." id="new-todo-details" name="new-todo"></textarea>
 
@@ -139,26 +138,25 @@
                   </div>
                   <input type="submit" class="create-new-todo-submit" id="todo-submit" value="Add To Do">
                 </div> 
-            </div>
-           
-
-              <div class="project-panel d-flex display-none">
+              </div>
+    
+              <div id="item-panel"class="project-panel d-flex display-none">
                 <textarea class="create-new-project-input new-input-base" placeholder="Title: Sew Dress" id="new-project-title" name="new-project" maxlength="40"></textarea>
                 <div class="create-new-project-submit">Create Project</div>
               </div>
 
-              <div class="date-panel d-flex display-none">
+              <div  id="item-panel" class="date-panel d-flex display-none">
                 <div>
                   <textarea class="create-new-date-input new-input-base" placeholder="My Birthday" id="new-date-title" name="new-date" maxlength="40"></textarea>
                   <div class="new-item-date-due d-flex">
-                    <div class="date-title">Due Date: </div>
+                    <div class="date-title">Date: </div>
                     <input type="date" class="new-item-date-input" id="new-date" name="new-date" required="">
                   </div>
                 </div>
                 <div class="create-new-date-submit">Add Date</div>
               </div>
 
-              <div class="note-panel d-flex display-none">
+              <div id="item-panel"class="note-panel d-flex display-none">
                 <div>
                   <textarea class="new-input-title new-input-base" placeholder="Note" id="new-note-title" name="new-note" maxlength="40" required=""></textarea>
                   <textarea class="new-input-details new-input-base " placeholder="Details: " id="new-note-details" name="new-note"></textarea>
