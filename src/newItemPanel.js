@@ -8,6 +8,10 @@ let loadNewItemPanel = () =>{
 let closeNewItemPanel = () =>{
     const itemPanel = document.querySelector(".overlay");
     itemPanel.classList.add("display-none");
+
+    // default to todo panel
+    displayTab(document.querySelector(".todo-panel"));
+
 }
 
 //display none for other tabs
@@ -25,7 +29,6 @@ let hideInactiveTabs = (activePanel) =>{
 // loading the different panels
 let displayTab = (activePanel) =>{
     hideInactiveTabs(activePanel);
-
 }
 
 
