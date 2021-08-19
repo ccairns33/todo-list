@@ -8,7 +8,7 @@ let iconColorChange = ( tabsArr ) => {
     for (let i = 0; i< tabsArr.length; i++){
         //the icon format corresponds with the tabArr order, so can simply go by index
         if (tabsArr[i].classList.contains("display-none")){
-            iconArr[i].classList.remove("green");
+            iconArr[i].classList.remove("blue");
             if (iconArr[i].classList.contains("pink")){
                 continue;
             }
@@ -17,7 +17,7 @@ let iconColorChange = ( tabsArr ) => {
             }
         }
         else {
-            iconArr[i].classList.add("green");
+            iconArr[i].classList.add("blue");
 
         }
     }
