@@ -1,4 +1,5 @@
-import {loadNewItemPanel, closeNewItemPanel,hideInactiveTabs } from "./newItemPanel";
+import {loadNewItemPanel, closeNewItemPanel } from "./newItemPanel";
+import {iconColorChange} from "./itemsPageDisplay";
 
 let initEventListeners = () => {
     const newTodoBtn = document.querySelector(".new-todo_btn");
@@ -37,16 +38,19 @@ let initEventListeners = () => {
     const notesSideTab = document.querySelector(".notes_tab");
 
     todoSideTab.addEventListener("click", (e) => {
-        hideInactiveTabs(document.querySelector(".todo-item_page"),"items-container", 'item-display_page');
+        hideInactiveTabs(document.querySelector(".todo-item_page"),"items-container", 'item-display_page' );
     })
     projectsSideTab.addEventListener("click", (e) => {
         hideInactiveTabs(document.querySelector(".project-item_page"),"items-container", 'item-display_page');
+
     })
     datesSideTab.addEventListener("click", (e) => {
         hideInactiveTabs(document.querySelector(".date-item_page"),"items-container", 'item-display_page');
+
     })
     notesSideTab.addEventListener("click", (e) => {
         hideInactiveTabs(document.querySelector(".notes-container"),"items-container", 'item-display_page');
+
     })
 }
 
@@ -62,6 +66,19 @@ let getDivChildren = (containerId, elementsId) =>{
         }
     }
     return myArray;
+}
+//add display none for other tabs and calling icon color changing
+let hideInactiveTabs = (activePanel, container, children) =>{
+    let tabsArr = getDivChildren(container, children);
+    tabsArr.forEach(element => {
+        if(activePanel.classList[0] === element.classList[0]){
+            activePanel.classList.remove("display-none");
+        }
+        else{
+            element.classList.add("display-none");
+        }
+    });
+    iconColorChange(tabsArr);
 }
 
 export {initEventListeners, getDivChildren};
