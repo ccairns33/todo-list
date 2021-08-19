@@ -1,4 +1,4 @@
-import {loadNewItemPanel, closeNewItemPanel,displayTab } from "./newItemPanel";
+import {loadNewItemPanel, closeNewItemPanel,hideInactiveTabs } from "./newItemPanel";
 
 let initEventListeners = () => {
     const newTodoBtn = document.querySelector(".new-todo_btn");
@@ -18,16 +18,35 @@ let initEventListeners = () => {
     const noteTab = document.querySelector(".new-item-note");
 
     todoTab.addEventListener("click", (e) => {
-        displayTab(document.querySelector(".todo-panel"));
+        hideInactiveTabs(document.querySelector(".todo-panel"),"new-item-main-content", 'item-panel');
     })
     projectTab.addEventListener("click", (e) => {
-        displayTab(document.querySelector(".project-panel"));
+        hideInactiveTabs(document.querySelector(".project-panel"),"new-item-main-content", 'item-panel');
     })
     dateTab.addEventListener("click", (e) => {
-        displayTab(document.querySelector(".date-panel"));
+        hideInactiveTabs(document.querySelector(".date-panel"),"new-item-main-content", 'item-panel');
     })
     noteTab.addEventListener("click", (e) => {
-        displayTab(document.querySelector(".note-panel"));
+        hideInactiveTabs(document.querySelector(".note-panel"),"new-item-main-content", 'item-panel');
+    })
+
+    // tabs for chagning main content from sidebar nav
+    const todoSideTab = document.querySelector(".todo-list_tab");
+    const projectsSideTab = document.querySelector(".projects_tab");
+    const datesSideTab = document.querySelector(".dates_tab");
+    const notesSideTab = document.querySelector(".notes_tab");
+
+    todoSideTab.addEventListener("click", (e) => {
+        hideInactiveTabs(document.querySelector(".todo-item_page"),"items-container", 'item-display_page');
+    })
+    projectsSideTab.addEventListener("click", (e) => {
+        hideInactiveTabs(document.querySelector(".project-item_page"),"items-container", 'item-display_page');
+    })
+    datesSideTab.addEventListener("click", (e) => {
+        hideInactiveTabs(document.querySelector(".date-item_page"),"items-container", 'item-display_page');
+    })
+    notesSideTab.addEventListener("click", (e) => {
+        hideInactiveTabs(document.querySelector(".notes-container"),"items-container", 'item-display_page');
     })
 }
 

@@ -139,7 +139,7 @@ h3>i {
     box-shadow: none;
     cursor: pointer;
 }
-.todo-item, .project-item, .date-item_page{
+.todo-item_page, .project-item_page, .date-item_page{
     
     transition: all .2s ease-out;
     background-color: rgba(255, 255, 255, 0.918);
@@ -151,7 +151,7 @@ h3>i {
     margin-bottom:.5rem;
 }
 
-.todo-item:hover, .project-item:hover, .date-item:hover{
+.todo-item_page:hover, .project-item_page:hover, .date-item_page:hover{
     box-shadow: 3px 3px 5px 2px rgba(0, 0, 0, 0.2);
 }
 .todo-checkmark, .project-checkmark{

@@ -15,8 +15,8 @@ let closeNewItemPanel = () =>{
 }
 
 //display none for other tabs
-let hideInactiveTabs = (activePanel) =>{
-    let tabsArr = getDivChildren("new-item-main-content", 'item-panel');
+let hideInactiveTabs = (activePanel, container, children) =>{
+    let tabsArr = getDivChildren(container, children);
     tabsArr.forEach(element => {
         if(activePanel.classList[0] === element.classList[0]){
             activePanel.classList.remove("display-none");
@@ -26,10 +26,7 @@ let hideInactiveTabs = (activePanel) =>{
         }
     });
 }
-// loading the different panels
-let displayTab = (activePanel) =>{
-    hideInactiveTabs(activePanel);
-}
 
 
-export {loadNewItemPanel,closeNewItemPanel,displayTab };
+
+export {loadNewItemPanel,closeNewItemPanel,hideInactiveTabs };
