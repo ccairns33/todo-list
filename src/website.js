@@ -81,4 +81,4 @@ let hideInactiveTabs = (activePanel, container, children) =>{
     iconColorChange(tabsArr);
 }
 
-export {initEventListeners, getDivChildren};
+export {initEventListeners, getDivChildren, hideInactiveTabs};
