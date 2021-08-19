@@ -93,8 +93,13 @@ input{
 
 
 h3>i {
-    color: #f78f8f;
     font-size:1.25rem;
+}
+.pink {
+    color: #f78f8f;
+}
+.green{
+    color:#29be80;
 }
 .new-list{
     width:75%
@@ -149,6 +154,10 @@ h3>i {
     align-items: center;
     border-radius: 3px;
     margin-bottom:.5rem;
+
+}
+.date-item_page{
+    padding:.65rem;
 }
 
 .todo-item_page:hover, .project-item_page:hover, .date-item_page:hover{
@@ -493,6 +502,8 @@ h3>i {
 .items-container{
     padding-top:5%;
     height:90%;
+    transition: all .2s ease-out;
+
 }
 .notes-container{
     height:100%;
