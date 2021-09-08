@@ -52,10 +52,44 @@ let initEventListeners = () => {
         hideInactiveTabs(document.querySelector(".notes-container"),"items-container", 'item-display_page');
 
     })
+
+    //event listeners for the todo items in Todo List sidebar
+
+    let arrayTodoItems = getDivChildrenByClass("items-container","todo-item_page");
+    console.log(arrayTodoItems);
+    arrayTodoItems.forEach(element => {
+        let checkmark = element.querySelector(".todo-checkmark");
+        let deails = element.querySelector(".todo-detail");
+        let editBtn = element.querySelector(".todo-edit");
+        let deleteBtn = element.querySelector(".todo-delete");
+
+        checkmark.addEventListener("click",(e) => {
+            if(checkmark.classList.contains("todo-checkmark_checked")){
+                checkmark.classList.remove("todo-checkmark_checked");
+            }
+            else{
+               checkmark.classList.add("todo-checkmark_checked");
+            }
+        })
+
+    });
+}
+
+let getDivChildrenByClass = (containerClass, elementsClass) =>{
+    let div = document.querySelector("."+containerClass),
+        subDiv = div.querySelectorAll("."+elementsClass),
+        myArray = [];
+    
+    for(let i = 0; i < subDiv.length; i++) {
+        let elem = subDiv[i];
+        myArray.push(elem);
+
+    }
+    return myArray;
 }
 
 let getDivChildren = (containerId, elementsId) =>{
-    var div = document.getElementById(containerId),
+    let div = document.getElementById(containerId),
         subDiv = div.getElementsByTagName('div'),
         myArray = [];
 
