@@ -208,6 +208,18 @@ h3>i {
     color:white;
     background-color: #1ba872;
 }
+.todo-detail_wrap {
+    position: relative;
+  }
+  .todo-detail_wrap, .todo-detail_content {
+    position: absolute;
+    background-color: #fff;
+    padding: .5em;
+    color:purple;
+  }
+  .todo-detail_wrap:hover .todo-detail_content:hover {
+    display: block;
+  }
 .todo-date, .project-date, .date-item-date{
     color:#b35495ba;
     font-size: .7rem;
@@ -582,3 +594,4 @@ font-size: 1rem;
 .note-item_title:focus, .note-item_content:focus {
     outline:none;
 } 
+

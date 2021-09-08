@@ -59,7 +59,7 @@ let initEventListeners = () => {
     console.log(arrayTodoItems);
     arrayTodoItems.forEach(element => {
         let checkmark = element.querySelector(".todo-checkmark");
-        let deails = element.querySelector(".todo-detail");
+        let details = element.querySelector(".todo-detail");
         let editBtn = element.querySelector(".todo-edit");
         let deleteBtn = element.querySelector(".todo-delete");
 
@@ -72,7 +72,22 @@ let initEventListeners = () => {
             }
         })
 
+        details.addEventListener("mouseover", (e) => {
+            let tooltip = details.querySelector(".todo-detail_wrap");
+            if (tooltip.classList.contains("display-none")){
+                tooltip.classList.remove("display-none");
+            }
+        })
+        details.addEventListener("mouseout", (e) => {
+            let tooltip = details.querySelector(".todo-detail_wrap");
+            if (!tooltip.classList.contains("display-none")){
+                tooltip.classList.add("display-none");
+            }
+        })
+
+
     });
+
 }
 
 let getDivChildrenByClass = (containerClass, elementsClass) =>{
