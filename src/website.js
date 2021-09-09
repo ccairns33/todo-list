@@ -59,7 +59,8 @@ let initEventListeners = () => {
     console.log(arrayTodoItems);
     arrayTodoItems.forEach(element => {
         let checkmark = element.querySelector(".todo-checkmark");
-        let details = element.querySelector(".todo-detail");
+        let detail = element.querySelector(".todo-detail");
+        let tooltip = element.querySelector(".todo-detail_wrap");
         let editBtn = element.querySelector(".todo-edit");
         let deleteBtn = element.querySelector(".todo-delete");
 
@@ -72,14 +73,12 @@ let initEventListeners = () => {
             }
         })
 
-        details.addEventListener("mouseover", (e) => {
-            let tooltip = details.querySelector(".todo-detail_wrap");
+        detail.addEventListener("mouseover", (e) => {
             if (tooltip.classList.contains("display-none")){
                 tooltip.classList.remove("display-none");
             }
         })
-        details.addEventListener("mouseout", (e) => {
-            let tooltip = details.querySelector(".todo-detail_wrap");
+        detail.addEventListener("mouseout", (e) => {
             if (!tooltip.classList.contains("display-none")){
                 tooltip.classList.add("display-none");
             }

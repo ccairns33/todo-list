@@ -211,11 +211,37 @@ h3>i {
 .todo-detail_wrap {
     position: relative;
   }
-  .todo-detail_wrap, .todo-detail_content {
+  span.todo-detail_content {
     position: absolute;
-    background-color: #fff;
-    padding: .5em;
-    color:purple;
+    /* autos make the span always go around content */
+    width: auto;
+    height: auto;
+    padding: .3rem;
+    font-size: .5rem;
+    text-align: center;
+    color: white;
+    background: #1ba872;
+    border: .3rem solid rgb(227, 255, 211);
+    border-radius: 5px;
+    text-shadow: rgba(0, 0, 0, 0.1) 1px 1px 1px;
+    box-shadow: rgba(0, 0, 0, 0.1) 1px 1px 2px 0px;
+    margin-top: .7rem;
+}
+
+span.todo-detail_content:after {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-width: .5rem;
+    border-style: solid;
+    border-color: transparent transparent #FFFFFF transparent;
+    top: -1.2rem;
+    left: 0rem;
+    border-bottom-color: #1ba872;
+}
+  .todo-detail_wrap {
+    position: absolute;
   }
   .todo-detail_wrap:hover .todo-detail_content:hover {
     display: block;
