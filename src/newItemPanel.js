@@ -1,4 +1,4 @@
-import {hideInactiveTabs} from "./website";
+import {hideInactiveTabs} from "./websiteInit";
 
 let loadNewItemPanel = () =>{
     const itemPanel = document.querySelector(".overlay");

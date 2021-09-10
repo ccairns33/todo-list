@@ -1,5 +1,5 @@
 import {loadNewItemPanel, closeNewItemPanel } from "./newItemPanel";
-import {iconColorChange} from "./itemsPageDisplay";
+import {iconColorChange} from "./home";
 
 let initEventListeners = () => {
     const newTodoBtn = document.querySelector(".new-todo_btn");
@@ -72,7 +72,7 @@ let initEventListeners = () => {
                checkmark.classList.add("todo-checkmark_checked");
             }
         })
-
+    // will display and not display deatil text if mouse is in or out
         detail.addEventListener("mouseover", (e) => {
             if (tooltip.classList.contains("display-none")){
                 tooltip.classList.remove("display-none");
@@ -84,6 +84,14 @@ let initEventListeners = () => {
             }
         })
 
+        editBtn.addEventListener("click", (e) => {
+            if (editBtn.classList.contains("todo-edit_clicked")){
+                return;
+            }
+            else{
+                editBtn.classList.add("todo-edit_clicked")
+            }
+        })
 
     });
 
