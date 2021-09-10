@@ -1,5 +1,7 @@
 import {loadNewItemPanel, closeNewItemPanel } from "./newItemPanel";
 import {iconColorChange} from "./home";
+import {displayTodoEditPanel} from "./todo";
+
 
 let initEventListeners = () => {
     const newTodoBtn = document.querySelector(".new-todo_btn");
@@ -83,13 +85,23 @@ let initEventListeners = () => {
                 tooltip.classList.add("display-none");
             }
         })
-
         editBtn.addEventListener("click", (e) => {
             if (editBtn.classList.contains("todo-edit_clicked")){
                 return;
             }
             else{
-                editBtn.classList.add("todo-edit_clicked")
+                editBtn.classList.add("todo-edit_clicked");
+                displayTodoEditPanel(editBtn);
+            }
+        })
+
+        // event listener for clicking close on todo edit panel
+        let todoEditClose = document.querySelector(".exit-todo-edit");
+        todoEditClose.addEventListener("click", (e) => {
+            editBtn.classList.remove("todo-edit_clicked");
+            let todoEditPanel = document.querySelector(".overlay-todoitem-edit")
+            if(!todoEditPanel.classList.contains("display-none")){
+                todoEditPanel.classList.add("display-none");
             }
         })
 
