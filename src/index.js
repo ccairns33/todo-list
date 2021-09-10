@@ -1,2 +1,2 @@
-import {initEventListeners } from "./website.js";
+import {initEventListeners } from "./websiteInit.js";
 initEventListeners();
