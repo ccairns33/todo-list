@@ -54,7 +54,6 @@ let initEventListeners = () => {
         hideInactiveTabs(document.querySelector(".notes-container"),"items-container", 'item-display_page');
 
     })
-
     //event listeners for the todo items in Todo List sidebar
 
     let arrayTodoItems = getDivChildrenByClass("items-container","todo-item_page");
@@ -105,10 +104,20 @@ let initEventListeners = () => {
             }
         })
 
+        // deleting the todo items on click
+        deleteBtn.addEventListener("click", deleteItem , (e) => {
+        })
+
     });
 
 }
 
+let deleteItem = (e) =>{
+    let deleteBtn = e.target;
+    let item = deleteBtn.parentElement.parentElement;
+    let itemParent = item.parentElement;
+    itemParent.removeChild(item);
+}
 let getDivChildrenByClass = (containerClass, elementsClass) =>{
     let div = document.querySelector("."+containerClass),
         subDiv = div.querySelectorAll("."+elementsClass),
