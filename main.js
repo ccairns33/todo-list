@@ -1,11 +1,3 @@
-/*
- * ATTENTION: The "eval" devtool has been used (maybe by default in mode: "development").
- * This devtool is neither made for production nor for readable output files.
- * It uses "eval()" calls to create a separate source file in the browser devtools.
- * If you are trying to read the output file, select a different devtool (https://webpack.js.org/configuration/devtool/)
- * or disable the default devtool with "devtool: false".
- * If you are looking for production-ready output files, see mode: "production" (https://webpack.js.org/configuration/mode/).
- */
 /******/ (() => { // webpackBootstrap
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
@@ -16,17 +8,36 @@
   \*********************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"iconColorChange\": () => (/* binding */ iconColorChange)\n/* harmony export */ });\nlet iconColorChange = ( tabsArr ) => {\n    let iconNodeList = document.querySelectorAll(\"i\");\n    let iconArr = [];\n    for (let i = 0; i< 4; i ++ ) {\n        //first four icons are the sidebar icons\n        iconArr.push(iconNodeList[i]);\n    }\n    for (let i = 0; i< tabsArr.length; i++){\n        //the icon format corresponds with the tabArr order, so can simply go by index\n        if (tabsArr[i].classList.contains(\"display-none\")){\n            iconArr[i].classList.remove(\"blue\");\n            if (iconArr[i].classList.contains(\"pink\")){\n                continue;\n            }\n            else {\n                iconArr[i].classList.add(\"pink\");\n            }\n        }\n        else {\n            iconArr[i].classList.add(\"blue\");\n\n        }\n    }\n}\n\n\n\n//# sourceURL=webpack://todo-list/./src/home.js?");
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "iconColorChange": () => (/* binding */ iconColorChange)
+/* harmony export */ });
+let iconColorChange = ( tabsArr ) => {
+    let iconNodeList = document.querySelectorAll(".sidebar_icon");
+    let iconArr = [];
+    for (let i = 0; i< iconNodeList.length; i ++ ) {
+        //first four icons are the sidebar icons
+        iconArr.push(iconNodeList[i]);
+    }
+    for (let i = 0; i< tabsArr.length; i++){
+        //the icon format corresponds with the tabArr order, so can simply go by index
+        if (tabsArr[i].classList.contains("display-none")){
+            iconArr[i].classList.remove("blue");
+            if (iconArr[i].classList.contains("pink")){
+                continue;
+            }
+            else {
+                iconArr[i].classList.add("pink");
+            }
+        }
+        else {
+            iconArr[i].classList.add("blue");
 
-/***/ }),
+        }
+    }
+}
 
-/***/ "./src/index.js":
-/*!**********************!*\
-  !*** ./src/index.js ***!
-  \**********************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _websiteInit_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./websiteInit.js */ \"./src/websiteInit.js\");\n\n(0,_websiteInit_js__WEBPACK_IMPORTED_MODULE_0__.initEventListeners)();\n\n//# sourceURL=webpack://todo-list/./src/index.js?");
 
 /***/ }),
 
@@ -36,7 +47,36 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _web
   \*****************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"loadNewItemPanel\": () => (/* binding */ loadNewItemPanel),\n/* harmony export */   \"closeNewItemPanel\": () => (/* binding */ closeNewItemPanel),\n/* harmony export */   \"displayTab\": () => (/* binding */ displayTab)\n/* harmony export */ });\n/* harmony import */ var _websiteInit__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./websiteInit */ \"./src/websiteInit.js\");\n\n\nlet loadNewItemPanel = () =>{\n    const itemPanel = document.querySelector(\".overlay\");\n    itemPanel.classList.remove(\"display-none\");\n}\n\nlet closeNewItemPanel = () =>{\n    const itemPanel = document.querySelector(\".overlay\");\n    itemPanel.classList.add(\"display-none\");\n\n    // default to todo panel\n    displayTab(document.querySelector(\".todo-panel\"),\"new-item-main-content\",\"item-panel\");\n\n}\n\n// loading the different panels\nlet displayTab = (activePanel, container, children) =>{\n    ;(0,_websiteInit__WEBPACK_IMPORTED_MODULE_0__.hideInactiveTabs)(activePanel,container, children);\n}\n\n\n\n\n//# sourceURL=webpack://todo-list/./src/newItemPanel.js?");
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "loadNewItemPanel": () => (/* binding */ loadNewItemPanel),
+/* harmony export */   "closeNewItemPanel": () => (/* binding */ closeNewItemPanel),
+/* harmony export */   "displayTab": () => (/* binding */ displayTab)
+/* harmony export */ });
+/* harmony import */ var _websiteInit__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./websiteInit */ "./src/websiteInit.js");
+
+
+let loadNewItemPanel = () =>{
+    const itemPanel = document.querySelector(".overlay");
+    itemPanel.classList.remove("display-none");
+}
+
+let closeNewItemPanel = () =>{
+    const itemPanel = document.querySelector(".overlay");
+    itemPanel.classList.add("display-none");
+
+    // default to todo panel
+    displayTab(document.querySelector(".todo-panel"),"new-item-main-content","item-panel");
+
+}
+
+// loading the different panels
+let displayTab = (activePanel, container, children) =>{
+    ;(0,_websiteInit__WEBPACK_IMPORTED_MODULE_0__.hideInactiveTabs)(activePanel,container, children);
+}
+
+
+
 
 /***/ }),
 
@@ -46,7 +86,25 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
   \*********************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"displayTodoEditPanel\": () => (/* binding */ displayTodoEditPanel)\n/* harmony export */ });\nlet displayTodoEditPanel = (editBtn) => {\n    if (editBtn.classList.contains(\"todo-edit_clicked\")){\n        let todoEditPanel = document.querySelector(\".overlay-todoitem-edit\")\n        if (todoEditPanel.classList.contains(\"display-none\")){\n            todoEditPanel.classList.remove(\"display-none\");\n        }\n        else{\n            return;\n        }\n    }\n    else{\n        return;\n    }\n}\n\n\n//# sourceURL=webpack://todo-list/./src/todo.js?");
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "displayTodoEditPanel": () => (/* binding */ displayTodoEditPanel)
+/* harmony export */ });
+let displayTodoEditPanel = (editBtn) => {
+    if (editBtn.classList.contains("todo-edit_clicked")){
+        let todoEditPanel = document.querySelector(".overlay-todoitem-edit")
+        if (todoEditPanel.classList.contains("display-none")){
+            todoEditPanel.classList.remove("display-none");
+        }
+        else{
+            return;
+        }
+    }
+    else{
+        return;
+    }
+}
+
 
 /***/ }),
 
@@ -56,7 +114,176 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
   \****************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"initEventListeners\": () => (/* binding */ initEventListeners),\n/* harmony export */   \"getDivChildren\": () => (/* binding */ getDivChildren),\n/* harmony export */   \"hideInactiveTabs\": () => (/* binding */ hideInactiveTabs)\n/* harmony export */ });\n/* harmony import */ var _newItemPanel__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./newItemPanel */ \"./src/newItemPanel.js\");\n/* harmony import */ var _home__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./home */ \"./src/home.js\");\n/* harmony import */ var _todo__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./todo */ \"./src/todo.js\");\n\n\n\n\n\nlet initEventListeners = () => {\n    const newTodoBtn = document.querySelector(\".new-todo_btn\");\n    newTodoBtn.addEventListener(\"click\", (e) => {\n        (0,_newItemPanel__WEBPACK_IMPORTED_MODULE_0__.loadNewItemPanel)();\n    })\n\n    const closePanel = document.querySelector(\".exit-new-item\");\n    closePanel.addEventListener(\"click\", (e) => {\n        (0,_newItemPanel__WEBPACK_IMPORTED_MODULE_0__.closeNewItemPanel)();\n    })\n\n    // new panel tabs\n    const dateTab = document.querySelector(\".new-item-date\");\n    const todoTab = document.querySelector(\".new-item-todo\");\n    const projectTab = document.querySelector(\".new-item-project\");\n    const noteTab = document.querySelector(\".new-item-note\");\n\n    todoTab.addEventListener(\"click\", (e) => {\n        hideInactiveTabs(document.querySelector(\".todo-panel\"),\"new-item-main-content\", 'item-panel');\n    })\n    projectTab.addEventListener(\"click\", (e) => {\n        hideInactiveTabs(document.querySelector(\".project-panel\"),\"new-item-main-content\", 'item-panel');\n    })\n    dateTab.addEventListener(\"click\", (e) => {\n        hideInactiveTabs(document.querySelector(\".date-panel\"),\"new-item-main-content\", 'item-panel');\n    })\n    noteTab.addEventListener(\"click\", (e) => {\n        hideInactiveTabs(document.querySelector(\".note-panel\"),\"new-item-main-content\", 'item-panel');\n    })\n\n    // tabs for chagning main content from sidebar nav\n    const todoSideTab = document.querySelector(\".todo-list_tab\");\n    const projectsSideTab = document.querySelector(\".projects_tab\");\n    const datesSideTab = document.querySelector(\".dates_tab\");\n    const notesSideTab = document.querySelector(\".notes_tab\");\n\n    todoSideTab.addEventListener(\"click\", (e) => {\n        hideInactiveTabs(document.querySelector(\".todo-item_page\"),\"items-container\", 'item-display_page' );\n    })\n    projectsSideTab.addEventListener(\"click\", (e) => {\n        hideInactiveTabs(document.querySelector(\".project-item_page\"),\"items-container\", 'item-display_page');\n\n    })\n    datesSideTab.addEventListener(\"click\", (e) => {\n        hideInactiveTabs(document.querySelector(\".date-item_page\"),\"items-container\", 'item-display_page');\n\n    })\n    notesSideTab.addEventListener(\"click\", (e) => {\n        hideInactiveTabs(document.querySelector(\".notes-container\"),\"items-container\", 'item-display_page');\n\n    })\n    //event listeners for the todo items in Todo List sidebar\n\n    let arrayTodoItems = getDivChildrenByClass(\"items-container\",\"todo-item_page\");\n    console.log(arrayTodoItems);\n    arrayTodoItems.forEach(element => {\n        let checkmark = element.querySelector(\".todo-checkmark\");\n        let detail = element.querySelector(\".todo-detail\");\n        let tooltip = element.querySelector(\".todo-detail_wrap\");\n        let editBtn = element.querySelector(\".todo-edit\");\n        let deleteBtn = element.querySelector(\".todo-delete\");\n\n        checkmark.addEventListener(\"click\",(e) => {\n            if(checkmark.classList.contains(\"todo-checkmark_checked\")){\n                checkmark.classList.remove(\"todo-checkmark_checked\");\n            }\n            else{\n               checkmark.classList.add(\"todo-checkmark_checked\");\n            }\n        })\n    // will display and not display deatil text if mouse is in or out\n        detail.addEventListener(\"mouseover\", (e) => {\n            if (tooltip.classList.contains(\"display-none\")){\n                tooltip.classList.remove(\"display-none\");\n            }\n        })\n        detail.addEventListener(\"mouseout\", (e) => {\n            if (!tooltip.classList.contains(\"display-none\")){\n                tooltip.classList.add(\"display-none\");\n            }\n        })\n        editBtn.addEventListener(\"click\", (e) => {\n            if (editBtn.classList.contains(\"todo-edit_clicked\")){\n                return;\n            }\n            else{\n                editBtn.classList.add(\"todo-edit_clicked\");\n                (0,_todo__WEBPACK_IMPORTED_MODULE_2__.displayTodoEditPanel)(editBtn);\n            }\n        })\n\n        // event listener for clicking close on todo edit panel\n        let todoEditClose = document.querySelector(\".exit-todo-edit\");\n        todoEditClose.addEventListener(\"click\", (e) => {\n            editBtn.classList.remove(\"todo-edit_clicked\");\n            let todoEditPanel = document.querySelector(\".overlay-todoitem-edit\")\n            if(!todoEditPanel.classList.contains(\"display-none\")){\n                todoEditPanel.classList.add(\"display-none\");\n            }\n        })\n\n        // deleting the todo items on click\n        deleteBtn.addEventListener(\"click\", deleteItem , (e) => {\n        })\n\n    });\n\n}\n\nlet deleteItem = (e) =>{\n    let deleteBtn = e.target;\n    let item = deleteBtn.parentElement.parentElement;\n    let itemParent = item.parentElement;\n    itemParent.removeChild(item);\n}\nlet getDivChildrenByClass = (containerClass, elementsClass) =>{\n    let div = document.querySelector(\".\"+containerClass),\n        subDiv = div.querySelectorAll(\".\"+elementsClass),\n        myArray = [];\n    \n    for(let i = 0; i < subDiv.length; i++) {\n        let elem = subDiv[i];\n        myArray.push(elem);\n\n    }\n    return myArray;\n}\n\nlet getDivChildren = (containerId, elementsId) =>{\n    let div = document.getElementById(containerId),\n        subDiv = div.getElementsByTagName('div'),\n        myArray = [];\n\n    for(let i = 0; i < subDiv.length; i++) {\n        let elem = subDiv[i];\n        if(elem.id == elementsId) {\n            myArray.push(elem);\n        }\n    }\n    return myArray;\n}\n//add display none for other tabs and calling icon color changing\nlet hideInactiveTabs = (activePanel, container, children) =>{\n    let tabsArr = getDivChildren(container, children);\n    tabsArr.forEach(element => {\n        if(activePanel.classList[0] === element.classList[0]){\n            activePanel.classList.remove(\"display-none\");\n        }\n        else{\n            element.classList.add(\"display-none\");\n        }\n    });\n    (0,_home__WEBPACK_IMPORTED_MODULE_1__.iconColorChange)(tabsArr);\n}\n\n\n\n//# sourceURL=webpack://todo-list/./src/websiteInit.js?");
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "initEventListeners": () => (/* binding */ initEventListeners),
+/* harmony export */   "getDivChildren": () => (/* binding */ getDivChildren),
+/* harmony export */   "hideInactiveTabs": () => (/* binding */ hideInactiveTabs)
+/* harmony export */ });
+/* harmony import */ var _newItemPanel__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./newItemPanel */ "./src/newItemPanel.js");
+/* harmony import */ var _home__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./home */ "./src/home.js");
+/* harmony import */ var _todo__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./todo */ "./src/todo.js");
+
+
+
+
+
+let initEventListeners = () => {
+    const newTodoBtn = document.querySelector(".new-todo_btn");
+    newTodoBtn.addEventListener("click", (e) => {
+        (0,_newItemPanel__WEBPACK_IMPORTED_MODULE_0__.loadNewItemPanel)();
+    })
+
+    const closePanel = document.querySelector(".exit-new-item");
+    closePanel.addEventListener("click", (e) => {
+        (0,_newItemPanel__WEBPACK_IMPORTED_MODULE_0__.closeNewItemPanel)();
+    })
+
+    // new panel tabs
+    const dateTab = document.querySelector(".new-item-date");
+    const todoTab = document.querySelector(".new-item-todo");
+    const projectTab = document.querySelector(".new-item-project");
+    const noteTab = document.querySelector(".new-item-note");
+
+    todoTab.addEventListener("click", (e) => {
+        hideInactiveTabs(document.querySelector(".todo-panel"),"new-item-main-content", 'item-panel');
+    })
+    projectTab.addEventListener("click", (e) => {
+        hideInactiveTabs(document.querySelector(".project-panel"),"new-item-main-content", 'item-panel');
+    })
+    dateTab.addEventListener("click", (e) => {
+        hideInactiveTabs(document.querySelector(".date-panel"),"new-item-main-content", 'item-panel');
+    })
+    noteTab.addEventListener("click", (e) => {
+        hideInactiveTabs(document.querySelector(".note-panel"),"new-item-main-content", 'item-panel');
+    })
+
+    // tabs for chagning main content from sidebar nav
+    const todoSideTab = document.querySelector(".todo-list_tab");
+    const projectsSideTab = document.querySelector(".projects_tab");
+    const datesSideTab = document.querySelector(".dates_tab");
+    const notesSideTab = document.querySelector(".notes_tab");
+
+    todoSideTab.addEventListener("click", (e) => {
+        hideInactiveTabs(document.querySelector(".todo-item_page"),"items-container", 'item-display_page' );
+    })
+    projectsSideTab.addEventListener("click", (e) => {
+        hideInactiveTabs(document.querySelector(".project-item_page"),"items-container", 'item-display_page');
+
+    })
+    datesSideTab.addEventListener("click", (e) => {
+        hideInactiveTabs(document.querySelector(".date-item_page"),"items-container", 'item-display_page');
+
+    })
+    notesSideTab.addEventListener("click", (e) => {
+        hideInactiveTabs(document.querySelector(".notes-container"),"items-container", 'item-display_page');
+
+    })
+    //event listeners for the todo items in Todo List sidebar
+
+    let arrayTodoItems = getDivChildrenByClass("items-container","todo-item_page");
+    console.log(arrayTodoItems);
+    arrayTodoItems.forEach(element => {
+        let checkmark = element.querySelector(".todo-checkmark");
+        let detail = element.querySelector(".todo-detail");
+        let tooltip = element.querySelector(".todo-detail_wrap");
+        let editBtn = element.querySelector(".todo-edit");
+        let deleteBtn = element.querySelector(".todo-delete");
+
+        checkmark.addEventListener("click",(e) => {
+            if(checkmark.classList.contains("todo-checkmark_checked")){
+                checkmark.classList.remove("todo-checkmark_checked");
+            }
+            else{
+               checkmark.classList.add("todo-checkmark_checked");
+            }
+        })
+    // will display and not display deatil text if mouse is in or out
+        detail.addEventListener("mouseover", (e) => {
+            if (tooltip.classList.contains("display-none")){
+                tooltip.classList.remove("display-none");
+            }
+        })
+        detail.addEventListener("mouseout", (e) => {
+            if (!tooltip.classList.contains("display-none")){
+                tooltip.classList.add("display-none");
+            }
+        })
+        editBtn.addEventListener("click", (e) => {
+            if (editBtn.classList.contains("todo-edit_clicked")){
+                return;
+            }
+            else{
+                editBtn.classList.add("todo-edit_clicked");
+                (0,_todo__WEBPACK_IMPORTED_MODULE_2__.displayTodoEditPanel)(editBtn);
+            }
+        })
+
+        // event listener for clicking close on todo edit panel
+        let todoEditClose = document.querySelector(".exit-todo-edit");
+        todoEditClose.addEventListener("click", (e) => {
+            editBtn.classList.remove("todo-edit_clicked");
+            let todoEditPanel = document.querySelector(".overlay-todoitem-edit")
+            if(!todoEditPanel.classList.contains("display-none")){
+                todoEditPanel.classList.add("display-none");
+            }
+        })
+
+        // deleting the todo items on click
+        deleteBtn.addEventListener("click", deleteItem , (e) => {
+        })
+
+    });
+
+}
+
+let deleteItem = (e) =>{
+    let deleteBtn = e.target;
+    let item = deleteBtn.parentElement.parentElement;
+    let itemParent = item.parentElement;
+    itemParent.removeChild(item);
+}
+let getDivChildrenByClass = (containerClass, elementsClass) =>{
+    let div = document.querySelector("."+containerClass),
+        subDiv = div.querySelectorAll("."+elementsClass),
+        myArray = [];
+    
+    for(let i = 0; i < subDiv.length; i++) {
+        let elem = subDiv[i];
+        myArray.push(elem);
+
+    }
+    return myArray;
+}
+
+let getDivChildren = (containerId, elementsId) =>{
+    let div = document.getElementById(containerId),
+        subDiv = div.getElementsByTagName('div'),
+        myArray = [];
+
+    for(let i = 0; i < subDiv.length; i++) {
+        let elem = subDiv[i];
+        if(elem.id == elementsId) {
+            myArray.push(elem);
+        }
+    }
+    return myArray;
+}
+//add display none for other tabs and calling icon color changing
+let hideInactiveTabs = (activePanel, container, children) =>{
+    let tabsArr = getDivChildren(container, children);
+    tabsArr.forEach(element => {
+        if(activePanel.classList[0] === element.classList[0]){
+            activePanel.classList.remove("display-none");
+        }
+        else{
+            element.classList.add("display-none");
+        }
+    });
+    (0,_home__WEBPACK_IMPORTED_MODULE_1__.iconColorChange)(tabsArr);
+}
+
+
 
 /***/ })
 
@@ -116,11 +343,18 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /******/ 	})();
 /******/ 	
 /************************************************************************/
-/******/ 	
-/******/ 	// startup
-/******/ 	// Load entry module and return exports
-/******/ 	// This entry module can't be inlined because the eval devtool is used.
-/******/ 	var __webpack_exports__ = __webpack_require__("./src/index.js");
-/******/ 	
+var __webpack_exports__ = {};
+// This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
+(() => {
+/*!**********************!*\
+  !*** ./src/index.js ***!
+  \**********************/
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _websiteInit_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./websiteInit.js */ "./src/websiteInit.js");
+
+(0,_websiteInit_js__WEBPACK_IMPORTED_MODULE_0__.initEventListeners)();
+})();
+
 /******/ })()
 ;
+//# sourceMappingURL=main.js.map
