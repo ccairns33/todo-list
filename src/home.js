@@ -1,7 +1,7 @@
 let iconColorChange = ( tabsArr ) => {
-    let iconNodeList = document.querySelectorAll("i");
+    let iconNodeList = document.querySelectorAll(".sidebar_icon");
     let iconArr = [];
-    for (let i = 0; i< 4; i ++ ) {
+    for (let i = 0; i< iconNodeList.length; i ++ ) {
         //first four icons are the sidebar icons
         iconArr.push(iconNodeList[i]);
     }
