@@ -40,35 +40,54 @@ let initEventListeners = () => {
     const notesSideTab = document.querySelector(".notes_tab");
 
     todoSideTab.addEventListener("click", (e) => {
-        if (document.querySelector(".todo-item_page") != null){
-            hideInactiveTabs(document.querySelector(".todo-item_page"),"items-container", 'item-display_page' );
+        let container = "items-container";
+        let children= "item-display_page";
+        let activePanel = document.querySelector(".todo-item_page");
+
+        if (activePanel != null){
+            hideInactiveTabs(activePanel,container, children,todoSideTab);
         }
         else {
-            iconColorChange(tabsArr,activePanel,todoSideTab);
+
+            iconColorChange(todoSideTab);
         }
     })
     projectsSideTab.addEventListener("click", (e) => {
-        if (document.querySelector("project-item_page" != null)){
-            hideInactiveTabs(document.querySelector(".project-item_page"),"items-container", 'item-display_page');
+        let container = "items-container";
+        let children= "item-display_page";
+        let activePanel = document.querySelector(".project-item_page");
+
+        if ( activePanel != null){
+            hideInactiveTabs(activePanel,container, children,projectsSideTab);
         }
         else {
-            iconColorChange(tabsArr,activePanel,projectsSideTab );
+
+            iconColorChange(projectsSideTab );
         }
     })
     datesSideTab.addEventListener("click", (e) => {
-        if (document.querySelector(".date-item_page")!= null){
-            hideInactiveTabs(document.querySelector(".date-item_page"),"items-container", 'item-display_page');
+        let container = "items-container";
+        let children= "item-display_page";
+        let activePanel = document.querySelector(".date-item_page");
+        if (activePanel != null){
+            hideInactiveTabs(activePanel,container, children,datesSideTab);
         }
         else {
-            iconColorChange(tabsArr,activePanel, datesSideTab);
+
+            iconColorChange(datesSideTab);
         }
     })
     notesSideTab.addEventListener("click", (e) => {
-        if (document.querySelector(".notes-container")!= null){
-            hideInactiveTabs(document.querySelector(".notes-container"),"items-container", 'item-display_page');
+        let container = "items-container";
+        let children= "item-display_page";
+        let activePanel = document.querySelector(".notes-container");
+
+        if (activePanel!= null){
+            hideInactiveTabs(activePanel,container, children,notesSideTab);
         }
         else {
-            iconColorChange(tabsArr,activePanel, notesSideTab);
+
+            iconColorChange(notesSideTab);
         }
     })
     //event listeners for the todo items in Todo List sidebar
@@ -162,9 +181,8 @@ let getDivChildren = (containerId, elementsId) =>{
     return myArray;
 }
 //add display none for other tabs and calling icon color changing
-let hideInactiveTabs = (activePanel, container, children) =>{
+let hideInactiveTabs = (activePanel, container, children, clickedTab) =>{
     let tabsArr = getDivChildren(container, children);
-    if (activePanel != null){
         tabsArr.forEach(element => {
             if(activePanel.classList[0] === element.classList[0]){
                 activePanel.classList.remove("display-none");
@@ -173,8 +191,8 @@ let hideInactiveTabs = (activePanel, container, children) =>{
                 element.classList.add("display-none");
             }
         });
-    }
-    iconColorChange(tabsArr,activePanel, );
+    
+    iconColorChange(clickedTab );
 }
 
 export {initEventListeners, getDivChildren, hideInactiveTabs};
