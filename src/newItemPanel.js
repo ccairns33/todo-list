@@ -18,6 +18,21 @@ let closeNewItemPanel = () =>{
 let displayTab = (activePanel, container, children) =>{
     hideInactiveTabs(activePanel,container, children);
 }
+let panelClicked = (clickedTab) => {
+    let panelNodeList = document.querySelectorAll(".sidetab_panel");
+    let panelArr = [];
+    for (let i = 0; i< panelNodeList.length; i ++ ) {
+        panelArr.push(panelNodeList[i]);
+    }
+    panelArr.forEach(element => {
+        if (element == clickedTab){
+            element.classList.add("sidebar-clicked");
+        }
+        else {
+            element.classList.remove("sidebar-clicked")
+        }
+    })
+}
 
 
-export {loadNewItemPanel,closeNewItemPanel,displayTab };
+export {loadNewItemPanel,closeNewItemPanel,displayTab,panelClicked };

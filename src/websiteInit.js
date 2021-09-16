@@ -1,4 +1,4 @@
-import {loadNewItemPanel, closeNewItemPanel } from "./newItemPanel";
+import {loadNewItemPanel, closeNewItemPanel, panelClicked } from "./newItemPanel";
 import {iconColorChange} from "./home";
 import {displayTodoEditPanel} from "./todo";
 
@@ -19,20 +19,22 @@ let initEventListeners = () => {
     const todoTabPanel = document.querySelector(".new-item-todo");
     const projectTabPanel = document.querySelector(".new-item-project");
     const noteTabPanel = document.querySelector(".new-item-note");
+    
     const conatiner_panel = "new-item-main-content";
     const children_panel = 'item-panel';
 
+    //no color change for these. might add something else later.
     todoTabPanel.addEventListener("click", (e) => {
-        hideInactiveTabs(document.querySelector(".todo-panel"),conatiner_panel, children_panel);
+        hideInactiveTabs(document.querySelector(".todo-panel"),conatiner_panel, children_panel,todoTabPanel);
     })
     projectTabPanel.addEventListener("click", (e) => {
-        hideInactiveTabs(document.querySelector(".project-panel"),conatiner_panel, children_panel);
+        hideInactiveTabs(document.querySelector(".project-panel"),conatiner_panel, children_panel,projectTabPanel);
     })
     dateTabPanel.addEventListener("click", (e) => {
-        hideInactiveTabs(document.querySelector(".date-panel"),conatiner_panel, children_panel);
+        hideInactiveTabs(document.querySelector(".date-panel"),conatiner_panel, children_panel,dateTabPanel);
     })
     noteTabPanel.addEventListener("click", (e) => {
-        hideInactiveTabs(document.querySelector(".note-panel"),conatiner_panel, children_panel);
+        hideInactiveTabs(document.querySelector(".note-panel"),conatiner_panel, children_panel,noteTabPanel);
     })
 
     // tabs for chagning main content from sidebar nav
@@ -175,7 +177,12 @@ let hideInactiveTabs = (activePanel, container, children, clickedTab) =>{
             element.classList.add("display-none")
         });
     }
-    iconColorChange(clickedTab);
+    if (children === 'item-panel'){
+        panelClicked(clickedTab);
+    }
+    else {
+        iconColorChange(clickedTab);
+    }
 }
 
 export {initEventListeners, getDivChildren, hideInactiveTabs};
