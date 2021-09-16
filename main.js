@@ -12,29 +12,26 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "iconColorChange": () => (/* binding */ iconColorChange)
 /* harmony export */ });
-let iconColorChange = ( tabsArr ) => {
+let iconColorChange = ( tabsArr,activePanel, clickedTab ) => {
     let iconNodeList = document.querySelectorAll(".sidebar_icon");
     let iconArr = [];
     for (let i = 0; i< iconNodeList.length; i ++ ) {
-        //first four icons are the sidebar icons
         iconArr.push(iconNodeList[i]);
     }
-    for (let i = 0; i< tabsArr.length; i++){
-        //the icon format corresponds with the tabArr order, so can simply go by index
-        if (tabsArr[i].classList.contains("display-none")){
-            iconArr[i].classList.remove("blue");
-            if (iconArr[i].classList.contains("pink")){
-                continue;
+    iconArr.forEach(element => {
+        if (element.parentElement == clickedTab){
+            element.classList.remove("blue");
+            if (element.classList.contains("pink")){
+                //do nothing, but it shouldn't have pink
             }
             else {
-                iconArr[i].classList.add("pink");
+                    element.classList.add("pink");
             }
         }
         else {
-            iconArr[i].classList.add("blue");
-
+            element.classList.add("blue");
         }
-    }
+    });
 }
 
 
@@ -165,19 +162,59 @@ let initEventListeners = () => {
     const notesSideTab = document.querySelector(".notes_tab");
 
     todoSideTab.addEventListener("click", (e) => {
-        hideInactiveTabs(document.querySelector(".todo-item_page"),"items-container", 'item-display_page' );
+        let container = "items-container";
+        let children= "item-display_page";
+        let activePanel = document.querySelector(".todo-item_page");
+
+        if (activePanel != null){
+            hideInactiveTabs(activePanel,container, children,todoSideTab);
+        }
+        else {
+            let tabsArr = getDivChildren(container, children);
+
+            (0,_home__WEBPACK_IMPORTED_MODULE_1__.iconColorChange)(tabsArr,activePanel,todoSideTab);
+        }
     })
     projectsSideTab.addEventListener("click", (e) => {
-        hideInactiveTabs(document.querySelector(".project-item_page"),"items-container", 'item-display_page');
+        let container = "items-container";
+        let children= "item-display_page";
+        let activePanel = document.querySelector(".project-item_page");
 
+        if ( activePanel != null){
+            hideInactiveTabs(activePanel,container, children,projectsSideTab);
+        }
+        else {
+            let tabsArr = getDivChildren(container, children);
+
+            (0,_home__WEBPACK_IMPORTED_MODULE_1__.iconColorChange)(tabsArr,activePanel,projectsSideTab );
+        }
     })
     datesSideTab.addEventListener("click", (e) => {
-        hideInactiveTabs(document.querySelector(".date-item_page"),"items-container", 'item-display_page');
+        let container = "items-container";
+        let children= "item-display_page";
+        let activePanel = document.querySelector(".date-item_page");
+        if (activePanel != null){
+            hideInactiveTabs(activePanel,container, children,datesSideTab);
+        }
+        else {
+            let tabsArr = getDivChildren(container, children);
 
+            (0,_home__WEBPACK_IMPORTED_MODULE_1__.iconColorChange)(tabsArr,activePanel, datesSideTab);
+        }
     })
     notesSideTab.addEventListener("click", (e) => {
-        hideInactiveTabs(document.querySelector(".notes-container"),"items-container", 'item-display_page');
+        let container = "items-container";
+        let children= "item-display_page";
+        let activePanel = document.querySelector(".notes-container");
 
+        if (activePanel!= null){
+            hideInactiveTabs(activePanel,container, children,notesSideTab);
+        }
+        else {
+            let tabsArr = getDivChildren(container, children);
+
+            (0,_home__WEBPACK_IMPORTED_MODULE_1__.iconColorChange)(tabsArr,activePanel, notesSideTab);
+        }
     })
     //event listeners for the todo items in Todo List sidebar
 
@@ -270,17 +307,18 @@ let getDivChildren = (containerId, elementsId) =>{
     return myArray;
 }
 //add display none for other tabs and calling icon color changing
-let hideInactiveTabs = (activePanel, container, children) =>{
+let hideInactiveTabs = (activePanel, container, children, clickedTab) =>{
     let tabsArr = getDivChildren(container, children);
-    tabsArr.forEach(element => {
-        if(activePanel.classList[0] === element.classList[0]){
-            activePanel.classList.remove("display-none");
-        }
-        else{
-            element.classList.add("display-none");
-        }
-    });
-    (0,_home__WEBPACK_IMPORTED_MODULE_1__.iconColorChange)(tabsArr);
+        tabsArr.forEach(element => {
+            if(activePanel.classList[0] === element.classList[0]){
+                activePanel.classList.remove("display-none");
+            }
+            else{
+                element.classList.add("display-none");
+            }
+        });
+    
+    (0,_home__WEBPACK_IMPORTED_MODULE_1__.iconColorChange)(tabsArr,activePanel,clickedTab );
 }
 
 
