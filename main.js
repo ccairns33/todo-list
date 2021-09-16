@@ -49,7 +49,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "loadNewItemPanel": () => (/* binding */ loadNewItemPanel),
 /* harmony export */   "closeNewItemPanel": () => (/* binding */ closeNewItemPanel),
-/* harmony export */   "displayTab": () => (/* binding */ displayTab)
+/* harmony export */   "displayTab": () => (/* binding */ displayTab),
+/* harmony export */   "panelClicked": () => (/* binding */ panelClicked)
 /* harmony export */ });
 /* harmony import */ var _websiteInit__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./websiteInit */ "./src/websiteInit.js");
 
@@ -71,6 +72,21 @@ let closeNewItemPanel = () =>{
 // loading the different panels
 let displayTab = (activePanel, container, children) =>{
     ;(0,_websiteInit__WEBPACK_IMPORTED_MODULE_0__.hideInactiveTabs)(activePanel,container, children);
+}
+let panelClicked = (clickedTab) => {
+    let panelNodeList = document.querySelectorAll(".sidetab_panel");
+    let panelArr = [];
+    for (let i = 0; i< panelNodeList.length; i ++ ) {
+        panelArr.push(panelNodeList[i]);
+    }
+    panelArr.forEach(element => {
+        if (element == clickedTab){
+            element.classList.add("sidebar-clicked");
+        }
+        else {
+            element.classList.remove("sidebar-clicked")
+        }
+    })
 }
 
 
@@ -142,20 +158,22 @@ let initEventListeners = () => {
     const todoTabPanel = document.querySelector(".new-item-todo");
     const projectTabPanel = document.querySelector(".new-item-project");
     const noteTabPanel = document.querySelector(".new-item-note");
+    
     const conatiner_panel = "new-item-main-content";
     const children_panel = 'item-panel';
 
+    //no color change for these. might add something else later.
     todoTabPanel.addEventListener("click", (e) => {
-        hideInactiveTabs(document.querySelector(".todo-panel"),conatiner_panel, children_panel);
+        hideInactiveTabs(document.querySelector(".todo-panel"),conatiner_panel, children_panel,todoTabPanel);
     })
     projectTabPanel.addEventListener("click", (e) => {
-        hideInactiveTabs(document.querySelector(".project-panel"),conatiner_panel, children_panel);
+        hideInactiveTabs(document.querySelector(".project-panel"),conatiner_panel, children_panel,projectTabPanel);
     })
     dateTabPanel.addEventListener("click", (e) => {
-        hideInactiveTabs(document.querySelector(".date-panel"),conatiner_panel, children_panel);
+        hideInactiveTabs(document.querySelector(".date-panel"),conatiner_panel, children_panel,dateTabPanel);
     })
     noteTabPanel.addEventListener("click", (e) => {
-        hideInactiveTabs(document.querySelector(".note-panel"),conatiner_panel, children_panel);
+        hideInactiveTabs(document.querySelector(".note-panel"),conatiner_panel, children_panel,noteTabPanel);
     })
 
     // tabs for chagning main content from sidebar nav
@@ -298,7 +316,12 @@ let hideInactiveTabs = (activePanel, container, children, clickedTab) =>{
             element.classList.add("display-none")
         });
     }
-    (0,_home__WEBPACK_IMPORTED_MODULE_1__.iconColorChange)(clickedTab);
+    if (children === 'item-panel'){
+        (0,_newItemPanel__WEBPACK_IMPORTED_MODULE_0__.panelClicked)(clickedTab);
+    }
+    else {
+        (0,_home__WEBPACK_IMPORTED_MODULE_1__.iconColorChange)(clickedTab);
+    }
 }
 
 
