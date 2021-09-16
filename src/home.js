@@ -1,9 +1,10 @@
-let iconColorChange = ( tabsArr,activePanel, clickedTab ) => {
+let iconColorChange = ( clickedTab ) => {
     let iconNodeList = document.querySelectorAll(".sidebar_icon");
     let iconArr = [];
     for (let i = 0; i< iconNodeList.length; i ++ ) {
         iconArr.push(iconNodeList[i]);
     }
+
     iconArr.forEach(element => {
         if (element.parentElement == clickedTab){
             element.classList.remove("blue");

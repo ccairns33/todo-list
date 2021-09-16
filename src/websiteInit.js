@@ -44,51 +44,32 @@ let initEventListeners = () => {
         let children= "item-display_page";
         let activePanel = document.querySelector(".todo-item_page");
 
-        if (activePanel != null){
-            hideInactiveTabs(activePanel,container, children,todoSideTab);
-        }
-        else {
-
-            iconColorChange(todoSideTab);
-        }
+        hideInactiveTabs(activePanel,container, children,todoSideTab);
+        
     })
     projectsSideTab.addEventListener("click", (e) => {
         let container = "items-container";
         let children= "item-display_page";
         let activePanel = document.querySelector(".project-item_page");
 
-        if ( activePanel != null){
-            hideInactiveTabs(activePanel,container, children,projectsSideTab);
-        }
-        else {
-
-            iconColorChange(projectsSideTab );
-        }
+        hideInactiveTabs(activePanel,container, children,projectsSideTab);
+    
     })
     datesSideTab.addEventListener("click", (e) => {
         let container = "items-container";
         let children= "item-display_page";
         let activePanel = document.querySelector(".date-item_page");
-        if (activePanel != null){
+       
             hideInactiveTabs(activePanel,container, children,datesSideTab);
-        }
-        else {
-
-            iconColorChange(datesSideTab);
-        }
+        
     })
     notesSideTab.addEventListener("click", (e) => {
         let container = "items-container";
         let children= "item-display_page";
         let activePanel = document.querySelector(".notes-container");
 
-        if (activePanel!= null){
             hideInactiveTabs(activePanel,container, children,notesSideTab);
-        }
-        else {
-
-            iconColorChange(notesSideTab);
-        }
+    
     })
     //event listeners for the todo items in Todo List sidebar
 
@@ -183,6 +164,7 @@ let getDivChildren = (containerId, elementsId) =>{
 //add display none for other tabs and calling icon color changing
 let hideInactiveTabs = (activePanel, container, children, clickedTab) =>{
     let tabsArr = getDivChildren(container, children);
+    if (activePanel!= null){
         tabsArr.forEach(element => {
             if(activePanel.classList[0] === element.classList[0]){
                 activePanel.classList.remove("display-none");
@@ -191,8 +173,13 @@ let hideInactiveTabs = (activePanel, container, children, clickedTab) =>{
                 element.classList.add("display-none");
             }
         });
-    
-    iconColorChange(clickedTab );
+    } 
+    else{
+        tabsArr.forEach(element => {
+            element.classList.add("display-none")
+        });
+    }
+    iconColorChange(clickedTab);
 }
 
 export {initEventListeners, getDivChildren, hideInactiveTabs};
