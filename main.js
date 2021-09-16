@@ -138,22 +138,24 @@ let initEventListeners = () => {
     })
 
     // new panel tabs
-    const dateTab = document.querySelector(".new-item-date");
-    const todoTab = document.querySelector(".new-item-todo");
-    const projectTab = document.querySelector(".new-item-project");
-    const noteTab = document.querySelector(".new-item-note");
+    const dateTabPanel = document.querySelector(".new-item-date");
+    const todoTabPanel = document.querySelector(".new-item-todo");
+    const projectTabPanel = document.querySelector(".new-item-project");
+    const noteTabPanel = document.querySelector(".new-item-note");
+    const conatiner_panel = "new-item-main-content";
+    const children_panel = 'item-panel';
 
-    todoTab.addEventListener("click", (e) => {
-        hideInactiveTabs(document.querySelector(".todo-panel"),"new-item-main-content", 'item-panel');
+    todoTabPanel.addEventListener("click", (e) => {
+        hideInactiveTabs(document.querySelector(".todo-panel"),conatiner_panel, children_panel);
     })
-    projectTab.addEventListener("click", (e) => {
-        hideInactiveTabs(document.querySelector(".project-panel"),"new-item-main-content", 'item-panel');
+    projectTabPanel.addEventListener("click", (e) => {
+        hideInactiveTabs(document.querySelector(".project-panel"),conatiner_panel, children_panel);
     })
-    dateTab.addEventListener("click", (e) => {
-        hideInactiveTabs(document.querySelector(".date-panel"),"new-item-main-content", 'item-panel');
+    dateTabPanel.addEventListener("click", (e) => {
+        hideInactiveTabs(document.querySelector(".date-panel"),conatiner_panel, children_panel);
     })
-    noteTab.addEventListener("click", (e) => {
-        hideInactiveTabs(document.querySelector(".note-panel"),"new-item-main-content", 'item-panel');
+    noteTabPanel.addEventListener("click", (e) => {
+        hideInactiveTabs(document.querySelector(".note-panel"),conatiner_panel, children_panel);
     })
 
     // tabs for chagning main content from sidebar nav
@@ -161,37 +163,31 @@ let initEventListeners = () => {
     const projectsSideTab = document.querySelector(".projects_tab");
     const datesSideTab = document.querySelector(".dates_tab");
     const notesSideTab = document.querySelector(".notes_tab");
+    const container_tab = "items-container";
+    const children_tab= "item-display_page";
 
     todoSideTab.addEventListener("click", (e) => {
-        let container = "items-container";
-        let children= "item-display_page";
         let activePanel = document.querySelector(".todo-item_page");
 
-        hideInactiveTabs(activePanel,container, children,todoSideTab);
+        hideInactiveTabs(activePanel,container_tab, children_tab,todoSideTab);
         
     })
     projectsSideTab.addEventListener("click", (e) => {
-        let container = "items-container";
-        let children= "item-display_page";
         let activePanel = document.querySelector(".project-item_page");
 
-        hideInactiveTabs(activePanel,container, children,projectsSideTab);
+        hideInactiveTabs(activePanel,container_tab, children_tab,projectsSideTab);
     
     })
     datesSideTab.addEventListener("click", (e) => {
-        let container = "items-container";
-        let children= "item-display_page";
         let activePanel = document.querySelector(".date-item_page");
        
-            hideInactiveTabs(activePanel,container, children,datesSideTab);
+        hideInactiveTabs(activePanel,container_tab, children_tab,datesSideTab);
         
     })
     notesSideTab.addEventListener("click", (e) => {
-        let container = "items-container";
-        let children= "item-display_page";
         let activePanel = document.querySelector(".notes-container");
 
-            hideInactiveTabs(activePanel,container, children,notesSideTab);
+        hideInactiveTabs(activePanel,container_tab, children_tab,notesSideTab);
     
     })
     //event listeners for the todo items in Todo List sidebar
