@@ -1,5 +1,4 @@
 /******/ (() => { // webpackBootstrap
-/******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
 /***/ "./src/home.js":
@@ -8,6 +7,7 @@
   \*********************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "iconColorChange": () => (/* binding */ iconColorChange)
@@ -45,6 +45,7 @@ let iconColorChange = ( clickedTab ) => {
   \*****************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "loadNewItemPanel": () => (/* binding */ loadNewItemPanel),
@@ -94,19 +95,30 @@ let panelClicked = (clickedTab) => {
 
 /***/ }),
 
+/***/ "./src/project.js":
+/*!************************!*\
+  !*** ./src/project.js ***!
+  \************************/
+/***/ (() => {
+
+
+
+/***/ }),
+
 /***/ "./src/todo.js":
 /*!*********************!*\
   !*** ./src/todo.js ***!
   \*********************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "displayTodoEditPanel": () => (/* binding */ displayTodoEditPanel)
 /* harmony export */ });
 let displayTodoEditPanel = (editBtn) => {
     if (editBtn.classList.contains("todo-edit_clicked")){
-        let todoEditPanel = document.querySelector(".overlay-todoitem-edit")
+        let todoEditPanel = document.querySelector(".todo-item-edit")
         if (todoEditPanel.classList.contains("display-none")){
             todoEditPanel.classList.remove("display-none");
         }
@@ -128,6 +140,7 @@ let displayTodoEditPanel = (editBtn) => {
   \****************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "initEventListeners": () => (/* binding */ initEventListeners),
@@ -137,6 +150,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _newItemPanel__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./newItemPanel */ "./src/newItemPanel.js");
 /* harmony import */ var _home__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./home */ "./src/home.js");
 /* harmony import */ var _todo__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./todo */ "./src/todo.js");
+/* harmony import */ var _project__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./project */ "./src/project.js");
+/* harmony import */ var _project__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_project__WEBPACK_IMPORTED_MODULE_3__);
+
 
 
 
@@ -158,7 +174,7 @@ let initEventListeners = () => {
     const todoTabPanel = document.querySelector(".new-item-todo");
     const projectTabPanel = document.querySelector(".new-item-project");
     const noteTabPanel = document.querySelector(".new-item-note");
-    
+
     const conatiner_panel = "new-item-main-content";
     const children_panel = 'item-panel';
 
@@ -252,7 +268,63 @@ let initEventListeners = () => {
         let todoEditClose = document.querySelector(".exit-todo-edit");
         todoEditClose.addEventListener("click", (e) => {
             editBtn.classList.remove("todo-edit_clicked");
-            let todoEditPanel = document.querySelector(".overlay-todoitem-edit")
+            let todoEditPanel = document.querySelector(".todo-item-edit")
+            if(!todoEditPanel.classList.contains("display-none")){
+                todoEditPanel.classList.add("display-none");
+            }
+        })
+
+        // deleting the todo items on click
+        deleteBtn.addEventListener("click", deleteItem , (e) => {
+        })
+
+    });
+
+    // event listeners for the project items in project sidebar
+
+    let arrayProjectItems = getDivChildrenByClass("items-container","project-item_page");
+    console.log(arrayProjectItems);
+    arrayProjectItems.forEach(element => {
+        let checkmark = element.querySelector(".project-checkmark");
+        let detail = element.querySelector(".project-detail");
+        let tooltip = element.querySelector(".project-detail_wrap");
+        let editBtn = element.querySelector(".project-edit");
+        let deleteBtn = element.querySelector(".project-delete");
+
+        checkmark.addEventListener("click",(e) => {
+            if(checkmark.classList.contains("project-checkmark_checked")){
+                checkmark.classList.remove("project-checkmark_checked");
+            }
+            else{
+               checkmark.classList.add("project-checkmark_checked");
+            }
+        })
+    // will display and not display deatil text if mouse is in or out
+        detail.addEventListener("mouseover", (e) => {
+            if (tooltip.classList.contains("display-none")){
+                tooltip.classList.remove("display-none");
+            }
+        })
+        detail.addEventListener("mouseout", (e) => {
+            if (!tooltip.classList.contains("display-none")){
+                tooltip.classList.add("display-none");
+            }
+        })
+        editBtn.addEventListener("click", (e) => {
+            if (editBtn.classList.contains("project-edit_clicked")){
+                return;
+            }
+            else{
+                editBtn.classList.add("project-edit_clicked");
+                (0,_project__WEBPACK_IMPORTED_MODULE_3__.displayProjectEditPanel)(editBtn);
+            }
+        })
+
+        // event listener for clicking close on project edit panel
+        let todoEditClose = document.querySelector(".exit-project-edit");
+        todoEditClose.addEventListener("click", (e) => {
+            editBtn.classList.remove("project-edit_clicked");
+            let todoEditPanel = document.querySelector(".project-item-edit")
             if(!todoEditPanel.classList.contains("display-none")){
                 todoEditPanel.classList.add("display-none");
             }
@@ -355,6 +427,18 @@ let hideInactiveTabs = (activePanel, container, children, clickedTab) =>{
 /******/ 	}
 /******/ 	
 /************************************************************************/
+/******/ 	/* webpack/runtime/compat get default export */
+/******/ 	(() => {
+/******/ 		// getDefaultExport function for compatibility with non-harmony modules
+/******/ 		__webpack_require__.n = (module) => {
+/******/ 			var getter = module && module.__esModule ?
+/******/ 				() => (module['default']) :
+/******/ 				() => (module);
+/******/ 			__webpack_require__.d(getter, { a: getter });
+/******/ 			return getter;
+/******/ 		};
+/******/ 	})();
+/******/ 	
 /******/ 	/* webpack/runtime/define property getters */
 /******/ 	(() => {
 /******/ 		// define getter functions for harmony exports
@@ -385,8 +469,9 @@ let hideInactiveTabs = (activePanel, container, children, clickedTab) =>{
 /******/ 	
 /************************************************************************/
 var __webpack_exports__ = {};
-// This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
+// This entry need to be wrapped in an IIFE because it need to be in strict mode.
 (() => {
+"use strict";
 /*!**********************!*\
   !*** ./src/index.js ***!
   \**********************/

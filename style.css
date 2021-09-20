@@ -208,10 +208,10 @@ h3>i {
     color:white;
     background-color: #1ba872;
 }
-.todo-detail_wrap {
+.todo-detail_wrap, .project-detail_wrap {
     position: relative;
   }
-span.todo-detail_content {
+span.todo-detail_content,span.project-detail_content {
     position: absolute;
     /* autos make the span always go around content */
     width: auto;
@@ -228,7 +228,7 @@ span.todo-detail_content {
     margin-top: .7rem;
 }
 
-span.todo-detail_content:after {
+span.todo-detail_content:after,span.project-detail_content:after {
     content: "";
     position: absolute;
     width: 0;
@@ -240,10 +240,11 @@ span.todo-detail_content:after {
     left: 0rem;
     border-bottom-color: #1ba872;
 }
-  .todo-detail_wrap {
+/* will make the size of the tool tip change depending on the size of the details button */
+  /* .todo-detail_wrap, .project-detail_wrap {
     position: absolute;
-  }
-  .todo-detail_wrap:hover .todo-detail_content:hover {
+  } */
+  .todo-detail_wrap:hover .todo-detail_content:hover .project-detail_wrap:hover .project-detail_content:hover {
     display: block;
   }
 .todo-date, .project-date, .date-item-date{
@@ -630,7 +631,7 @@ font-size: 1rem;
 } 
 /* todo item editting */
 /* new item popup */
-.overlay-todoitem-edit{
+.overlay-item-edit{
     position: fixed; /* Sit on top of the page content */
     width: 100%; /* Full width (cover the whole page) */
     height: 100%; /* Full height (cover the whole page) */
@@ -641,7 +642,7 @@ font-size: 1rem;
     background-color: rgba(0,0,0,0.5); /* Black background with opacity */
     z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
 }
-.todo-edit-container{
+.item-edit-container{
     position: absolute; /* Sit on top of the page content */
     top: 0;
     left: 0;
@@ -655,17 +656,17 @@ font-size: 1rem;
     margin-left:34.4%;
     border-radius: 4px;
 }
-.todo-edit-content{
+.item-edit-content{
     height:100%;
     width:100%;
 }
-.todo-edit-content_container{
+.item-edit-content_container{
     padding:1rem;
     flex-direction: column;
     padding-left: 2rem;
 
 }
-.todo-edit-header{
+.item-edit-header{
     background-color: #fff;
     height:1rem;
     width:100%;
@@ -687,17 +688,17 @@ font-size: 1rem;
     height:9rem;
     font-size: .85rem;
 }
-.exit-todo-edit{
+.exit-edit{
     font-weight:600;
     margin-right: 1rem;
     color:#b281a3;
     transition: all .2s ease-out;
 }
-.exit-todo-edit:hover{
+.exit-edit:hover{
     cursor:pointer;
     opacity:.7;
 }
-.todo-edit-header>h2{
+.item-edit-header>h2{
     font-weight: 500;
     font-size: 1.2rem;
     margin-top:0;

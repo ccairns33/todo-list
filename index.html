@@ -63,7 +63,13 @@
         <div id="item-display_page" class="project-item_page d-flex display-none">
           <div class="project-checkmark"></div>
           <div class="project-title"> Project</div>
-          <div class="project-detail"> Project details</div>
+          <div class="project-detail">Project details
+            <div class= "project-detail_wrap display-none">
+                <span class= "project-detail_content">
+                  <p>Here is some content for the tooltip. </p>
+                </span>
+            </div>
+          </div>
           <div class="project-date">Aug 17</div>
           <div class="project-edit project-icon">
             <i class="far fa-edit"></i>
@@ -176,13 +182,13 @@
         </form>
       </div>
       
-      <div class="overlay-todoitem-edit display-none">
-        <div class="todo-edit-container ">
-          <div class="todo-edit-header d-flex">
-            <div class="exit-todo-edit">X</div>
+      <div class="overlay-item-edit todo-item-edit display-none">
+        <div class="item-edit-container todo-edit-container">
+          <div class="item-edit-header todo-edit-header d-flex">
+            <div class="exit-edit exit-todo-edit">X</div>
           </div>
-          <form class="todo-edit-content"> 
-            <div class="todo-edit-content_container d-flex">
+          <form class="item-edit-content todo-edit-content"> 
+            <div class="item-edit-content_container todo-edit-content_container d-flex">
               <textarea class="edit-input edit-input_small" maxlength="40" required="" data-index="0" data-project="todo">Example</textarea>
               <textarea class="edit-input edit-input_big" placeholder="Details:">Here is some content for the tooltip.</textarea>
               <div class="new-item-date-due d-flex">
@@ -202,6 +208,60 @@
                     <input type="radio" id="new-item-high" name="new-item-priority" value="high" required="">
                     <label for="new-item-high" class="priority-btn priority-btn-high">high</label>
                 </div>
+                <input type="submit" class="create-new-todo-submit" id="todo-submit" value="Confirm Edit">
+              </div> 
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div class="overlay-item-edit project-item-edit display-none">
+        <div class="item-edit-container project-edit-container">
+          <div class="item-edit-header project-edit-header d-flex">
+            <div class="exit-edit exit-project-edit">X</div>
+          </div>
+          <form class="item-edit-content project-edit-content"> 
+            <div class="item-edit-content_container project-edit-content_container d-flex">
+              <textarea class="edit-input edit-input_small" maxlength="40" required="" data-index="0" data-project="todo">Example</textarea>
+              <textarea class="edit-input edit-input_big" placeholder="Details:">Here is some content for the tooltip.</textarea>
+              <div class="new-item-date-due d-flex">
+                <div class="date-title">Due Date: </div>
+                <input type="date" class="new-item-date-input" id="new-item-date" name="new-todo" required="">
+              </div>
+              <div class="wrapper-priority-submit d-flex"> 
+                <div class="new-item-priority d-flex">
+                    <div class="priority-title">Priority: </div>
+
+                    <input type="radio" id="new-item-low" name="new-item-priority" value="low" required="">
+                    <label for="new-item-low" class="priority-btn priority-btn-low">Low</label>
+
+                    <input type="radio" id="new-item-medium" name="new-item-priority" value="medium" required="">
+                    <label for="new-item-medium" class="priority-btn priority-btn-medium">Medium</label>
+
+                    <input type="radio" id="new-item-high" name="new-item-priority" value="high" required="">
+                    <label for="new-item-high" class="priority-btn priority-btn-high">high</label>
+                </div>
+                <input type="submit" class="create-new-todo-submit" id="todo-submit" value="Confirm Edit">
+              </div> 
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div class="overlay-item-edit date-item-edit display-none">
+        <div class="item-edit-container date-edit-container ">
+          <div class="item-edit-header date-edit-header d-flex">
+            <div class="exit-edit">X</div>
+          </div>
+          <form class="item-edit-content date-edit-content"> 
+            <div class="item-edit-content_container date-edit-content_container d-flex">
+              <textarea class="edit-input edit-input_small" maxlength="40" required="" data-index="0" data-project="todo">Example</textarea>
+              <textarea class="edit-input edit-input_big" placeholder="Details:">Here is some content for the tooltip.</textarea>
+              <div class="new-item-date-due d-flex">
+                <div class="date-title">Due Date: </div>
+                <input type="date" class="new-item-date-input" id="new-item-date" name="new-todo" required="">
+              </div>
+              <div class="wrapper-priority-submit d-flex"> 
                 <input type="submit" class="create-new-todo-submit" id="todo-submit" value="Confirm Edit">
               </div> 
             </div>
