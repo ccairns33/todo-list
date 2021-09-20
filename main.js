@@ -2,6 +2,34 @@
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
+/***/ "./src/date.js":
+/*!*********************!*\
+  !*** ./src/date.js ***!
+  \*********************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "displayDateEditPanel": () => (/* binding */ displayDateEditPanel)
+/* harmony export */ });
+let displayDateEditPanel = (editBtn) => {
+    if (editBtn.classList.contains("date-edit_clicked")){
+        let dateEditPanel = document.querySelector(".date-item-edit")
+        if (dateEditPanel.classList.contains("display-none")){
+            dateEditPanel.classList.remove("display-none");
+        }
+        else{
+            return;
+        }
+    }
+    else{
+        return;
+    }
+}
+
+
+/***/ }),
+
 /***/ "./src/home.js":
 /*!*********************!*\
   !*** ./src/home.js ***!
@@ -166,6 +194,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _home__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./home */ "./src/home.js");
 /* harmony import */ var _todo__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./todo */ "./src/todo.js");
 /* harmony import */ var _project__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./project */ "./src/project.js");
+/* harmony import */ var _date_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./date.js */ "./src/date.js");
+
 
 
 
@@ -339,6 +369,42 @@ let initEventListeners = () => {
         todoEditClose.addEventListener("click", (e) => {
             editBtn.classList.remove("project-edit_clicked");
             let todoEditPanel = document.querySelector(".project-item-edit")
+            if(!todoEditPanel.classList.contains("display-none")){
+                todoEditPanel.classList.add("display-none");
+            }
+        })
+
+        // deleting the todo items on click
+        deleteBtn.addEventListener("click", deleteItem , (e) => {
+        })
+
+    });
+    // event listeners for the project items in project sidebar
+
+    let arrayDateItems = getDivChildrenByClass("items-container","date-item_page");
+    console.log(arrayDateItems);
+    arrayDateItems.forEach(element => {
+        let editBtn = element.querySelector(".date-edit");
+        let deleteBtn = element.querySelector(".date-delete");
+
+       
+    // will display and not display deatil text if mouse is in or out
+        
+        editBtn.addEventListener("click", (e) => {
+            if (editBtn.classList.contains("date-edit_clicked")){
+                return;
+            }
+            else{
+                editBtn.classList.add("date-edit_clicked");
+                (0,_date_js__WEBPACK_IMPORTED_MODULE_4__.displayDateEditPanel)(editBtn);
+            }
+        })
+
+        // event listener for clicking close on project edit panel
+        let dateEditClose = document.querySelector(".exit-date-edit");
+        dateEditClose.addEventListener("click", (e) => {
+            editBtn.classList.remove("date-edit_clicked");
+            let todoEditPanel = document.querySelector(".date-item-edit")
             if(!todoEditPanel.classList.contains("display-none")){
                 todoEditPanel.classList.add("display-none");
             }
