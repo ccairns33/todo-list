@@ -208,9 +208,10 @@ h3>i {
     color:white;
     background-color: #1ba872;
 }
-.todo-detail_wrap, .project-detail_wrap {
+/* makes size of tooptip dependent on detail button length */
+/* .todo-detail_wrap, .project-detail_wrap {
     position: relative;
-  }
+  } */
 span.todo-detail_content,span.project-detail_content {
     position: absolute;
     /* autos make the span always go around content */
@@ -240,10 +241,10 @@ span.todo-detail_content:after,span.project-detail_content:after {
     left: 0rem;
     border-bottom-color: #1ba872;
 }
-/* will make the size of the tool tip change depending on the size of the details button */
-  /* .todo-detail_wrap, .project-detail_wrap {
+/* will make the size of the tool tip stay the same size. not depending on the size of the details button */
+  .todo-detail_wrap, .project-detail_wrap {
     position: absolute;
-  } */
+  }
   .todo-detail_wrap:hover .todo-detail_content:hover .project-detail_wrap:hover .project-detail_content:hover {
     display: block;
   }
