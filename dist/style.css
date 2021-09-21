@@ -171,7 +171,7 @@ h3>i {
     margin-right:1rem;
     margin-left:.5rem;
 }
-.todo-checkmark_checked{
+.todo-checkmark_checked, .project-checkmark_checked{
     height:.7rem;
     width:.7rem;
     display: block;
@@ -243,7 +243,7 @@ span.todo-detail_content:after,span.project-detail_content:after {
 }
 /* will make the size of the tool tip stay the same size. not depending on the size of the details button */
   .todo-detail_wrap, .project-detail_wrap {
-    position: absolute;
+    position: relative;
   }
   .todo-detail_wrap:hover .todo-detail_content:hover .project-detail_wrap:hover .project-detail_content:hover {
     display: block;

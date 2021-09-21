@@ -232,7 +232,13 @@ let deleteItem = (e) =>{
     let deleteBtn = e.target;
     let item = deleteBtn.parentElement.parentElement;
     let itemParent = item.parentElement;
-    itemParent.removeChild(item);
+    // strange bug will delete items-container, in a certain sequence of events. hard to replicate
+    if(itemParent.id === "items-container"){
+        return;
+    }
+    else {
+        itemParent.removeChild(item);
+    }
 }
 let getDivChildrenByClass = (containerClass, elementsClass) =>{
     let div = document.querySelector("."+containerClass),
