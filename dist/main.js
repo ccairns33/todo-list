@@ -416,6 +416,13 @@ let initEventListeners = () => {
 
     });
 
+    // event listener for exiting note from note tab
+    let noteExit = document.querySelector(".note-close_icon");
+    noteExit.addEventListener("click", deleteItem, (e) =>{
+
+    })
+
+
 }
 
 let deleteItem = (e) =>{
