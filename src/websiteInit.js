@@ -233,7 +233,7 @@ let deleteItem = (e) =>{
     let item = deleteBtn.parentElement.parentElement;
     let itemParent = item.parentElement;
     // strange bug will delete items-container, in a certain sequence of events. hard to replicate
-    if(itemParent.id === "items-container"){
+    if(itemParent.firstChild.id === "items-container"){
         return;
     }
     else {
