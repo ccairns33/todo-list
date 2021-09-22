@@ -241,7 +241,7 @@ span.todo-detail_content:after,span.project-detail_content:after {
     left: 0rem;
     border-bottom-color: #1ba872;
 }
-/* will make the size of the tool tip stay the same size. not depending on the size of the details button */
+/* will make the size of the tool tip not stay the same size.  depending on the size of the details button */
   .todo-detail_wrap, .project-detail_wrap {
     position: relative;
   }
@@ -494,22 +494,6 @@ span.todo-detail_content:after,span.project-detail_content:after {
     justify-content: space-between;
     height:100%;
 }
-.create-new-project-submit{
-    text-align: center;
-    align-self: flex-start;
-    padding: .5rem .5rem;
-    border-radius: 3px;
-    border: 1px solid #3ba395;
-    font-size: .8rem;
-    text-transform: uppercase;
-    font-weight: 700;
-    color: #3ba395;
-    background-color: transparent;
-    cursor: pointer;
-    transition: all .3s;
-    margin-bottom:1.5rem;
-}
-
 .create-new-project-submit:hover{
     background-color: #3ba395;
     color:white;
@@ -526,9 +510,10 @@ span.todo-detail_content:after,span.project-detail_content:after {
 
 }
 
-.create-new-date-submit{
+.create-new-date-submit, .create-new-note-submit, .create-new-project-submit{
     text-align: center;
-    align-self: flex-start;
+    align-self: flex-end;
+    margin-right:1.5rem;
     padding: .5rem .5rem;
     border-radius: 3px;
     border: 1px solid #3ba395;
@@ -549,7 +534,10 @@ span.todo-detail_content:after,span.project-detail_content:after {
 .note-panel{
     flex-direction: column;
     justify-content: space-between;
-    height:100%;
+    
+}
+.panel-height{
+    height:97.5%;
 }
 .grid{
     display:grid;
