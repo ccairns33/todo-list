@@ -201,10 +201,38 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+// Selector for todos container
+const itemsContainer = document.querySelector('[data-container]');
+
+// Local storage keys
+const LOCAL_STORAGE_CATEGORIES_KEY = 'LOCAL_STORAGE_CATEGORIES_KEY';
+const LOCAL_STORAGE_TODOS_KEY = 'LOCAL_STORAGE_TODOS_KEY';
+const LOCAL_STORAGE_PROJECTS_KEY = 'LOCAL_STORAGE_PROJECTS_KEY';
+const LOCAL_STORAGE_DATES_KEY = 'LOCAL_STORAGE_DATES_KEY';
+const LOCAL_STORAGE_NOTES_KEY = 'LOCAL_STORAGE_NOTES_KEY';
+
+
+const LOCAL_STORAGE_SELECTED_CATEGORY_ID_KEY = 'LOCAL_STORAGE_SELECTED_CATEGORY_ID_KEY';
+
+let selectedCategoryId = localStorage.getItem(LOCAL_STORAGE_SELECTED_CATEGORY_ID_KEY);
+let categories = JSON.parse(localStorage.getItem(LOCAL_STORAGE_CATEGORIES_KEY)) || [];
+let todos = JSON.parse(localStorage.getItem(LOCAL_STORAGE_TODOS_KEY)) || [];
+let projects = JSON.parse(localStorage.getItem(LOCAL_STORAGE_PROJECTS_KEY)) || [];
+let dates = JSON.parse(localStorage.getItem(LOCAL_STORAGE_DATES_KEY)) || [];
+let notes = JSON.parse(localStorage.getItem(LOCAL_STORAGE_NOTES_KEY)) || [];
+
+// todo selectors for new todo
+let newTodoSubmitBtn = document.querySelector(".create-new-todo-submit");
+let newTodoTitle = document.querySelector("#new-todo-title");
+let newTodoDetails = document.querySelector("#new-todo-details");
+let newTodoDueDate = document.querySelector("#new-todo-date");
+let todoPriorityContainer = document.querySelector("#new-todo-priority-container")
+
+
 
 let initEventListeners = () => {
-    const newTodoBtn = document.querySelector(".new-todo_btn");
-    newTodoBtn.addEventListener("click", (e) => {
+    const newItemBtn = document.querySelector(".new-todo_btn");
+    newItemBtn.addEventListener("click", (e) => {
         (0,_newItemPanel__WEBPACK_IMPORTED_MODULE_0__.loadNewItemPanel)();
     })
 
@@ -423,6 +451,74 @@ let initEventListeners = () => {
     })
 
 
+    // add todo items !!
+
+    // finding todo priority
+    let todoPriority = ""
+            todoPriorityContainer.addEventListener("click", (e) =>  {
+                if (e.target.tagName.toLowerCase() === "label"){
+                    if (e.target.classList.contains("priority-btn-low")){
+                        todoPriority = "low";
+                    }
+                    else if (e.target.classList.contains("priority-btn-medium")){
+                        todoPriority = "medium";
+                    }
+                    else {
+                        todoPriority = "high";
+                    }
+                }
+            })
+    newTodoSubmitBtn.addEventListener("click", (e) => {
+            
+        let todoTitle = newTodoTitle.value;
+        let todoDetails = newTodoDetails.value;
+        let todoDate = newTodoDueDate.value;
+        console.log("hit");
+        todos.push({_id: Date.now().toString(),categoryId: "todo",title: todoTitle,details: todoDetails,dueDate: todoDate});
+        console.log(todos)
+        saveAndLoad()
+
+    })
+
+}
+let loadTodos = () => {
+    let todosToRender = todos;
+    todosToRender.forEach(({ _id, categoryId, title, details, dueDate }) => {
+        itemsContainer.innerHTML += `<div id="item-display_page" class="todo-item_page d-flex display-none">
+        <div class="todo-checkmark"></div>
+        <div class="todo-title"> ${title}</div>
+        <div class="todo-detail">item details
+          <div class= "todo-detail_wrap display-none">
+              <span class= "todo-detail_content">
+                <p>${details} </p>
+              </span>
+          </div>
+        </div>
+        <div class="todo-date">${dueDate}</div>
+        <div class="todo-edit todo-icon" data-edit-todo=${_id}>
+          <i class="far fa-edit"></i>
+        </div>
+        <div class="todo-delete todo-icon" data-delete-todo=${_id}>
+          <i class="far fa-trash-alt"></i>
+        </div>
+      </div>`
+    })
+}
+let load = () => {
+    // clearing old data
+    clearChildElements(itemsContainer);
+
+    loadTodos();
+
+
+}
+let saveAndLoad = () =>{
+    // saves
+    localStorage.setItem(LOCAL_STORAGE_TODOS_KEY, JSON.stringify(todos));
+
+    // loading/ rendering
+    load();
+    
 }
 
 let deleteItem = (e) =>{
@@ -448,6 +544,11 @@ let getDivChildrenByClass = (containerClass, elementsClass) =>{
 
     }
     return myArray;
+}
+let clearChildElements = (element) => {
+    while (element.firstChild) {
+        element.removeChild(element.firstChild);
+    }
 }
 
 let getDivChildren = (containerId, elementsId) =>{
