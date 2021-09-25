@@ -40,7 +40,7 @@
       </div>
     </nav>
     <div class="main todo-list content background-pic">
-      <div id="items-container" class= "items-container">
+      <div id="items-container" data-container class= "items-container">
         <div id="item-display_page" class="todo-item_page d-flex display-none">
           <div class="todo-checkmark"></div>
           <div class="todo-title"> Example</div>
@@ -52,10 +52,10 @@
             </div>
           </div>
           <div class="todo-date">Aug 17</div>
-          <div class="todo-edit todo-icon">
+          <div class="todo-edit todo-icon" data-edit-todo>
             <i class="far fa-edit"></i>
           </div>
-          <div class="todo-delete todo-icon">
+          <div class="todo-delete todo-icon" data-delete-todo>
             <i class="far fa-trash-alt"></i>
           </div>
         </div>
@@ -134,10 +134,10 @@
 
                 <div class="new-item-date-due d-flex">
                   <div class="date-title">Due Date: </div>
-                  <input type="date" class="new-item-date-input" id="new-item-date" name="new-todo" required="">
+                  <input type="date" class="new-item-date-input" id="new-todo-date" name="new-todo" required="">
                 </div>
                 <div class="wrapper-priority-submit d-flex"> 
-                  <div class="new-item-priority d-flex">
+                  <div class="new-item-priority d-flex" id = "new-todo-priority-container">
                       <div class="priority-title">Priority: </div>
 
                       <input type="radio" id="new-item-low" name="new-item-priority" value="low" required="">
