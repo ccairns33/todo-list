@@ -1,4 +1,4 @@
-import {getDivChildrenByClass, deleteItem} from "./websiteInit";
+import {getDivChildrenByClass, deleteItem, saveAndLoad} from "./websiteInit";
 let displayTodoEditPanel = (editBtn) => {
     if (editBtn.classList.contains("todo-edit_clicked")){
         let todoEditPanel = document.querySelector(".todo-item-edit")
@@ -12,6 +12,36 @@ let displayTodoEditPanel = (editBtn) => {
     else{
         return;
     }
+}
+let newTodoPriority = (todoPriorityContainer) =>{
+    let todoPriority = "";
+    todoPriorityContainer.addEventListener("click", (e) =>  {
+        if (e.target.tagName.toLowerCase() === "label"){
+            if (e.target.classList.contains("priority-btn-low")){
+                todoPriority = "low";
+            }
+            else if (e.target.classList.contains("priority-btn-medium")){
+                todoPriority = "medium";
+            }
+            else {
+                todoPriority = "high";
+            }
+        }
+    })
+    return todoPriority;
+}
+let newTodoSubmition = (todoPriorityContainer,todos, newTodoSubmitBtn,newTodoTitle,newTodoDetails,newTodoDueDate ) => {
+    // finding todo priority
+    let todoPriority = newTodoPriority(todoPriorityContainer);
+    newTodoSubmitBtn.addEventListener("click", (e) => {
+            
+        let todoTitle = newTodoTitle.value;
+        let todoDetails = newTodoDetails.value;
+        let todoDate = newTodoDueDate.value;
+        todos.push({_id: Date.now().toString(),categoryId: "todo",title: todoTitle,details: todoDetails,dueDate: todoDate, priority:todoPriority});
+        saveAndLoad()
+
+    })
 }
 let todoItemsArrayAndListeners = (arrayTodoItems) => {
     arrayTodoItems = getDivChildrenByClass("items-container","todo-item_page");
@@ -96,4 +126,4 @@ let updateArrayTodoItems = (arrayTodoItems) => {
     arrayTodoItems = Array.from(document.querySelectorAll(".todo-item_page"));
     console.log(arrayTodoItems);
 }
-export{displayTodoEditPanel, updateArrayTodoItems, loadTodos, todoItemsArrayAndListeners}
+export{displayTodoEditPanel, updateArrayTodoItems, loadTodos, todoItemsArrayAndListeners,newTodoSubmition}

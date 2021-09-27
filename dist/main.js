@@ -161,7 +161,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "displayTodoEditPanel": () => (/* binding */ displayTodoEditPanel),
 /* harmony export */   "updateArrayTodoItems": () => (/* binding */ updateArrayTodoItems),
 /* harmony export */   "loadTodos": () => (/* binding */ loadTodos),
-/* harmony export */   "todoItemsArrayAndListeners": () => (/* binding */ todoItemsArrayAndListeners)
+/* harmony export */   "todoItemsArrayAndListeners": () => (/* binding */ todoItemsArrayAndListeners),
+/* harmony export */   "newTodoSubmition": () => (/* binding */ newTodoSubmition)
 /* harmony export */ });
 /* harmony import */ var _websiteInit__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./websiteInit */ "./src/websiteInit.js");
 
@@ -178,6 +179,36 @@ let displayTodoEditPanel = (editBtn) => {
     else{
         return;
     }
+}
+let newTodoPriority = (todoPriorityContainer) =>{
+    let todoPriority = "";
+    todoPriorityContainer.addEventListener("click", (e) =>  {
+        if (e.target.tagName.toLowerCase() === "label"){
+            if (e.target.classList.contains("priority-btn-low")){
+                todoPriority = "low";
+            }
+            else if (e.target.classList.contains("priority-btn-medium")){
+                todoPriority = "medium";
+            }
+            else {
+                todoPriority = "high";
+            }
+        }
+    })
+    return todoPriority;
+}
+let newTodoSubmition = (todoPriorityContainer,todos, newTodoSubmitBtn,newTodoTitle,newTodoDetails,newTodoDueDate ) => {
+    // finding todo priority
+    let todoPriority = newTodoPriority(todoPriorityContainer);
+    newTodoSubmitBtn.addEventListener("click", (e) => {
+            
+        let todoTitle = newTodoTitle.value;
+        let todoDetails = newTodoDetails.value;
+        let todoDate = newTodoDueDate.value;
+        todos.push({_id: Date.now().toString(),categoryId: "todo",title: todoTitle,details: todoDetails,dueDate: todoDate, priority:todoPriority});
+        (0,_websiteInit__WEBPACK_IMPORTED_MODULE_0__.saveAndLoad)()
+
+    })
 }
 let todoItemsArrayAndListeners = (arrayTodoItems) => {
     arrayTodoItems = (0,_websiteInit__WEBPACK_IMPORTED_MODULE_0__.getDivChildrenByClass)("items-container","todo-item_page");
@@ -234,8 +265,6 @@ let todoItemsArrayAndListeners = (arrayTodoItems) => {
 
     });
 }
-
-
 let loadTodos = (todos,itemsContainer,arrayTodoItems) => {
     let todosToRender = todos;
     todosToRender.forEach(({ _id, category, title, details, dueDate, priority }) => {
@@ -280,7 +309,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "getDivChildren": () => (/* binding */ getDivChildren),
 /* harmony export */   "hideInactiveTabs": () => (/* binding */ hideInactiveTabs),
 /* harmony export */   "getDivChildrenByClass": () => (/* binding */ getDivChildrenByClass),
-/* harmony export */   "deleteItem": () => (/* binding */ deleteItem)
+/* harmony export */   "deleteItem": () => (/* binding */ deleteItem),
+/* harmony export */   "saveAndLoad": () => (/* binding */ saveAndLoad)
 /* harmony export */ });
 /* harmony import */ var _newItemPanel__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./newItemPanel */ "./src/newItemPanel.js");
 /* harmony import */ var _home__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./home */ "./src/home.js");
@@ -325,36 +355,13 @@ let arrayProjectItems = [];
 let arrayDateItems = [];
 
 
-
-
 let initEventListeners = () => {
     // add todo items !!
     (0,_todo__WEBPACK_IMPORTED_MODULE_2__.loadTodos)(todos,itemsContainer,arrayTodoItems);
     console.log(arrayTodoItems);
-    // finding todo priority
-    let todoPriority = ""
-            todoPriorityContainer.addEventListener("click", (e) =>  {
-                if (e.target.tagName.toLowerCase() === "label"){
-                    if (e.target.classList.contains("priority-btn-low")){
-                        todoPriority = "low";
-                    }
-                    else if (e.target.classList.contains("priority-btn-medium")){
-                        todoPriority = "medium";
-                    }
-                    else {
-                        todoPriority = "high";
-                    }
-                }
-            })
-    newTodoSubmitBtn.addEventListener("click", (e) => {
-            
-        let todoTitle = newTodoTitle.value;
-        let todoDetails = newTodoDetails.value;
-        let todoDate = newTodoDueDate.value;
-        todos.push({_id: Date.now().toString(),categoryId: "todo",title: todoTitle,details: todoDetails,dueDate: todoDate, priority:todoPriority});
-        saveAndLoad()
+    
+    (0,_todo__WEBPACK_IMPORTED_MODULE_2__.newTodoSubmition)(todoPriorityContainer,todos, newTodoSubmitBtn,newTodoTitle,newTodoDetails,newTodoDueDate);
 
-    })
     const newItemBtn = document.querySelector(".new-todo_btn");
     newItemBtn.addEventListener("click", (e) => {
         (0,_newItemPanel__WEBPACK_IMPORTED_MODULE_0__.loadNewItemPanel)();

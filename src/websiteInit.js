@@ -1,6 +1,6 @@
 import {loadNewItemPanel, closeNewItemPanel, panelClicked } from "./newItemPanel";
 import {iconColorChange} from "./home";
-import {displayTodoEditPanel, updateArrayTodoItems, loadTodos, todoItemsArrayAndListeners} from "./todo";
+import {displayTodoEditPanel, updateArrayTodoItems, loadTodos, todoItemsArrayAndListeners, newTodoSubmition} from "./todo";
 import {displayProjectEditPanel} from "./project";
 import {displayDateEditPanel} from "./date.js";
 
@@ -36,36 +36,13 @@ let arrayProjectItems = [];
 let arrayDateItems = [];
 
 
-
-
 let initEventListeners = () => {
     // add todo items !!
     loadTodos(todos,itemsContainer,arrayTodoItems);
     console.log(arrayTodoItems);
-    // finding todo priority
-    let todoPriority = ""
-            todoPriorityContainer.addEventListener("click", (e) =>  {
-                if (e.target.tagName.toLowerCase() === "label"){
-                    if (e.target.classList.contains("priority-btn-low")){
-                        todoPriority = "low";
-                    }
-                    else if (e.target.classList.contains("priority-btn-medium")){
-                        todoPriority = "medium";
-                    }
-                    else {
-                        todoPriority = "high";
-                    }
-                }
-            })
-    newTodoSubmitBtn.addEventListener("click", (e) => {
-            
-        let todoTitle = newTodoTitle.value;
-        let todoDetails = newTodoDetails.value;
-        let todoDate = newTodoDueDate.value;
-        todos.push({_id: Date.now().toString(),categoryId: "todo",title: todoTitle,details: todoDetails,dueDate: todoDate, priority:todoPriority});
-        saveAndLoad()
+    
+    newTodoSubmition(todoPriorityContainer,todos, newTodoSubmitBtn,newTodoTitle,newTodoDetails,newTodoDueDate);
 
-    })
     const newItemBtn = document.querySelector(".new-todo_btn");
     newItemBtn.addEventListener("click", (e) => {
         loadNewItemPanel();
@@ -328,4 +305,4 @@ let hideInactiveTabs = (activePanel, container, children, clickedTab) =>{
     }
 }
 
-export {initEventListeners, getDivChildren, hideInactiveTabs, getDivChildrenByClass, deleteItem};
+export {initEventListeners, getDivChildren, hideInactiveTabs, getDivChildrenByClass, deleteItem, saveAndLoad};
