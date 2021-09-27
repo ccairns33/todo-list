@@ -158,8 +158,13 @@ let displayProjectEditPanel = (editBtn) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "displayTodoEditPanel": () => (/* binding */ displayTodoEditPanel)
+/* harmony export */   "displayTodoEditPanel": () => (/* binding */ displayTodoEditPanel),
+/* harmony export */   "updateArrayTodoItems": () => (/* binding */ updateArrayTodoItems),
+/* harmony export */   "loadTodos": () => (/* binding */ loadTodos),
+/* harmony export */   "todoItemsArrayAndListeners": () => (/* binding */ todoItemsArrayAndListeners)
 /* harmony export */ });
+/* harmony import */ var _websiteInit__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./websiteInit */ "./src/websiteInit.js");
+
 let displayTodoEditPanel = (editBtn) => {
     if (editBtn.classList.contains("todo-edit_clicked")){
         let todoEditPanel = document.querySelector(".todo-item-edit")
@@ -173,6 +178,91 @@ let displayTodoEditPanel = (editBtn) => {
     else{
         return;
     }
+}
+let todoItemsArrayAndListeners = (arrayTodoItems) => {
+    arrayTodoItems = (0,_websiteInit__WEBPACK_IMPORTED_MODULE_0__.getDivChildrenByClass)("items-container","todo-item_page");
+    console.log((0,_websiteInit__WEBPACK_IMPORTED_MODULE_0__.getDivChildrenByClass)("items-container","todo-item_page"))
+    arrayTodoItems.forEach(element => {
+        let checkmark = element.querySelector(".todo-checkmark");
+        let detail = element.querySelector(".todo-detail");
+        let tooltip = element.querySelector(".todo-detail_wrap");
+        let editBtn = element.querySelector(".todo-edit");
+        let deleteBtn = element.querySelector(".todo-delete");
+
+        checkmark.addEventListener("click",(e) => {
+            if(checkmark.classList.contains("todo-checkmark_checked")){
+                checkmark.classList.remove("todo-checkmark_checked");
+            }
+            else{
+               checkmark.classList.add("todo-checkmark_checked");
+            }
+        })
+    // will display and not display deatil text if mouse is in or out
+        detail.addEventListener("mouseover", (e) => {
+            if (tooltip.classList.contains("display-none")){
+                tooltip.classList.remove("display-none");
+            }
+        })
+        detail.addEventListener("mouseout", (e) => {
+            if (!tooltip.classList.contains("display-none")){
+                tooltip.classList.add("display-none");
+            }
+        })
+        editBtn.addEventListener("click", (e) => {
+            if (editBtn.classList.contains("todo-edit_clicked")){
+                return;
+            }
+            else{
+                editBtn.classList.add("todo-edit_clicked");
+                displayTodoEditPanel(editBtn);
+            }
+        })
+
+        // event listener for clicking close on todo edit panel
+        let todoEditClose = document.querySelector(".exit-todo-edit");
+        todoEditClose.addEventListener("click", (e) => {
+            editBtn.classList.remove("todo-edit_clicked");
+            let todoEditPanel = document.querySelector(".todo-item-edit")
+            if(!todoEditPanel.classList.contains("display-none")){
+                todoEditPanel.classList.add("display-none");
+            }
+        })
+
+        // deleting the todo items on click
+        deleteBtn.addEventListener("click", _websiteInit__WEBPACK_IMPORTED_MODULE_0__.deleteItem , (e) => {
+        })
+
+    });
+}
+
+
+let loadTodos = (todos,itemsContainer,arrayTodoItems) => {
+    let todosToRender = todos;
+    todosToRender.forEach(({ _id, category, title, details, dueDate, priority }) => {
+        itemsContainer.innerHTML += `<div id="item-display_page" class="todo-item_page d-flex">
+        <div class="todo-checkmark"></div>
+        <div class="todo-title"> ${title}</div>
+        <div class="todo-detail">item details
+          <div class= "todo-detail_wrap display-none">
+              <span class= "todo-detail_content">
+                <p>${details} </p>
+              </span>
+          </div>
+        </div>
+        <div class="todo-date">${dueDate}</div>
+        <div class="todo-edit todo-icon" data-edit-todo=${_id}>
+          <i class="far fa-edit"></i>
+        </div>
+        <div class="todo-delete todo-icon" data-delete-todo=${_id}>
+          <i class="far fa-trash-alt"></i>
+        </div>
+      </div>`
+    })
+    updateArrayTodoItems(arrayTodoItems);
+}
+let updateArrayTodoItems = (arrayTodoItems) => {
+    arrayTodoItems = Array.from(document.querySelectorAll(".todo-item_page"));
+    console.log(arrayTodoItems);
 }
 
 
@@ -188,7 +278,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "initEventListeners": () => (/* binding */ initEventListeners),
 /* harmony export */   "getDivChildren": () => (/* binding */ getDivChildren),
-/* harmony export */   "hideInactiveTabs": () => (/* binding */ hideInactiveTabs)
+/* harmony export */   "hideInactiveTabs": () => (/* binding */ hideInactiveTabs),
+/* harmony export */   "getDivChildrenByClass": () => (/* binding */ getDivChildrenByClass),
+/* harmony export */   "deleteItem": () => (/* binding */ deleteItem)
 /* harmony export */ });
 /* harmony import */ var _newItemPanel__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./newItemPanel */ "./src/newItemPanel.js");
 /* harmony import */ var _home__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./home */ "./src/home.js");
@@ -228,9 +320,41 @@ let newTodoDetails = document.querySelector("#new-todo-details");
 let newTodoDueDate = document.querySelector("#new-todo-date");
 let todoPriorityContainer = document.querySelector("#new-todo-priority-container")
 
+let arrayTodoItems = [];
+let arrayProjectItems = [];
+let arrayDateItems = [];
+
+
 
 
 let initEventListeners = () => {
+    // add todo items !!
+    (0,_todo__WEBPACK_IMPORTED_MODULE_2__.loadTodos)(todos,itemsContainer,arrayTodoItems);
+    console.log(arrayTodoItems);
+    // finding todo priority
+    let todoPriority = ""
+            todoPriorityContainer.addEventListener("click", (e) =>  {
+                if (e.target.tagName.toLowerCase() === "label"){
+                    if (e.target.classList.contains("priority-btn-low")){
+                        todoPriority = "low";
+                    }
+                    else if (e.target.classList.contains("priority-btn-medium")){
+                        todoPriority = "medium";
+                    }
+                    else {
+                        todoPriority = "high";
+                    }
+                }
+            })
+    newTodoSubmitBtn.addEventListener("click", (e) => {
+            
+        let todoTitle = newTodoTitle.value;
+        let todoDetails = newTodoDetails.value;
+        let todoDate = newTodoDueDate.value;
+        todos.push({_id: Date.now().toString(),categoryId: "todo",title: todoTitle,details: todoDetails,dueDate: todoDate, priority:todoPriority});
+        saveAndLoad()
+
+    })
     const newItemBtn = document.querySelector(".new-todo_btn");
     newItemBtn.addEventListener("click", (e) => {
         (0,_newItemPanel__WEBPACK_IMPORTED_MODULE_0__.loadNewItemPanel)();
@@ -247,21 +371,22 @@ let initEventListeners = () => {
     const projectTabPanel = document.querySelector(".new-item-project");
     const noteTabPanel = document.querySelector(".new-item-note");
 
-    const conatiner_panel = "new-item-main-content";
+    const container_panel = "new-item-main-content";
     const children_panel = 'item-panel';
 
     //no color change for these. might add something else later.
     todoTabPanel.addEventListener("click", (e) => {
-        hideInactiveTabs(document.querySelector(".todo-panel"),conatiner_panel, children_panel,todoTabPanel);
+        (0,_todo__WEBPACK_IMPORTED_MODULE_2__.updateArrayTodoItems)(arrayTodoItems);
+        hideInactiveTabs(document.querySelector(".todo-panel"),container_panel, children_panel,todoTabPanel);
     })
     projectTabPanel.addEventListener("click", (e) => {
-        hideInactiveTabs(document.querySelector(".project-panel"),conatiner_panel, children_panel,projectTabPanel);
+        hideInactiveTabs(document.querySelector(".project-panel"),container_panel, children_panel,projectTabPanel);
     })
     dateTabPanel.addEventListener("click", (e) => {
-        hideInactiveTabs(document.querySelector(".date-panel"),conatiner_panel, children_panel,dateTabPanel);
+        hideInactiveTabs(document.querySelector(".date-panel"),container_panel, children_panel,dateTabPanel);
     })
     noteTabPanel.addEventListener("click", (e) => {
-        hideInactiveTabs(document.querySelector(".note-panel"),conatiner_panel, children_panel,noteTabPanel);
+        hideInactiveTabs(document.querySelector(".note-panel"),container_panel, children_panel,noteTabPanel);
     })
 
     // tabs for chagning main content from sidebar nav
@@ -298,63 +423,12 @@ let initEventListeners = () => {
     })
     //event listeners for the todo items in Todo List sidebar
 
-    let arrayTodoItems = getDivChildrenByClass("items-container","todo-item_page");
-    console.log(arrayTodoItems);
-    arrayTodoItems.forEach(element => {
-        let checkmark = element.querySelector(".todo-checkmark");
-        let detail = element.querySelector(".todo-detail");
-        let tooltip = element.querySelector(".todo-detail_wrap");
-        let editBtn = element.querySelector(".todo-edit");
-        let deleteBtn = element.querySelector(".todo-delete");
-
-        checkmark.addEventListener("click",(e) => {
-            if(checkmark.classList.contains("todo-checkmark_checked")){
-                checkmark.classList.remove("todo-checkmark_checked");
-            }
-            else{
-               checkmark.classList.add("todo-checkmark_checked");
-            }
-        })
-    // will display and not display deatil text if mouse is in or out
-        detail.addEventListener("mouseover", (e) => {
-            if (tooltip.classList.contains("display-none")){
-                tooltip.classList.remove("display-none");
-            }
-        })
-        detail.addEventListener("mouseout", (e) => {
-            if (!tooltip.classList.contains("display-none")){
-                tooltip.classList.add("display-none");
-            }
-        })
-        editBtn.addEventListener("click", (e) => {
-            if (editBtn.classList.contains("todo-edit_clicked")){
-                return;
-            }
-            else{
-                editBtn.classList.add("todo-edit_clicked");
-                (0,_todo__WEBPACK_IMPORTED_MODULE_2__.displayTodoEditPanel)(editBtn);
-            }
-        })
-
-        // event listener for clicking close on todo edit panel
-        let todoEditClose = document.querySelector(".exit-todo-edit");
-        todoEditClose.addEventListener("click", (e) => {
-            editBtn.classList.remove("todo-edit_clicked");
-            let todoEditPanel = document.querySelector(".todo-item-edit")
-            if(!todoEditPanel.classList.contains("display-none")){
-                todoEditPanel.classList.add("display-none");
-            }
-        })
-
-        // deleting the todo items on click
-        deleteBtn.addEventListener("click", deleteItem , (e) => {
-        })
-
-    });
+    ;(0,_todo__WEBPACK_IMPORTED_MODULE_2__.todoItemsArrayAndListeners)();
+    
 
     // event listeners for the project items in project sidebar
 
-    let arrayProjectItems = getDivChildrenByClass("items-container","project-item_page");
+    arrayProjectItems = getDivChildrenByClass("items-container","project-item_page");
     console.log(arrayProjectItems);
     arrayProjectItems.forEach(element => {
         let checkmark = element.querySelector(".project-checkmark");
@@ -409,7 +483,7 @@ let initEventListeners = () => {
     });
     // event listeners for the project items in project sidebar
 
-    let arrayDateItems = getDivChildrenByClass("items-container","date-item_page");
+    arrayDateItems = getDivChildrenByClass("items-container","date-item_page");
     console.log(arrayDateItems);
     arrayDateItems.forEach(element => {
         let editBtn = element.querySelector(".date-edit");
@@ -451,69 +525,22 @@ let initEventListeners = () => {
     })
 
 
-    // add todo items !!
-
-    // finding todo priority
-    let todoPriority = ""
-            todoPriorityContainer.addEventListener("click", (e) =>  {
-                if (e.target.tagName.toLowerCase() === "label"){
-                    if (e.target.classList.contains("priority-btn-low")){
-                        todoPriority = "low";
-                    }
-                    else if (e.target.classList.contains("priority-btn-medium")){
-                        todoPriority = "medium";
-                    }
-                    else {
-                        todoPriority = "high";
-                    }
-                }
-            })
-    newTodoSubmitBtn.addEventListener("click", (e) => {
-            
-        let todoTitle = newTodoTitle.value;
-        let todoDetails = newTodoDetails.value;
-        let todoDate = newTodoDueDate.value;
-        console.log("hit");
-        todos.push({_id: Date.now().toString(),categoryId: "todo",title: todoTitle,details: todoDetails,dueDate: todoDate});
-        console.log(todos)
-        saveAndLoad()
-
-    })
+    
 
 }
-let loadTodos = () => {
-    let todosToRender = todos;
-    todosToRender.forEach(({ _id, categoryId, title, details, dueDate }) => {
-        itemsContainer.innerHTML += `<div id="item-display_page" class="todo-item_page d-flex display-none">
-        <div class="todo-checkmark"></div>
-        <div class="todo-title"> ${title}</div>
-        <div class="todo-detail">item details
-          <div class= "todo-detail_wrap display-none">
-              <span class= "todo-detail_content">
-                <p>${details} </p>
-              </span>
-          </div>
-        </div>
-        <div class="todo-date">${dueDate}</div>
-        <div class="todo-edit todo-icon" data-edit-todo=${_id}>
-          <i class="far fa-edit"></i>
-        </div>
-        <div class="todo-delete todo-icon" data-delete-todo=${_id}>
-          <i class="far fa-trash-alt"></i>
-        </div>
-      </div>`
-    })
-}
+
+
 let load = () => {
     // clearing old data
     clearChildElements(itemsContainer);
 
-    loadTodos();
+    (0,_todo__WEBPACK_IMPORTED_MODULE_2__.loadTodos)(todos,itemsContainer,arrayTodoItems);
 
 
 }
 let saveAndLoad = () =>{
     // saves
+    console.log(LOCAL_STORAGE_TODOS_KEY)
     localStorage.setItem(LOCAL_STORAGE_TODOS_KEY, JSON.stringify(todos));
 
     // loading/ rendering
@@ -570,7 +597,7 @@ let hideInactiveTabs = (activePanel, container, children, clickedTab) =>{
     if (activePanel!= null){
         tabsArr.forEach(element => {
             if(activePanel.classList[0] === element.classList[0]){
-                activePanel.classList.remove("display-none");
+                element.classList.remove("display-none");
             }
             else{
                 element.classList.add("display-none");

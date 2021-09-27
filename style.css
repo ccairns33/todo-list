@@ -221,6 +221,7 @@ span.todo-detail_content,span.project-detail_content {
     font-size: .5rem;
     text-align: center;
     color: white;
+    font-weight: bold;
     background: #1ba872;
     border: .3rem solid rgb(227, 255, 211);
     border-radius: 5px;
@@ -279,6 +280,7 @@ span.todo-detail_content:after,span.project-detail_content:after {
     bottom: 0;
     background-color: rgba(0,0,0,0.5); /* Black background with opacity */
     z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
+    overflow-y:scroll;
 }
 .new-item-container{
     position: absolute; /* Sit on top of the page content */
