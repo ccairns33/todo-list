@@ -1,8 +1,8 @@
 import {loadNewItemPanel, closeNewItemPanel, panelClicked } from "./newItemPanel";
 import {iconColorChange} from "./home";
 import {displayTodoEditPanel, updateArrayTodoItems, loadTodos, todoItemsArrayAndListeners, newTodoSubmition} from "./todo";
-import {displayProjectEditPanel} from "./project";
-import {displayDateEditPanel} from "./date.js";
+import {displayProjectEditPanel, projectItemsArrayAndListeners, updateArrayProjectItems, loadProjects, newProjectSubmition} from "./project";
+import {displayDateEditPanel,dateItemsArrayAndListeners} from "./date.js";
 
 // Selector for todos container
 const itemsContainer = document.querySelector('[data-container]');
@@ -31,6 +31,13 @@ let newTodoDetails = document.querySelector("#new-todo-details");
 let newTodoDueDate = document.querySelector("#new-todo-date");
 let todoPriorityContainer = document.querySelector("#new-todo-priority-container")
 
+// project selectors for new project
+let newProjectSubmitBtn = document.querySelector(".create-new-project-submit");
+let newProjectTitle = document.querySelector("#new-project-title");
+let newProjectDetails = document.querySelector("#new-project-details");
+let newProjectDueDate = document.querySelector("#new-project-date");
+let projectPriorityContainer = document.querySelector("#new-project-priority-container")
+
 let arrayTodoItems = [];
 let arrayProjectItems = [];
 let arrayDateItems = [];
@@ -39,15 +46,17 @@ let arrayDateItems = [];
 let initEventListeners = () => {
     // add todo items !!
     loadTodos(todos,itemsContainer,arrayTodoItems);
-    console.log(arrayTodoItems);
-    
     newTodoSubmition(todoPriorityContainer,todos, newTodoSubmitBtn,newTodoTitle,newTodoDetails,newTodoDueDate);
 
+    // add todo items !!
+    loadProjects(projects,itemsContainer,arrayProjectItems);
+    newProjectSubmition(projectPriorityContainer,projects, newProjectSubmitBtn,newProjectTitle,newProjectDetails,newProjectDueDate);
+
+    // new item panel open and close
     const newItemBtn = document.querySelector(".new-todo_btn");
     newItemBtn.addEventListener("click", (e) => {
         loadNewItemPanel();
     })
-
     const closePanel = document.querySelector(".exit-new-item");
     closePanel.addEventListener("click", (e) => {
         closeNewItemPanel();
@@ -59,12 +68,11 @@ let initEventListeners = () => {
     const projectTabPanel = document.querySelector(".new-item-project");
     const noteTabPanel = document.querySelector(".new-item-note");
 
+    // main content for the new item panel
     const container_panel = "new-item-main-content";
     const children_panel = 'item-panel';
 
-    //no color change for these. might add something else later.
     todoTabPanel.addEventListener("click", (e) => {
-        updateArrayTodoItems(arrayTodoItems);
         hideInactiveTabs(document.querySelector(".todo-panel"),container_panel, children_panel,todoTabPanel);
     })
     projectTabPanel.addEventListener("click", (e) => {
@@ -87,149 +95,50 @@ let initEventListeners = () => {
 
     todoSideTab.addEventListener("click", (e) => {
         let activePanel = document.querySelector(".todo-item_page");
-
         hideInactiveTabs(activePanel,container_tab, children_tab,todoSideTab);
-        
     })
     projectsSideTab.addEventListener("click", (e) => {
         let activePanel = document.querySelector(".project-item_page");
-
         hideInactiveTabs(activePanel,container_tab, children_tab,projectsSideTab);
-    
     })
     datesSideTab.addEventListener("click", (e) => {
         let activePanel = document.querySelector(".date-item_page");
-       
         hideInactiveTabs(activePanel,container_tab, children_tab,datesSideTab);
-        
     })
     notesSideTab.addEventListener("click", (e) => {
         let activePanel = document.querySelector(".notes-container");
-
         hideInactiveTabs(activePanel,container_tab, children_tab,notesSideTab);
-    
     })
+
     //event listeners for the todo items in Todo List sidebar
-
-    todoItemsArrayAndListeners();
+    todoItemsArrayAndListeners(arrayTodoItems);
     
+    //event listeners for the project items in Project List sidebar
+    projectItemsArrayAndListeners(arrayProjectItems);
 
-    // event listeners for the project items in project sidebar
-
-    arrayProjectItems = getDivChildrenByClass("items-container","project-item_page");
-    console.log(arrayProjectItems);
-    arrayProjectItems.forEach(element => {
-        let checkmark = element.querySelector(".project-checkmark");
-        let detail = element.querySelector(".project-detail");
-        let tooltip = element.querySelector(".project-detail_wrap");
-        let editBtn = element.querySelector(".project-edit");
-        let deleteBtn = element.querySelector(".project-delete");
-
-        checkmark.addEventListener("click",(e) => {
-            if(checkmark.classList.contains("project-checkmark_checked")){
-                checkmark.classList.remove("project-checkmark_checked");
-            }
-            else{
-               checkmark.classList.add("project-checkmark_checked");
-            }
-        })
-    // will display and not display deatil text if mouse is in or out
-        detail.addEventListener("mouseover", (e) => {
-            if (tooltip.classList.contains("display-none")){
-                tooltip.classList.remove("display-none");
-            }
-        })
-        detail.addEventListener("mouseout", (e) => {
-            if (!tooltip.classList.contains("display-none")){
-                tooltip.classList.add("display-none");
-            }
-        })
-        editBtn.addEventListener("click", (e) => {
-            if (editBtn.classList.contains("project-edit_clicked")){
-                return;
-            }
-            else{
-                editBtn.classList.add("project-edit_clicked");
-                displayProjectEditPanel(editBtn);
-            }
-        })
-
-        // event listener for clicking close on project edit panel
-        let todoEditClose = document.querySelector(".exit-project-edit");
-        todoEditClose.addEventListener("click", (e) => {
-            editBtn.classList.remove("project-edit_clicked");
-            let todoEditPanel = document.querySelector(".project-item-edit")
-            if(!todoEditPanel.classList.contains("display-none")){
-                todoEditPanel.classList.add("display-none");
-            }
-        })
-
-        // deleting the todo items on click
-        deleteBtn.addEventListener("click", deleteItem , (e) => {
-        })
-
-    });
-    // event listeners for the project items in project sidebar
-
-    arrayDateItems = getDivChildrenByClass("items-container","date-item_page");
-    console.log(arrayDateItems);
-    arrayDateItems.forEach(element => {
-        let editBtn = element.querySelector(".date-edit");
-        let deleteBtn = element.querySelector(".date-delete");
-
-       
-    // will display and not display deatil text if mouse is in or out
-        
-        editBtn.addEventListener("click", (e) => {
-            if (editBtn.classList.contains("date-edit_clicked")){
-                return;
-            }
-            else{
-                editBtn.classList.add("date-edit_clicked");
-                displayDateEditPanel(editBtn);
-            }
-        })
-
-        // event listener for clicking close on project edit panel
-        let dateEditClose = document.querySelector(".exit-date-edit");
-        dateEditClose.addEventListener("click", (e) => {
-            editBtn.classList.remove("date-edit_clicked");
-            let todoEditPanel = document.querySelector(".date-item-edit")
-            if(!todoEditPanel.classList.contains("display-none")){
-                todoEditPanel.classList.add("display-none");
-            }
-        })
-
-        // deleting the todo items on click
-        deleteBtn.addEventListener("click", deleteItem , (e) => {
-        })
-
-    });
+    //event listeners for the project items in Date List sidebar
+    dateItemsArrayAndListeners(arrayDateItems);
 
     // event listener for exiting note from note tab
     let noteExit = document.querySelector(".note-close_icon");
     noteExit.addEventListener("click", deleteItem, (e) =>{
-
     })
-
-
-    
-
 }
-
 
 let load = () => {
     // clearing old data
     clearChildElements(itemsContainer);
 
     loadTodos(todos,itemsContainer,arrayTodoItems);
-
+    loadProjects(projects,itemsContainer,arrayProjectItems);
 
 }
 let saveAndLoad = () =>{
     // saves
     console.log(LOCAL_STORAGE_TODOS_KEY)
     localStorage.setItem(LOCAL_STORAGE_TODOS_KEY, JSON.stringify(todos));
+    localStorage.setItem(LOCAL_STORAGE_PROJECTS_KEY, JSON.stringify(projects));
+
 
     // loading/ rendering
     load();

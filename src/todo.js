@@ -1,4 +1,5 @@
 import {getDivChildrenByClass, deleteItem, saveAndLoad} from "./websiteInit";
+
 let displayTodoEditPanel = (editBtn) => {
     if (editBtn.classList.contains("todo-edit_clicked")){
         let todoEditPanel = document.querySelector(".todo-item-edit")
@@ -101,7 +102,7 @@ let todoItemsArrayAndListeners = (arrayTodoItems) => {
 let loadTodos = (todos,itemsContainer,arrayTodoItems) => {
     let todosToRender = todos;
     todosToRender.forEach(({ _id, category, title, details, dueDate, priority }) => {
-        itemsContainer.innerHTML += `<div id="item-display_page" class="todo-item_page d-flex">
+        itemsContainer.innerHTML += `<div id="item-display_page" class="todo-item_page d-flex" data-catagory=${category} data-priority=${priority}>
         <div class="todo-checkmark"></div>
         <div class="todo-title"> ${title}</div>
         <div class="todo-detail">item details
