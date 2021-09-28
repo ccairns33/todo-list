@@ -10,8 +10,12 @@
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "displayDateEditPanel": () => (/* binding */ displayDateEditPanel)
+/* harmony export */   "displayDateEditPanel": () => (/* binding */ displayDateEditPanel),
+/* harmony export */   "dateItemsArrayAndListeners": () => (/* binding */ dateItemsArrayAndListeners)
 /* harmony export */ });
+/* harmony import */ var _websiteInit__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./websiteInit */ "./src/websiteInit.js");
+
+
 let displayDateEditPanel = (editBtn) => {
     if (editBtn.classList.contains("date-edit_clicked")){
         let dateEditPanel = document.querySelector(".date-item-edit")
@@ -25,6 +29,40 @@ let displayDateEditPanel = (editBtn) => {
     else{
         return;
     }
+}
+
+let dateItemsArrayAndListeners = (arrayDateItems) => {
+    arrayDateItems = (0,_websiteInit__WEBPACK_IMPORTED_MODULE_0__.getDivChildrenByClass)("items-container","date-item_page");
+    console.log(arrayDateItems);
+    arrayDateItems.forEach(element => {
+        let editBtn = element.querySelector(".date-edit");
+        let deleteBtn = element.querySelector(".date-delete");
+        
+        editBtn.addEventListener("click", (e) => {
+            if (editBtn.classList.contains("date-edit_clicked")){
+                return;
+            }
+            else{
+                editBtn.classList.add("date-edit_clicked");
+                displayDateEditPanel(editBtn);
+            }
+        })
+
+        // event listener for clicking close on date edit panel
+        let dateEditClose = document.querySelector(".exit-date-edit");
+        dateEditClose.addEventListener("click", (e) => {
+            editBtn.classList.remove("date-edit_clicked");
+            let todoEditPanel = document.querySelector(".date-item-edit")
+            if(!todoEditPanel.classList.contains("display-none")){
+                todoEditPanel.classList.add("display-none");
+            }
+        })
+
+        // deleting the item on clicking on the trash bin
+        deleteBtn.addEventListener("click", _websiteInit__WEBPACK_IMPORTED_MODULE_0__.deleteItem , (e) => {
+        })
+
+    });
 }
 
 
@@ -130,8 +168,15 @@ let panelClicked = (clickedTab) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "displayProjectEditPanel": () => (/* binding */ displayProjectEditPanel)
+/* harmony export */   "displayProjectEditPanel": () => (/* binding */ displayProjectEditPanel),
+/* harmony export */   "projectItemsArrayAndListeners": () => (/* binding */ projectItemsArrayAndListeners),
+/* harmony export */   "updateArrayProjectItems": () => (/* binding */ updateArrayProjectItems),
+/* harmony export */   "loadProjects": () => (/* binding */ loadProjects),
+/* harmony export */   "newProjectSubmition": () => (/* binding */ newProjectSubmition)
 /* harmony export */ });
+/* harmony import */ var _websiteInit__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./websiteInit */ "./src/websiteInit.js");
+
+
 let displayProjectEditPanel = (editBtn) => {
     if (editBtn.classList.contains("project-edit_clicked")){
         let projectEditPanel = document.querySelector(".project-item-edit")
@@ -146,6 +191,122 @@ let displayProjectEditPanel = (editBtn) => {
         return;
     }
 }
+let newProjectPriority = (projectPriorityContainer) =>{
+    let projectPriority = "";
+    projectPriorityContainer.addEventListener("click", (e) =>  {
+        if (e.target.tagName.toLowerCase() === "label"){
+            if (e.target.classList.contains("priority-btn-low")){
+                projectPriority = "low";
+            }
+            else if (e.target.classList.contains("priority-btn-medium")){
+                projectPriority = "medium";
+            }
+            else {
+                projectPriority = "high";
+            }
+        }
+    })
+    return projectPriority;
+}
+let newProjectSubmition = (projectPriorityContainer,projects, newProjectSubmitBtn,newProjectTitle,newProjectDetails,newProjectDueDate) => {
+    // finding todo priority
+    let projectPriority = newProjectPriority(projectPriorityContainer);
+    newProjectSubmitBtn.addEventListener("click", (e) => {
+            
+        let projTitle = newProjectTitle.value;
+        let projDetails = newProjectDetails.value;
+        let projDate = newProjectDueDate.value;
+        projects.push({_id: Date.now().toString(),categoryId: "project",title: projTitle,details: projDetails,dueDate: projDate, priority:projectPriority});
+        (0,_websiteInit__WEBPACK_IMPORTED_MODULE_0__.saveAndLoad)()
+
+    })
+}
+    // event listeners for the project items in project sidebar
+let projectItemsArrayAndListeners = (arrayProjectItems) => {
+    arrayProjectItems = (0,_websiteInit__WEBPACK_IMPORTED_MODULE_0__.getDivChildrenByClass)("items-container","project-item_page");
+    console.log(arrayProjectItems);
+    arrayProjectItems.forEach(element => {
+        let checkmark = element.querySelector(".project-checkmark");
+        let detail = element.querySelector(".project-detail");
+        let tooltip = element.querySelector(".project-detail_wrap");
+        let editBtn = element.querySelector(".project-edit");
+        let deleteBtn = element.querySelector(".project-delete");
+
+        checkmark.addEventListener("click",(e) => {
+            if(checkmark.classList.contains("project-checkmark_checked")){
+                checkmark.classList.remove("project-checkmark_checked");
+            }
+            else{
+               checkmark.classList.add("project-checkmark_checked");
+            }
+        })
+    // will display and not display deatil text if mouse is in or out
+        detail.addEventListener("mouseover", (e) => {
+            if (tooltip.classList.contains("display-none")){
+                tooltip.classList.remove("display-none");
+            }
+        })
+        detail.addEventListener("mouseout", (e) => {
+            if (!tooltip.classList.contains("display-none")){
+                tooltip.classList.add("display-none");
+            }
+        })
+        editBtn.addEventListener("click", (e) => {
+            if (editBtn.classList.contains("project-edit_clicked")){
+                return;
+            }
+            else{
+                editBtn.classList.add("project-edit_clicked");
+                displayProjectEditPanel(editBtn);
+            }
+        })
+
+        // event listener for clicking close on project edit panel
+        let todoEditClose = document.querySelector(".exit-project-edit");
+        todoEditClose.addEventListener("click", (e) => {
+            editBtn.classList.remove("project-edit_clicked");
+            let todoEditPanel = document.querySelector(".project-item-edit")
+            if(!todoEditPanel.classList.contains("display-none")){
+                todoEditPanel.classList.add("display-none");
+            }
+        })
+
+        // deleting the todo items on click
+        deleteBtn.addEventListener("click", _websiteInit__WEBPACK_IMPORTED_MODULE_0__.deleteItem , (e) => {
+        })
+
+    });
+}
+
+let loadProjects = (projects,itemsContainer,arrayProjectItems) => {
+    let projectsToRender = projects;
+    projectsToRender.forEach(({ _id, category, title, details, dueDate, priority }) => {
+        itemsContainer.innerHTML += `<div id="item-display_page" class="project-item_page d-flex" data-catagory=${category} data-priority=${priority}>
+        <div class="project-checkmark"></div>
+        <div class="project-title"> ${title}</div>
+        <div class="project-detail">item details
+          <div class= "project-detail_wrap display-none">
+              <span class= "project-detail_content">
+                <p>${details} </p>
+              </span>
+          </div>
+        </div>
+        <div class="project-date">${dueDate}</div>
+        <div class="project-edit todo-icon" data-edit-project=${_id}>
+          <i class="far fa-edit"></i>
+        </div>
+        <div class="project-delete project-icon" data-delete-project=${_id}>
+          <i class="far fa-trash-alt"></i>
+        </div>
+      </div>`
+    })
+    updateArrayProjectItems(arrayProjectItems);
+}
+let updateArrayProjectItems = (arrayProjectItems) => {
+    arrayProjectItems = Array.from(document.querySelectorAll(".project-item_page"));
+    console.log(arrayProjectItems);
+}
+
 
 
 /***/ }),
@@ -165,6 +326,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "newTodoSubmition": () => (/* binding */ newTodoSubmition)
 /* harmony export */ });
 /* harmony import */ var _websiteInit__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./websiteInit */ "./src/websiteInit.js");
+
 
 let displayTodoEditPanel = (editBtn) => {
     if (editBtn.classList.contains("todo-edit_clicked")){
@@ -268,7 +430,7 @@ let todoItemsArrayAndListeners = (arrayTodoItems) => {
 let loadTodos = (todos,itemsContainer,arrayTodoItems) => {
     let todosToRender = todos;
     todosToRender.forEach(({ _id, category, title, details, dueDate, priority }) => {
-        itemsContainer.innerHTML += `<div id="item-display_page" class="todo-item_page d-flex">
+        itemsContainer.innerHTML += `<div id="item-display_page" class="todo-item_page d-flex" data-catagory=${category} data-priority=${priority}>
         <div class="todo-checkmark"></div>
         <div class="todo-title"> ${title}</div>
         <div class="todo-detail">item details
@@ -350,6 +512,13 @@ let newTodoDetails = document.querySelector("#new-todo-details");
 let newTodoDueDate = document.querySelector("#new-todo-date");
 let todoPriorityContainer = document.querySelector("#new-todo-priority-container")
 
+// project selectors for new project
+let newProjectSubmitBtn = document.querySelector(".create-new-project-submit");
+let newProjectTitle = document.querySelector("#new-project-title");
+let newProjectDetails = document.querySelector("#new-project-details");
+let newProjectDueDate = document.querySelector("#new-project-date");
+let projectPriorityContainer = document.querySelector("#new-project-priority-container")
+
 let arrayTodoItems = [];
 let arrayProjectItems = [];
 let arrayDateItems = [];
@@ -358,15 +527,17 @@ let arrayDateItems = [];
 let initEventListeners = () => {
     // add todo items !!
     (0,_todo__WEBPACK_IMPORTED_MODULE_2__.loadTodos)(todos,itemsContainer,arrayTodoItems);
-    console.log(arrayTodoItems);
-    
     (0,_todo__WEBPACK_IMPORTED_MODULE_2__.newTodoSubmition)(todoPriorityContainer,todos, newTodoSubmitBtn,newTodoTitle,newTodoDetails,newTodoDueDate);
 
+    // add todo items !!
+    (0,_project__WEBPACK_IMPORTED_MODULE_3__.loadProjects)(projects,itemsContainer,arrayProjectItems);
+    (0,_project__WEBPACK_IMPORTED_MODULE_3__.newProjectSubmition)(projectPriorityContainer,projects, newProjectSubmitBtn,newProjectTitle,newProjectDetails,newProjectDueDate);
+
+    // new item panel open and close
     const newItemBtn = document.querySelector(".new-todo_btn");
     newItemBtn.addEventListener("click", (e) => {
         (0,_newItemPanel__WEBPACK_IMPORTED_MODULE_0__.loadNewItemPanel)();
     })
-
     const closePanel = document.querySelector(".exit-new-item");
     closePanel.addEventListener("click", (e) => {
         (0,_newItemPanel__WEBPACK_IMPORTED_MODULE_0__.closeNewItemPanel)();
@@ -378,12 +549,11 @@ let initEventListeners = () => {
     const projectTabPanel = document.querySelector(".new-item-project");
     const noteTabPanel = document.querySelector(".new-item-note");
 
+    // main content for the new item panel
     const container_panel = "new-item-main-content";
     const children_panel = 'item-panel';
 
-    //no color change for these. might add something else later.
     todoTabPanel.addEventListener("click", (e) => {
-        (0,_todo__WEBPACK_IMPORTED_MODULE_2__.updateArrayTodoItems)(arrayTodoItems);
         hideInactiveTabs(document.querySelector(".todo-panel"),container_panel, children_panel,todoTabPanel);
     })
     projectTabPanel.addEventListener("click", (e) => {
@@ -406,149 +576,50 @@ let initEventListeners = () => {
 
     todoSideTab.addEventListener("click", (e) => {
         let activePanel = document.querySelector(".todo-item_page");
-
         hideInactiveTabs(activePanel,container_tab, children_tab,todoSideTab);
-        
     })
     projectsSideTab.addEventListener("click", (e) => {
         let activePanel = document.querySelector(".project-item_page");
-
         hideInactiveTabs(activePanel,container_tab, children_tab,projectsSideTab);
-    
     })
     datesSideTab.addEventListener("click", (e) => {
         let activePanel = document.querySelector(".date-item_page");
-       
         hideInactiveTabs(activePanel,container_tab, children_tab,datesSideTab);
-        
     })
     notesSideTab.addEventListener("click", (e) => {
         let activePanel = document.querySelector(".notes-container");
-
         hideInactiveTabs(activePanel,container_tab, children_tab,notesSideTab);
-    
     })
+
     //event listeners for the todo items in Todo List sidebar
-
-    ;(0,_todo__WEBPACK_IMPORTED_MODULE_2__.todoItemsArrayAndListeners)();
+    ;(0,_todo__WEBPACK_IMPORTED_MODULE_2__.todoItemsArrayAndListeners)(arrayTodoItems);
     
+    //event listeners for the project items in Project List sidebar
+    (0,_project__WEBPACK_IMPORTED_MODULE_3__.projectItemsArrayAndListeners)(arrayProjectItems);
 
-    // event listeners for the project items in project sidebar
-
-    arrayProjectItems = getDivChildrenByClass("items-container","project-item_page");
-    console.log(arrayProjectItems);
-    arrayProjectItems.forEach(element => {
-        let checkmark = element.querySelector(".project-checkmark");
-        let detail = element.querySelector(".project-detail");
-        let tooltip = element.querySelector(".project-detail_wrap");
-        let editBtn = element.querySelector(".project-edit");
-        let deleteBtn = element.querySelector(".project-delete");
-
-        checkmark.addEventListener("click",(e) => {
-            if(checkmark.classList.contains("project-checkmark_checked")){
-                checkmark.classList.remove("project-checkmark_checked");
-            }
-            else{
-               checkmark.classList.add("project-checkmark_checked");
-            }
-        })
-    // will display and not display deatil text if mouse is in or out
-        detail.addEventListener("mouseover", (e) => {
-            if (tooltip.classList.contains("display-none")){
-                tooltip.classList.remove("display-none");
-            }
-        })
-        detail.addEventListener("mouseout", (e) => {
-            if (!tooltip.classList.contains("display-none")){
-                tooltip.classList.add("display-none");
-            }
-        })
-        editBtn.addEventListener("click", (e) => {
-            if (editBtn.classList.contains("project-edit_clicked")){
-                return;
-            }
-            else{
-                editBtn.classList.add("project-edit_clicked");
-                (0,_project__WEBPACK_IMPORTED_MODULE_3__.displayProjectEditPanel)(editBtn);
-            }
-        })
-
-        // event listener for clicking close on project edit panel
-        let todoEditClose = document.querySelector(".exit-project-edit");
-        todoEditClose.addEventListener("click", (e) => {
-            editBtn.classList.remove("project-edit_clicked");
-            let todoEditPanel = document.querySelector(".project-item-edit")
-            if(!todoEditPanel.classList.contains("display-none")){
-                todoEditPanel.classList.add("display-none");
-            }
-        })
-
-        // deleting the todo items on click
-        deleteBtn.addEventListener("click", deleteItem , (e) => {
-        })
-
-    });
-    // event listeners for the project items in project sidebar
-
-    arrayDateItems = getDivChildrenByClass("items-container","date-item_page");
-    console.log(arrayDateItems);
-    arrayDateItems.forEach(element => {
-        let editBtn = element.querySelector(".date-edit");
-        let deleteBtn = element.querySelector(".date-delete");
-
-       
-    // will display and not display deatil text if mouse is in or out
-        
-        editBtn.addEventListener("click", (e) => {
-            if (editBtn.classList.contains("date-edit_clicked")){
-                return;
-            }
-            else{
-                editBtn.classList.add("date-edit_clicked");
-                (0,_date_js__WEBPACK_IMPORTED_MODULE_4__.displayDateEditPanel)(editBtn);
-            }
-        })
-
-        // event listener for clicking close on project edit panel
-        let dateEditClose = document.querySelector(".exit-date-edit");
-        dateEditClose.addEventListener("click", (e) => {
-            editBtn.classList.remove("date-edit_clicked");
-            let todoEditPanel = document.querySelector(".date-item-edit")
-            if(!todoEditPanel.classList.contains("display-none")){
-                todoEditPanel.classList.add("display-none");
-            }
-        })
-
-        // deleting the todo items on click
-        deleteBtn.addEventListener("click", deleteItem , (e) => {
-        })
-
-    });
+    //event listeners for the project items in Date List sidebar
+    (0,_date_js__WEBPACK_IMPORTED_MODULE_4__.dateItemsArrayAndListeners)(arrayDateItems);
 
     // event listener for exiting note from note tab
     let noteExit = document.querySelector(".note-close_icon");
     noteExit.addEventListener("click", deleteItem, (e) =>{
-
     })
-
-
-    
-
 }
-
 
 let load = () => {
     // clearing old data
     clearChildElements(itemsContainer);
 
     (0,_todo__WEBPACK_IMPORTED_MODULE_2__.loadTodos)(todos,itemsContainer,arrayTodoItems);
-
+    (0,_project__WEBPACK_IMPORTED_MODULE_3__.loadProjects)(projects,itemsContainer,arrayProjectItems);
 
 }
 let saveAndLoad = () =>{
     // saves
     console.log(LOCAL_STORAGE_TODOS_KEY)
     localStorage.setItem(LOCAL_STORAGE_TODOS_KEY, JSON.stringify(todos));
+    localStorage.setItem(LOCAL_STORAGE_PROJECTS_KEY, JSON.stringify(projects));
+
 
     // loading/ rendering
     load();

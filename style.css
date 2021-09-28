@@ -218,7 +218,7 @@ span.todo-detail_content,span.project-detail_content {
     width: auto;
     height: auto;
     padding: .3rem;
-    font-size: .5rem;
+    font-size: .6rem;
     text-align: center;
     color: white;
     font-weight: bold;
@@ -471,6 +471,7 @@ span.todo-detail_content:after,span.project-detail_content:after {
 }
 .wrapper-priority-submit{
     justify-content: space-between;
+    margin-top:.4rem;
 }
 .create-new-todo-submit{
     text-align: center;
