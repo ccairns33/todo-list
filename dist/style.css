@@ -471,7 +471,9 @@ span.todo-detail_content:after,span.project-detail_content:after {
 }
 .wrapper-priority-submit{
     justify-content: space-between;
-    margin-top:.4rem;
+}
+.height2{
+    height:2rem;
 }
 .create-new-todo-submit{
     text-align: center;

@@ -1,4 +1,4 @@
-import {getDivChildrenByClass, deleteItem, saveAndLoad} from "./websiteInit";
+import {getDivChildrenByClass, deleteItem, saveAndLoad, autoCloseNewItemPanel} from "./websiteInit";
 
 let displayProjectEditPanel = (editBtn) => {
     if (editBtn.classList.contains("project-edit_clicked")){
@@ -14,40 +14,42 @@ let displayProjectEditPanel = (editBtn) => {
         return;
     }
 }
-let newProjectPriority = (projectPriorityContainer) =>{
-    let projectPriority = "";
-    projectPriorityContainer.addEventListener("click", (e) =>  {
-        if (e.target.tagName.toLowerCase() === "label"){
-            if (e.target.classList.contains("priority-btn-low")){
-                projectPriority = "low";
-            }
-            else if (e.target.classList.contains("priority-btn-medium")){
-                projectPriority = "medium";
-            }
-            else {
-                projectPriority = "high";
-            }
-        }
-    })
-    return projectPriority;
-}
+// let newProjectPriority = (projectPriorityContainer) =>{
+//     let projectPriority = "";
+//     projectPriorityContainer.addEventListener("click", (e) =>  {
+//         if (e.target.tagName.toLowerCase() === "label"){
+//             if (e.target.classList.contains("priority-btn-low")){
+//                 projectPriority = "low";
+//             }
+//             else if (e.target.classList.contains("priority-btn-medium")){
+//                 projectPriority = "medium";
+//             }
+//             else {
+//                 projectPriority = "high";
+//             }
+//         }
+//     })
+//     return projectPriority;
+// }
 let newProjectSubmition = (projectPriorityContainer,projects, newProjectSubmitBtn,newProjectTitle,newProjectDetails,newProjectDueDate) => {
     // finding todo priority
-    let projectPriority = newProjectPriority(projectPriorityContainer);
+    // let projectPriority = newProjectPriority(projectPriorityContainer);
     newProjectSubmitBtn.addEventListener("click", (e) => {
             
         let projTitle = newProjectTitle.value;
         let projDetails = newProjectDetails.value;
         let projDate = newProjectDueDate.value;
-        projects.push({_id: Date.now().toString(),categoryId: "project",title: projTitle,details: projDetails,dueDate: projDate, priority:projectPriority});
-        saveAndLoad()
+        projects.push({_id: Date.now().toString(),category: "project",title: projTitle,details: projDetails,dueDate: projDate});
+        saveAndLoad();
+        autoCloseNewItemPanel();
 
     })
+    
 }
+
     // event listeners for the project items in project sidebar
 let projectItemsArrayAndListeners = (arrayProjectItems) => {
     arrayProjectItems = getDivChildrenByClass("items-container","project-item_page");
-    console.log(arrayProjectItems);
     arrayProjectItems.forEach(element => {
         let checkmark = element.querySelector(".project-checkmark");
         let detail = element.querySelector(".project-detail");
@@ -85,12 +87,12 @@ let projectItemsArrayAndListeners = (arrayProjectItems) => {
         })
 
         // event listener for clicking close on project edit panel
-        let todoEditClose = document.querySelector(".exit-project-edit");
-        todoEditClose.addEventListener("click", (e) => {
+        let projectEditClose = document.querySelector(".exit-project-edit");
+        projectEditClose.addEventListener("click", (e) => {
             editBtn.classList.remove("project-edit_clicked");
-            let todoEditPanel = document.querySelector(".project-item-edit")
-            if(!todoEditPanel.classList.contains("display-none")){
-                todoEditPanel.classList.add("display-none");
+            let projectEditPanel = document.querySelector(".project-item-edit")
+            if(!projectEditPanel.classList.contains("display-none")){
+                projectEditPanel.classList.add("display-none");
             }
         })
 
@@ -103,11 +105,11 @@ let projectItemsArrayAndListeners = (arrayProjectItems) => {
 
 let loadProjects = (projects,itemsContainer,arrayProjectItems) => {
     let projectsToRender = projects;
-    projectsToRender.forEach(({ _id, category, title, details, dueDate, priority }) => {
-        itemsContainer.innerHTML += `<div id="item-display_page" class="project-item_page d-flex" data-catagory=${category} data-priority=${priority}>
+    projectsToRender.forEach(({ _id, category, title, details, dueDate }) => {
+        itemsContainer.innerHTML += `<div id="item-display_page" class="project-item_page d-flex" data-catagory=${category}>
         <div class="project-checkmark"></div>
         <div class="project-title"> ${title}</div>
-        <div class="project-detail">item details
+        <div class="project-detail">project details
           <div class= "project-detail_wrap display-none">
               <span class= "project-detail_content">
                 <p>${details} </p>
@@ -123,11 +125,12 @@ let loadProjects = (projects,itemsContainer,arrayProjectItems) => {
         </div>
       </div>`
     })
-    updateArrayProjectItems(arrayProjectItems);
+
 }
 let updateArrayProjectItems = (arrayProjectItems) => {
-    arrayProjectItems = Array.from(document.querySelectorAll(".project-item_page"));
-    console.log(arrayProjectItems);
+    arrayProjectItems = getDivChildrenByClass("items-container","project-item_page");
+    console.log("array-projects:" +arrayProjectItems);
+    return arrayProjectItems;
 }
 
 export{displayProjectEditPanel, projectItemsArrayAndListeners, updateArrayProjectItems, loadProjects,newProjectSubmition}

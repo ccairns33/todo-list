@@ -191,40 +191,42 @@ let displayProjectEditPanel = (editBtn) => {
         return;
     }
 }
-let newProjectPriority = (projectPriorityContainer) =>{
-    let projectPriority = "";
-    projectPriorityContainer.addEventListener("click", (e) =>  {
-        if (e.target.tagName.toLowerCase() === "label"){
-            if (e.target.classList.contains("priority-btn-low")){
-                projectPriority = "low";
-            }
-            else if (e.target.classList.contains("priority-btn-medium")){
-                projectPriority = "medium";
-            }
-            else {
-                projectPriority = "high";
-            }
-        }
-    })
-    return projectPriority;
-}
+// let newProjectPriority = (projectPriorityContainer) =>{
+//     let projectPriority = "";
+//     projectPriorityContainer.addEventListener("click", (e) =>  {
+//         if (e.target.tagName.toLowerCase() === "label"){
+//             if (e.target.classList.contains("priority-btn-low")){
+//                 projectPriority = "low";
+//             }
+//             else if (e.target.classList.contains("priority-btn-medium")){
+//                 projectPriority = "medium";
+//             }
+//             else {
+//                 projectPriority = "high";
+//             }
+//         }
+//     })
+//     return projectPriority;
+// }
 let newProjectSubmition = (projectPriorityContainer,projects, newProjectSubmitBtn,newProjectTitle,newProjectDetails,newProjectDueDate) => {
     // finding todo priority
-    let projectPriority = newProjectPriority(projectPriorityContainer);
+    // let projectPriority = newProjectPriority(projectPriorityContainer);
     newProjectSubmitBtn.addEventListener("click", (e) => {
             
         let projTitle = newProjectTitle.value;
         let projDetails = newProjectDetails.value;
         let projDate = newProjectDueDate.value;
-        projects.push({_id: Date.now().toString(),categoryId: "project",title: projTitle,details: projDetails,dueDate: projDate, priority:projectPriority});
-        (0,_websiteInit__WEBPACK_IMPORTED_MODULE_0__.saveAndLoad)()
+        projects.push({_id: Date.now().toString(),category: "project",title: projTitle,details: projDetails,dueDate: projDate});
+        (0,_websiteInit__WEBPACK_IMPORTED_MODULE_0__.saveAndLoad)();
+        (0,_websiteInit__WEBPACK_IMPORTED_MODULE_0__.autoCloseNewItemPanel)();
 
     })
+    
 }
+
     // event listeners for the project items in project sidebar
 let projectItemsArrayAndListeners = (arrayProjectItems) => {
     arrayProjectItems = (0,_websiteInit__WEBPACK_IMPORTED_MODULE_0__.getDivChildrenByClass)("items-container","project-item_page");
-    console.log(arrayProjectItems);
     arrayProjectItems.forEach(element => {
         let checkmark = element.querySelector(".project-checkmark");
         let detail = element.querySelector(".project-detail");
@@ -262,12 +264,12 @@ let projectItemsArrayAndListeners = (arrayProjectItems) => {
         })
 
         // event listener for clicking close on project edit panel
-        let todoEditClose = document.querySelector(".exit-project-edit");
-        todoEditClose.addEventListener("click", (e) => {
+        let projectEditClose = document.querySelector(".exit-project-edit");
+        projectEditClose.addEventListener("click", (e) => {
             editBtn.classList.remove("project-edit_clicked");
-            let todoEditPanel = document.querySelector(".project-item-edit")
-            if(!todoEditPanel.classList.contains("display-none")){
-                todoEditPanel.classList.add("display-none");
+            let projectEditPanel = document.querySelector(".project-item-edit")
+            if(!projectEditPanel.classList.contains("display-none")){
+                projectEditPanel.classList.add("display-none");
             }
         })
 
@@ -280,11 +282,11 @@ let projectItemsArrayAndListeners = (arrayProjectItems) => {
 
 let loadProjects = (projects,itemsContainer,arrayProjectItems) => {
     let projectsToRender = projects;
-    projectsToRender.forEach(({ _id, category, title, details, dueDate, priority }) => {
-        itemsContainer.innerHTML += `<div id="item-display_page" class="project-item_page d-flex" data-catagory=${category} data-priority=${priority}>
+    projectsToRender.forEach(({ _id, category, title, details, dueDate }) => {
+        itemsContainer.innerHTML += `<div id="item-display_page" class="project-item_page d-flex" data-catagory=${category}>
         <div class="project-checkmark"></div>
         <div class="project-title"> ${title}</div>
-        <div class="project-detail">item details
+        <div class="project-detail">project details
           <div class= "project-detail_wrap display-none">
               <span class= "project-detail_content">
                 <p>${details} </p>
@@ -300,11 +302,12 @@ let loadProjects = (projects,itemsContainer,arrayProjectItems) => {
         </div>
       </div>`
     })
-    updateArrayProjectItems(arrayProjectItems);
+
 }
 let updateArrayProjectItems = (arrayProjectItems) => {
-    arrayProjectItems = Array.from(document.querySelectorAll(".project-item_page"));
-    console.log(arrayProjectItems);
+    arrayProjectItems = (0,_websiteInit__WEBPACK_IMPORTED_MODULE_0__.getDivChildrenByClass)("items-container","project-item_page");
+    console.log("array-projects:" +arrayProjectItems);
+    return arrayProjectItems;
 }
 
 
@@ -342,52 +345,58 @@ let displayTodoEditPanel = (editBtn) => {
         return;
     }
 }
-let newTodoPriority = (todoPriorityContainer) =>{
-    let todoPriority = "";
-    todoPriorityContainer.addEventListener("click", (e) =>  {
-        if (e.target.tagName.toLowerCase() === "label"){
-            if (e.target.classList.contains("priority-btn-low")){
-                todoPriority = "low";
-            }
-            else if (e.target.classList.contains("priority-btn-medium")){
-                todoPriority = "medium";
-            }
-            else {
-                todoPriority = "high";
-            }
-        }
-    })
-    return todoPriority;
-}
+// let newTodoPriority = (todoPriorityContainer) =>{
+//     let todoPriority = "";
+//     todoPriorityContainer.addEventListener("click", (e) =>  {
+//         if (e.target.tagName.toLowerCase() === "label"){
+//             if (e.target.classList.contains("priority-btn-low")){
+//                 todoPriority = "low";
+//             }
+//             else if (e.target.classList.contains("priority-btn-medium")){
+//                 todoPriority = "medium";
+//             }
+//             else {
+//                 todoPriority = "high";
+//             }
+//         }
+//     })
+//     return todoPriority;
+// }
 let newTodoSubmition = (todoPriorityContainer,todos, newTodoSubmitBtn,newTodoTitle,newTodoDetails,newTodoDueDate ) => {
     // finding todo priority
-    let todoPriority = newTodoPriority(todoPriorityContainer);
+    // let todoPriority = newTodoPriority(todoPriorityContainer);
     newTodoSubmitBtn.addEventListener("click", (e) => {
             
         let todoTitle = newTodoTitle.value;
         let todoDetails = newTodoDetails.value;
         let todoDate = newTodoDueDate.value;
-        todos.push({_id: Date.now().toString(),categoryId: "todo",title: todoTitle,details: todoDetails,dueDate: todoDate, priority:todoPriority});
-        (0,_websiteInit__WEBPACK_IMPORTED_MODULE_0__.saveAndLoad)()
+        todos.push({_id: Date.now().toString(),category: "todo",title: todoTitle,details: todoDetails,dueDate: todoDate});
+
+        (0,_websiteInit__WEBPACK_IMPORTED_MODULE_0__.saveAndLoad)();
+        (0,_websiteInit__WEBPACK_IMPORTED_MODULE_0__.autoCloseNewItemPanel)();
 
     })
 }
+
 let todoItemsArrayAndListeners = (arrayTodoItems) => {
     arrayTodoItems = (0,_websiteInit__WEBPACK_IMPORTED_MODULE_0__.getDivChildrenByClass)("items-container","todo-item_page");
-    console.log((0,_websiteInit__WEBPACK_IMPORTED_MODULE_0__.getDivChildrenByClass)("items-container","todo-item_page"))
+    console.log(arrayTodoItems);
+
     arrayTodoItems.forEach(element => {
         let checkmark = element.querySelector(".todo-checkmark");
         let detail = element.querySelector(".todo-detail");
         let tooltip = element.querySelector(".todo-detail_wrap");
         let editBtn = element.querySelector(".todo-edit");
         let deleteBtn = element.querySelector(".todo-delete");
-
         checkmark.addEventListener("click",(e) => {
             if(checkmark.classList.contains("todo-checkmark_checked")){
                 checkmark.classList.remove("todo-checkmark_checked");
+                console.log("unchecked");
             }
             else{
                checkmark.classList.add("todo-checkmark_checked");
+               console.log("checked");
+
             }
         })
     // will display and not display deatil text if mouse is in or out
@@ -429,8 +438,9 @@ let todoItemsArrayAndListeners = (arrayTodoItems) => {
 }
 let loadTodos = (todos,itemsContainer,arrayTodoItems) => {
     let todosToRender = todos;
-    todosToRender.forEach(({ _id, category, title, details, dueDate, priority }) => {
-        itemsContainer.innerHTML += `<div id="item-display_page" class="todo-item_page d-flex" data-catagory=${category} data-priority=${priority}>
+    let todoItemAdded = [];
+    todosToRender.forEach(({ _id, category, title, details, dueDate }) => {
+        todoItemAdded =`<div id="item-display_page" class="todo-item_page d-flex" data-catagory=${category} >
         <div class="todo-checkmark"></div>
         <div class="todo-title"> ${title}</div>
         <div class="todo-detail">item details
@@ -448,12 +458,17 @@ let loadTodos = (todos,itemsContainer,arrayTodoItems) => {
           <i class="far fa-trash-alt"></i>
         </div>
       </div>`
+      itemsContainer.innerHTML += todoItemAdded;
+
     })
-    updateArrayTodoItems(arrayTodoItems);
+
 }
 let updateArrayTodoItems = (arrayTodoItems) => {
-    arrayTodoItems = Array.from(document.querySelectorAll(".todo-item_page"));
-    console.log(arrayTodoItems);
+    arrayTodoItems = (0,_websiteInit__WEBPACK_IMPORTED_MODULE_0__.getDivChildrenByClass)("items-container","todo-item_page");
+    console.log("array-todo:" +arrayTodoItems);
+    // add the eventlisteners to the updated array
+    // todoItemsArrayAndListeners(arrayTodoItems)
+    return arrayTodoItems;
 }
 
 
@@ -472,7 +487,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "hideInactiveTabs": () => (/* binding */ hideInactiveTabs),
 /* harmony export */   "getDivChildrenByClass": () => (/* binding */ getDivChildrenByClass),
 /* harmony export */   "deleteItem": () => (/* binding */ deleteItem),
-/* harmony export */   "saveAndLoad": () => (/* binding */ saveAndLoad)
+/* harmony export */   "saveAndLoad": () => (/* binding */ saveAndLoad),
+/* harmony export */   "autoCloseNewItemPanel": () => (/* binding */ autoCloseNewItemPanel)
 /* harmony export */ });
 /* harmony import */ var _newItemPanel__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./newItemPanel */ "./src/newItemPanel.js");
 /* harmony import */ var _home__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./home */ "./src/home.js");
@@ -525,18 +541,23 @@ let arrayDateItems = [];
 
 
 let initEventListeners = () => {
-    // add todo items !!
-    (0,_todo__WEBPACK_IMPORTED_MODULE_2__.loadTodos)(todos,itemsContainer,arrayTodoItems);
-    (0,_todo__WEBPACK_IMPORTED_MODULE_2__.newTodoSubmition)(todoPriorityContainer,todos, newTodoSubmitBtn,newTodoTitle,newTodoDetails,newTodoDueDate);
+    // add items !!
 
-    // add todo items !!
-    (0,_project__WEBPACK_IMPORTED_MODULE_3__.loadProjects)(projects,itemsContainer,arrayProjectItems);
+    // bug in here or subsequent functions. unable to click the checkmark
+    // updateArrayProjectItems(arrayProjectItems);
+    // updateArrayTodoItems(arrayTodoItems);
+
+    load();
+
+    // bug in here or subsequent functions. unable to click the checkmark
+    (0,_todo__WEBPACK_IMPORTED_MODULE_2__.newTodoSubmition)(todoPriorityContainer,todos, newTodoSubmitBtn,newTodoTitle,newTodoDetails,newTodoDueDate);
     (0,_project__WEBPACK_IMPORTED_MODULE_3__.newProjectSubmition)(projectPriorityContainer,projects, newProjectSubmitBtn,newProjectTitle,newProjectDetails,newProjectDueDate);
 
     // new item panel open and close
     const newItemBtn = document.querySelector(".new-todo_btn");
     newItemBtn.addEventListener("click", (e) => {
         (0,_newItemPanel__WEBPACK_IMPORTED_MODULE_0__.loadNewItemPanel)();
+       
     })
     const closePanel = document.querySelector(".exit-new-item");
     closePanel.addEventListener("click", (e) => {
@@ -566,6 +587,7 @@ let initEventListeners = () => {
         hideInactiveTabs(document.querySelector(".note-panel"),container_panel, children_panel,noteTabPanel);
     })
 
+
     // tabs for chagning main content from sidebar nav
     const todoSideTab = document.querySelector(".todo-list_tab");
     const projectsSideTab = document.querySelector(".projects_tab");
@@ -592,18 +614,22 @@ let initEventListeners = () => {
     })
 
     //event listeners for the todo items in Todo List sidebar
-    ;(0,_todo__WEBPACK_IMPORTED_MODULE_2__.todoItemsArrayAndListeners)(arrayTodoItems);
+    // todoItemsArrayAndListeners(arrayTodoItems);
     
     //event listeners for the project items in Project List sidebar
-    (0,_project__WEBPACK_IMPORTED_MODULE_3__.projectItemsArrayAndListeners)(arrayProjectItems);
+    // projectItemsArrayAndListeners(arrayProjectItems);
 
     //event listeners for the project items in Date List sidebar
-    (0,_date_js__WEBPACK_IMPORTED_MODULE_4__.dateItemsArrayAndListeners)(arrayDateItems);
+    // dateItemsArrayAndListeners(arrayDateItems);
 
     // event listener for exiting note from note tab
     let noteExit = document.querySelector(".note-close_icon");
     noteExit.addEventListener("click", deleteItem, (e) =>{
     })
+}
+let autoCloseNewItemPanel = () => {
+    let newItemPanel = document.querySelector(".overlay");
+    newItemPanel.classList.add("display-none");
 }
 
 let load = () => {
@@ -613,10 +639,13 @@ let load = () => {
     (0,_todo__WEBPACK_IMPORTED_MODULE_2__.loadTodos)(todos,itemsContainer,arrayTodoItems);
     (0,_project__WEBPACK_IMPORTED_MODULE_3__.loadProjects)(projects,itemsContainer,arrayProjectItems);
 
+   (0,_todo__WEBPACK_IMPORTED_MODULE_2__.todoItemsArrayAndListeners)(arrayTodoItems)
+    ;(0,_project__WEBPACK_IMPORTED_MODULE_3__.projectItemsArrayAndListeners)(arrayProjectItems)
+
 }
 let saveAndLoad = () =>{
     // saves
-    console.log(LOCAL_STORAGE_TODOS_KEY)
+    // console.log(LOCAL_STORAGE_TODOS_KEY)
     localStorage.setItem(LOCAL_STORAGE_TODOS_KEY, JSON.stringify(todos));
     localStorage.setItem(LOCAL_STORAGE_PROJECTS_KEY, JSON.stringify(projects));
 

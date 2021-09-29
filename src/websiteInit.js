@@ -1,6 +1,6 @@
 import {loadNewItemPanel, closeNewItemPanel, panelClicked } from "./newItemPanel";
 import {iconColorChange} from "./home";
-import {displayTodoEditPanel, updateArrayTodoItems, loadTodos, todoItemsArrayAndListeners, newTodoSubmition} from "./todo";
+import {displayTodoEditPanel, loadTodos, todoItemsArrayAndListeners, newTodoSubmition, updateArrayTodoItems} from "./todo";
 import {displayProjectEditPanel, projectItemsArrayAndListeners, updateArrayProjectItems, loadProjects, newProjectSubmition} from "./project";
 import {displayDateEditPanel,dateItemsArrayAndListeners} from "./date.js";
 
@@ -44,18 +44,23 @@ let arrayDateItems = [];
 
 
 let initEventListeners = () => {
-    // add todo items !!
-    loadTodos(todos,itemsContainer,arrayTodoItems);
-    newTodoSubmition(todoPriorityContainer,todos, newTodoSubmitBtn,newTodoTitle,newTodoDetails,newTodoDueDate);
+    // add items !!
 
-    // add todo items !!
-    loadProjects(projects,itemsContainer,arrayProjectItems);
+    // bug in here or subsequent functions. unable to click the checkmark
+    // updateArrayProjectItems(arrayProjectItems);
+    // updateArrayTodoItems(arrayTodoItems);
+
+    load();
+
+    // bug in here or subsequent functions. unable to click the checkmark
+    newTodoSubmition(todoPriorityContainer,todos, newTodoSubmitBtn,newTodoTitle,newTodoDetails,newTodoDueDate);
     newProjectSubmition(projectPriorityContainer,projects, newProjectSubmitBtn,newProjectTitle,newProjectDetails,newProjectDueDate);
 
     // new item panel open and close
     const newItemBtn = document.querySelector(".new-todo_btn");
     newItemBtn.addEventListener("click", (e) => {
         loadNewItemPanel();
+       
     })
     const closePanel = document.querySelector(".exit-new-item");
     closePanel.addEventListener("click", (e) => {
@@ -85,6 +90,7 @@ let initEventListeners = () => {
         hideInactiveTabs(document.querySelector(".note-panel"),container_panel, children_panel,noteTabPanel);
     })
 
+
     // tabs for chagning main content from sidebar nav
     const todoSideTab = document.querySelector(".todo-list_tab");
     const projectsSideTab = document.querySelector(".projects_tab");
@@ -111,18 +117,22 @@ let initEventListeners = () => {
     })
 
     //event listeners for the todo items in Todo List sidebar
-    todoItemsArrayAndListeners(arrayTodoItems);
+    // todoItemsArrayAndListeners(arrayTodoItems);
     
     //event listeners for the project items in Project List sidebar
-    projectItemsArrayAndListeners(arrayProjectItems);
+    // projectItemsArrayAndListeners(arrayProjectItems);
 
     //event listeners for the project items in Date List sidebar
-    dateItemsArrayAndListeners(arrayDateItems);
+    // dateItemsArrayAndListeners(arrayDateItems);
 
     // event listener for exiting note from note tab
     let noteExit = document.querySelector(".note-close_icon");
     noteExit.addEventListener("click", deleteItem, (e) =>{
     })
+}
+let autoCloseNewItemPanel = () => {
+    let newItemPanel = document.querySelector(".overlay");
+    newItemPanel.classList.add("display-none");
 }
 
 let load = () => {
@@ -132,10 +142,13 @@ let load = () => {
     loadTodos(todos,itemsContainer,arrayTodoItems);
     loadProjects(projects,itemsContainer,arrayProjectItems);
 
+   todoItemsArrayAndListeners(arrayTodoItems)
+    projectItemsArrayAndListeners(arrayProjectItems)
+
 }
 let saveAndLoad = () =>{
     // saves
-    console.log(LOCAL_STORAGE_TODOS_KEY)
+    // console.log(LOCAL_STORAGE_TODOS_KEY)
     localStorage.setItem(LOCAL_STORAGE_TODOS_KEY, JSON.stringify(todos));
     localStorage.setItem(LOCAL_STORAGE_PROJECTS_KEY, JSON.stringify(projects));
 
@@ -214,4 +227,4 @@ let hideInactiveTabs = (activePanel, container, children, clickedTab) =>{
     }
 }
 
-export {initEventListeners, getDivChildren, hideInactiveTabs, getDivChildrenByClass, deleteItem, saveAndLoad};
+export {initEventListeners, getDivChildren, hideInactiveTabs, getDivChildrenByClass, deleteItem, saveAndLoad, autoCloseNewItemPanel};

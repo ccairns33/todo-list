@@ -1,4 +1,4 @@
-import {getDivChildrenByClass, deleteItem, saveAndLoad} from "./websiteInit";
+import {getDivChildrenByClass, deleteItem, saveAndLoad, autoCloseNewItemPanel} from "./websiteInit";
 
 let displayTodoEditPanel = (editBtn) => {
     if (editBtn.classList.contains("todo-edit_clicked")){
@@ -14,52 +14,58 @@ let displayTodoEditPanel = (editBtn) => {
         return;
     }
 }
-let newTodoPriority = (todoPriorityContainer) =>{
-    let todoPriority = "";
-    todoPriorityContainer.addEventListener("click", (e) =>  {
-        if (e.target.tagName.toLowerCase() === "label"){
-            if (e.target.classList.contains("priority-btn-low")){
-                todoPriority = "low";
-            }
-            else if (e.target.classList.contains("priority-btn-medium")){
-                todoPriority = "medium";
-            }
-            else {
-                todoPriority = "high";
-            }
-        }
-    })
-    return todoPriority;
-}
+// let newTodoPriority = (todoPriorityContainer) =>{
+//     let todoPriority = "";
+//     todoPriorityContainer.addEventListener("click", (e) =>  {
+//         if (e.target.tagName.toLowerCase() === "label"){
+//             if (e.target.classList.contains("priority-btn-low")){
+//                 todoPriority = "low";
+//             }
+//             else if (e.target.classList.contains("priority-btn-medium")){
+//                 todoPriority = "medium";
+//             }
+//             else {
+//                 todoPriority = "high";
+//             }
+//         }
+//     })
+//     return todoPriority;
+// }
 let newTodoSubmition = (todoPriorityContainer,todos, newTodoSubmitBtn,newTodoTitle,newTodoDetails,newTodoDueDate ) => {
     // finding todo priority
-    let todoPriority = newTodoPriority(todoPriorityContainer);
+    // let todoPriority = newTodoPriority(todoPriorityContainer);
     newTodoSubmitBtn.addEventListener("click", (e) => {
             
         let todoTitle = newTodoTitle.value;
         let todoDetails = newTodoDetails.value;
         let todoDate = newTodoDueDate.value;
-        todos.push({_id: Date.now().toString(),categoryId: "todo",title: todoTitle,details: todoDetails,dueDate: todoDate, priority:todoPriority});
-        saveAndLoad()
+        todos.push({_id: Date.now().toString(),category: "todo",title: todoTitle,details: todoDetails,dueDate: todoDate});
+
+        saveAndLoad();
+        autoCloseNewItemPanel();
 
     })
 }
+
 let todoItemsArrayAndListeners = (arrayTodoItems) => {
     arrayTodoItems = getDivChildrenByClass("items-container","todo-item_page");
-    console.log(getDivChildrenByClass("items-container","todo-item_page"))
+    console.log(arrayTodoItems);
+
     arrayTodoItems.forEach(element => {
         let checkmark = element.querySelector(".todo-checkmark");
         let detail = element.querySelector(".todo-detail");
         let tooltip = element.querySelector(".todo-detail_wrap");
         let editBtn = element.querySelector(".todo-edit");
         let deleteBtn = element.querySelector(".todo-delete");
-
         checkmark.addEventListener("click",(e) => {
             if(checkmark.classList.contains("todo-checkmark_checked")){
                 checkmark.classList.remove("todo-checkmark_checked");
+                console.log("unchecked");
             }
             else{
                checkmark.classList.add("todo-checkmark_checked");
+               console.log("checked");
+
             }
         })
     // will display and not display deatil text if mouse is in or out
@@ -101,8 +107,9 @@ let todoItemsArrayAndListeners = (arrayTodoItems) => {
 }
 let loadTodos = (todos,itemsContainer,arrayTodoItems) => {
     let todosToRender = todos;
-    todosToRender.forEach(({ _id, category, title, details, dueDate, priority }) => {
-        itemsContainer.innerHTML += `<div id="item-display_page" class="todo-item_page d-flex" data-catagory=${category} data-priority=${priority}>
+    let todoItemAdded = [];
+    todosToRender.forEach(({ _id, category, title, details, dueDate }) => {
+        todoItemAdded =`<div id="item-display_page" class="todo-item_page d-flex" data-catagory=${category} >
         <div class="todo-checkmark"></div>
         <div class="todo-title"> ${title}</div>
         <div class="todo-detail">item details
@@ -120,11 +127,16 @@ let loadTodos = (todos,itemsContainer,arrayTodoItems) => {
           <i class="far fa-trash-alt"></i>
         </div>
       </div>`
+      itemsContainer.innerHTML += todoItemAdded;
+
     })
-    updateArrayTodoItems(arrayTodoItems);
+
 }
 let updateArrayTodoItems = (arrayTodoItems) => {
-    arrayTodoItems = Array.from(document.querySelectorAll(".todo-item_page"));
-    console.log(arrayTodoItems);
+    arrayTodoItems = getDivChildrenByClass("items-container","todo-item_page");
+    console.log("array-todo:" +arrayTodoItems);
+    // add the eventlisteners to the updated array
+    // todoItemsArrayAndListeners(arrayTodoItems)
+    return arrayTodoItems;
 }
 export{displayTodoEditPanel, updateArrayTodoItems, loadTodos, todoItemsArrayAndListeners,newTodoSubmition}
