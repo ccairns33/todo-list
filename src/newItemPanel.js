@@ -1,8 +1,14 @@
 import {hideInactiveTabs} from "./websiteInit";
+import {newTodoPriority} from "./todo";
+
 
 let loadNewItemPanel = () =>{
     const itemPanel = document.querySelector(".overlay");
     itemPanel.classList.remove("display-none");
+    
+    //adding priority event listeners
+    newTodoPriority();
+    
 }
 
 let closeNewItemPanel = () =>{
@@ -13,6 +19,7 @@ let closeNewItemPanel = () =>{
     displayTab(document.querySelector(".todo-panel"),"new-item-main-content","item-panel");
 
 }
+
 
 // loading the different panels
 let displayTab = (activePanel, container, children) =>{

@@ -1,8 +1,8 @@
 import {loadNewItemPanel, closeNewItemPanel, panelClicked } from "./newItemPanel";
 import {iconColorChange} from "./home";
-import {displayTodoEditPanel, loadTodos, todoItemsArrayAndListeners, newTodoSubmition, updateArrayTodoItems} from "./todo";
-import {displayProjectEditPanel, projectItemsArrayAndListeners, updateArrayProjectItems, loadProjects, newProjectSubmition} from "./project";
-import {displayDateEditPanel,dateItemsArrayAndListeners} from "./date.js";
+import {loadTodos, todoItemsArrayAndListeners, newTodoSubmition} from "./todo";
+import { projectItemsArrayAndListeners, loadProjects, newProjectSubmition} from "./project";
+import {dateItemsArrayAndListeners} from "./date.js";
 
 // Selector for todos container
 const itemsContainer = document.querySelector('[data-container]');
@@ -44,15 +44,10 @@ let arrayDateItems = [];
 
 
 let initEventListeners = () => {
-    // add items !!
-
-    // bug in here or subsequent functions. unable to click the checkmark
-    // updateArrayProjectItems(arrayProjectItems);
-    // updateArrayTodoItems(arrayTodoItems);
-
+    // add in items !!
     load();
 
-    // bug in here or subsequent functions. unable to click the checkmark
+    // for utilizing new submitions
     newTodoSubmition(todoPriorityContainer,todos, newTodoSubmitBtn,newTodoTitle,newTodoDetails,newTodoDueDate);
     newProjectSubmition(projectPriorityContainer,projects, newProjectSubmitBtn,newProjectTitle,newProjectDetails,newProjectDueDate);
 
@@ -116,15 +111,6 @@ let initEventListeners = () => {
         hideInactiveTabs(activePanel,container_tab, children_tab,notesSideTab);
     })
 
-    //event listeners for the todo items in Todo List sidebar
-    // todoItemsArrayAndListeners(arrayTodoItems);
-    
-    //event listeners for the project items in Project List sidebar
-    // projectItemsArrayAndListeners(arrayProjectItems);
-
-    //event listeners for the project items in Date List sidebar
-    // dateItemsArrayAndListeners(arrayDateItems);
-
     // event listener for exiting note from note tab
     let noteExit = document.querySelector(".note-close_icon");
     noteExit.addEventListener("click", deleteItem, (e) =>{
@@ -142,8 +128,10 @@ let load = () => {
     loadTodos(todos,itemsContainer,arrayTodoItems);
     loadProjects(projects,itemsContainer,arrayProjectItems);
 
-   todoItemsArrayAndListeners(arrayTodoItems)
+    todoItemsArrayAndListeners(arrayTodoItems)
     projectItemsArrayAndListeners(arrayProjectItems)
+    // dateItemsArrayAndListeners(arrayDateItems);
+
 
 }
 let saveAndLoad = () =>{

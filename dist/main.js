@@ -209,8 +209,6 @@ let displayProjectEditPanel = (editBtn) => {
 //     return projectPriority;
 // }
 let newProjectSubmition = (projectPriorityContainer,projects, newProjectSubmitBtn,newProjectTitle,newProjectDetails,newProjectDueDate) => {
-    // finding todo priority
-    // let projectPriority = newProjectPriority(projectPriorityContainer);
     newProjectSubmitBtn.addEventListener("click", (e) => {
             
         let projTitle = newProjectTitle.value;
@@ -323,7 +321,6 @@ let updateArrayProjectItems = (arrayProjectItems) => {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "displayTodoEditPanel": () => (/* binding */ displayTodoEditPanel),
-/* harmony export */   "updateArrayTodoItems": () => (/* binding */ updateArrayTodoItems),
 /* harmony export */   "loadTodos": () => (/* binding */ loadTodos),
 /* harmony export */   "todoItemsArrayAndListeners": () => (/* binding */ todoItemsArrayAndListeners),
 /* harmony export */   "newTodoSubmition": () => (/* binding */ newTodoSubmition)
@@ -345,23 +342,12 @@ let displayTodoEditPanel = (editBtn) => {
         return;
     }
 }
-// let newTodoPriority = (todoPriorityContainer) =>{
-//     let todoPriority = "";
-//     todoPriorityContainer.addEventListener("click", (e) =>  {
-//         if (e.target.tagName.toLowerCase() === "label"){
-//             if (e.target.classList.contains("priority-btn-low")){
-//                 todoPriority = "low";
-//             }
-//             else if (e.target.classList.contains("priority-btn-medium")){
-//                 todoPriority = "medium";
-//             }
-//             else {
-//                 todoPriority = "high";
-//             }
-//         }
-//     })
-//     return todoPriority;
-// }
+let newTodoPriority = (todoPriorityContainer) =>{
+    let priorityContainer = element.querySelector("#new-todo-priority-container");
+    let priorityArr= Array.from(document.querySelectorAll(""))
+    priorityContainer.addEventListener("click", (e)=>{
+    })
+}
 let newTodoSubmition = (todoPriorityContainer,todos, newTodoSubmitBtn,newTodoTitle,newTodoDetails,newTodoDueDate ) => {
     // finding todo priority
     // let todoPriority = newTodoPriority(todoPriorityContainer);
@@ -388,6 +374,8 @@ let todoItemsArrayAndListeners = (arrayTodoItems) => {
         let tooltip = element.querySelector(".todo-detail_wrap");
         let editBtn = element.querySelector(".todo-edit");
         let deleteBtn = element.querySelector(".todo-delete");
+
+
         checkmark.addEventListener("click",(e) => {
             if(checkmark.classList.contains("todo-checkmark_checked")){
                 checkmark.classList.remove("todo-checkmark_checked");
@@ -434,6 +422,8 @@ let todoItemsArrayAndListeners = (arrayTodoItems) => {
         deleteBtn.addEventListener("click", _websiteInit__WEBPACK_IMPORTED_MODULE_0__.deleteItem , (e) => {
         })
 
+        
+
     });
 }
 let loadTodos = (todos,itemsContainer,arrayTodoItems) => {
@@ -463,13 +453,7 @@ let loadTodos = (todos,itemsContainer,arrayTodoItems) => {
     })
 
 }
-let updateArrayTodoItems = (arrayTodoItems) => {
-    arrayTodoItems = (0,_websiteInit__WEBPACK_IMPORTED_MODULE_0__.getDivChildrenByClass)("items-container","todo-item_page");
-    console.log("array-todo:" +arrayTodoItems);
-    // add the eventlisteners to the updated array
-    // todoItemsArrayAndListeners(arrayTodoItems)
-    return arrayTodoItems;
-}
+
 
 
 /***/ }),
@@ -541,15 +525,10 @@ let arrayDateItems = [];
 
 
 let initEventListeners = () => {
-    // add items !!
-
-    // bug in here or subsequent functions. unable to click the checkmark
-    // updateArrayProjectItems(arrayProjectItems);
-    // updateArrayTodoItems(arrayTodoItems);
-
+    // add in items !!
     load();
 
-    // bug in here or subsequent functions. unable to click the checkmark
+    // for utilizing new submitions
     (0,_todo__WEBPACK_IMPORTED_MODULE_2__.newTodoSubmition)(todoPriorityContainer,todos, newTodoSubmitBtn,newTodoTitle,newTodoDetails,newTodoDueDate);
     (0,_project__WEBPACK_IMPORTED_MODULE_3__.newProjectSubmition)(projectPriorityContainer,projects, newProjectSubmitBtn,newProjectTitle,newProjectDetails,newProjectDueDate);
 
@@ -613,15 +592,6 @@ let initEventListeners = () => {
         hideInactiveTabs(activePanel,container_tab, children_tab,notesSideTab);
     })
 
-    //event listeners for the todo items in Todo List sidebar
-    // todoItemsArrayAndListeners(arrayTodoItems);
-    
-    //event listeners for the project items in Project List sidebar
-    // projectItemsArrayAndListeners(arrayProjectItems);
-
-    //event listeners for the project items in Date List sidebar
-    // dateItemsArrayAndListeners(arrayDateItems);
-
     // event listener for exiting note from note tab
     let noteExit = document.querySelector(".note-close_icon");
     noteExit.addEventListener("click", deleteItem, (e) =>{
@@ -639,8 +609,10 @@ let load = () => {
     (0,_todo__WEBPACK_IMPORTED_MODULE_2__.loadTodos)(todos,itemsContainer,arrayTodoItems);
     (0,_project__WEBPACK_IMPORTED_MODULE_3__.loadProjects)(projects,itemsContainer,arrayProjectItems);
 
-   (0,_todo__WEBPACK_IMPORTED_MODULE_2__.todoItemsArrayAndListeners)(arrayTodoItems)
+    (0,_todo__WEBPACK_IMPORTED_MODULE_2__.todoItemsArrayAndListeners)(arrayTodoItems)
     ;(0,_project__WEBPACK_IMPORTED_MODULE_3__.projectItemsArrayAndListeners)(arrayProjectItems)
+    // dateItemsArrayAndListeners(arrayDateItems);
+
 
 }
 let saveAndLoad = () =>{

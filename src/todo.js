@@ -14,23 +14,30 @@ let displayTodoEditPanel = (editBtn) => {
         return;
     }
 }
-// let newTodoPriority = (todoPriorityContainer) =>{
-//     let todoPriority = "";
-//     todoPriorityContainer.addEventListener("click", (e) =>  {
-//         if (e.target.tagName.toLowerCase() === "label"){
-//             if (e.target.classList.contains("priority-btn-low")){
-//                 todoPriority = "low";
-//             }
-//             else if (e.target.classList.contains("priority-btn-medium")){
-//                 todoPriority = "medium";
-//             }
-//             else {
-//                 todoPriority = "high";
-//             }
-//         }
-//     })
-//     return todoPriority;
-// }
+let newTodoPriority = () =>{
+    let priorityContainer = element.querySelector("#new-todo-priority-container");
+    let priorityArr= Array.from(document.querySelectorAll(".todo-priority-btn"))
+    priorityContainer.addEventListener("click", (e)=>{
+        if (e.target.tagName.toLowerCase() === "label") {
+            if (!e.target.classList.contains("todo-priority_clicked")){
+                e.target.classList.add("todo-priority_clicked");
+
+            }
+            else {
+                e.target.classList.remove("todo-priority_clicked");
+            }
+        }        
+        priorityArr.forEach(btn =>{
+            if(btn.classList.contains("todo-priority_clicked")){
+                btn.classList.add("todo-priority-"+btn.value+"_clicked")
+            }
+            else {
+                btn.classList.remove("todo-priority-"+btn.value+"_clicked")
+
+            }
+        })
+    })
+}
 let newTodoSubmition = (todoPriorityContainer,todos, newTodoSubmitBtn,newTodoTitle,newTodoDetails,newTodoDueDate ) => {
     // finding todo priority
     // let todoPriority = newTodoPriority(todoPriorityContainer);
@@ -39,7 +46,15 @@ let newTodoSubmition = (todoPriorityContainer,todos, newTodoSubmitBtn,newTodoTit
         let todoTitle = newTodoTitle.value;
         let todoDetails = newTodoDetails.value;
         let todoDate = newTodoDueDate.value;
-        todos.push({_id: Date.now().toString(),category: "todo",title: todoTitle,details: todoDetails,dueDate: todoDate});
+        let todoPriority="";
+
+        let priorityArr= Array.from(document.querySelectorAll(".todo-priority-btn"));
+        priorityArr.forEach(btn=>{
+            if(btn.classList.contains("todo-priority_clicked")){
+                todoPriority=btn.value;
+            }
+        })
+        todos.push({_id: Date.now().toString(),category: "todo",title: todoTitle,details: todoDetails,dueDate: todoDate, priority: todoPriority});
 
         saveAndLoad();
         autoCloseNewItemPanel();
@@ -57,6 +72,8 @@ let todoItemsArrayAndListeners = (arrayTodoItems) => {
         let tooltip = element.querySelector(".todo-detail_wrap");
         let editBtn = element.querySelector(".todo-edit");
         let deleteBtn = element.querySelector(".todo-delete");
+
+
         checkmark.addEventListener("click",(e) => {
             if(checkmark.classList.contains("todo-checkmark_checked")){
                 checkmark.classList.remove("todo-checkmark_checked");
@@ -103,6 +120,8 @@ let todoItemsArrayAndListeners = (arrayTodoItems) => {
         deleteBtn.addEventListener("click", deleteItem , (e) => {
         })
 
+        
+
     });
 }
 let loadTodos = (todos,itemsContainer,arrayTodoItems) => {
@@ -132,11 +151,5 @@ let loadTodos = (todos,itemsContainer,arrayTodoItems) => {
     })
 
 }
-let updateArrayTodoItems = (arrayTodoItems) => {
-    arrayTodoItems = getDivChildrenByClass("items-container","todo-item_page");
-    console.log("array-todo:" +arrayTodoItems);
-    // add the eventlisteners to the updated array
-    // todoItemsArrayAndListeners(arrayTodoItems)
-    return arrayTodoItems;
-}
-export{displayTodoEditPanel, updateArrayTodoItems, loadTodos, todoItemsArrayAndListeners,newTodoSubmition}
+
+export{displayTodoEditPanel, loadTodos, todoItemsArrayAndListeners,newTodoSubmition, newTodoPriority}

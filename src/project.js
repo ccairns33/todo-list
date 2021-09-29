@@ -32,8 +32,6 @@ let displayProjectEditPanel = (editBtn) => {
 //     return projectPriority;
 // }
 let newProjectSubmition = (projectPriorityContainer,projects, newProjectSubmitBtn,newProjectTitle,newProjectDetails,newProjectDueDate) => {
-    // finding todo priority
-    // let projectPriority = newProjectPriority(projectPriorityContainer);
     newProjectSubmitBtn.addEventListener("click", (e) => {
             
         let projTitle = newProjectTitle.value;
