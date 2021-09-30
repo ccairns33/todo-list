@@ -15,7 +15,7 @@ let displayTodoEditPanel = (editBtn) => {
     }
 }
 let newTodoPriority = () =>{
-    let priorityContainer = element.querySelector("#new-todo-priority-container");
+    let priorityContainer = document.querySelector("#new-todo-priority-container");
     let priorityArr= Array.from(document.querySelectorAll(".todo-priority-btn"))
     priorityContainer.addEventListener("click", (e)=>{
         if (e.target.tagName.toLowerCase() === "label") {
@@ -29,10 +29,16 @@ let newTodoPriority = () =>{
         }        
         priorityArr.forEach(btn =>{
             if(btn.classList.contains("todo-priority_clicked")){
-                btn.classList.add("todo-priority-"+btn.value+"_clicked")
+                btn.classList.add("todo-priority-btn-"+btn.textContent.toLowerCase()+"_clicked")
+                btn.classList.remove("todo-priority-btn-"+btn.textContent.toLowerCase())
+
             }
             else {
-                btn.classList.remove("todo-priority-"+btn.value+"_clicked")
+                if (btn.classList.contains("todo-priority-btn-"+btn.textContent.toLowerCase()+"_clicked")){
+                    btn.classList.remove("todo-priority-btn-"+btn.textContent.toLowerCase()+"_clicked")
+                    btn.classList.add("todo-priority-btn-"+btn.textContent.toLowerCase())
+                 }
+
 
             }
         })
