@@ -429,7 +429,7 @@ span.todo-detail_content:after,span.project-detail_content:after {
     margin: 0;
     opacity: 0;
 }
-.priority-btn{
+.project-priority-btn, .todo-priority-btn{
     display: inline-block;
     margin: 0 .5rem 0 -5px;
     padding: .2rem .5rem;
@@ -440,32 +440,44 @@ span.todo-detail_content:after,span.project-detail_content:after {
     cursor: pointer;
     transition: all .3s;
 }
-.priority-btn-low{
+.todo-priority-btn-low, .project-priority-btn-low{
     border: 1px solid green;
     color: green;
     transition: all .3s;
 }
-.priority-btn-low:hover{
+.todo-priority-btn-low:hover, .project-priority-btn-low:hover{
     color:white;
     background:green;
 }
-.priority-btn-medium{
+.todo-priority-btn-low_clicked{
+    color:white;
+    background:green;
+}
+.todo-priority-btn-medium, .project-priority-btn-medium{
     border: 1px solid orange;
     color: orange;
     transition: all .3s;
 
 }
-.priority-btn-medium:hover{
+.todo-priority-btn-medium:hover, .project-priority-btn-medium:hover{
     color:white;
     background:orange;
 }
-.priority-btn-high{
+.todo-priority-btn-medium_clicked,.project-priority-btn-medium_clicked{
+    color:white;
+    background:orange;
+}
+.todo-priority-btn-high, .project-priority-btn-high{
     border: 1px solid red;
     color: red;
     transition: all .3s;
 
 }
-.priority-btn-high:hover{
+.todo-priority-btn-high:hover, .project-priority-btn-high:hover{
+    color:white;
+    background:red;
+}
+.todo-priority-btn-high_clicked, .project-priority-btn-high{
     color:white;
     background:red;
 }

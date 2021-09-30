@@ -119,11 +119,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "panelClicked": () => (/* binding */ panelClicked)
 /* harmony export */ });
 /* harmony import */ var _websiteInit__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./websiteInit */ "./src/websiteInit.js");
+/* harmony import */ var _todo__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./todo */ "./src/todo.js");
+
+
 
 
 let loadNewItemPanel = () =>{
     const itemPanel = document.querySelector(".overlay");
     itemPanel.classList.remove("display-none");
+    
+    //adding priority event listeners
+    (0,_todo__WEBPACK_IMPORTED_MODULE_1__.newTodoPriority)();
+    
 }
 
 let closeNewItemPanel = () =>{
@@ -134,6 +141,7 @@ let closeNewItemPanel = () =>{
     displayTab(document.querySelector(".todo-panel"),"new-item-main-content","item-panel");
 
 }
+
 
 // loading the different panels
 let displayTab = (activePanel, container, children) =>{
@@ -323,7 +331,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "displayTodoEditPanel": () => (/* binding */ displayTodoEditPanel),
 /* harmony export */   "loadTodos": () => (/* binding */ loadTodos),
 /* harmony export */   "todoItemsArrayAndListeners": () => (/* binding */ todoItemsArrayAndListeners),
-/* harmony export */   "newTodoSubmition": () => (/* binding */ newTodoSubmition)
+/* harmony export */   "newTodoSubmition": () => (/* binding */ newTodoSubmition),
+/* harmony export */   "newTodoPriority": () => (/* binding */ newTodoPriority)
 /* harmony export */ });
 /* harmony import */ var _websiteInit__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./websiteInit */ "./src/websiteInit.js");
 
@@ -342,10 +351,34 @@ let displayTodoEditPanel = (editBtn) => {
         return;
     }
 }
-let newTodoPriority = (todoPriorityContainer) =>{
-    let priorityContainer = element.querySelector("#new-todo-priority-container");
-    let priorityArr= Array.from(document.querySelectorAll(""))
+let newTodoPriority = () =>{
+    let priorityContainer = document.querySelector("#new-todo-priority-container");
+    let priorityArr= Array.from(document.querySelectorAll(".todo-priority-btn"))
     priorityContainer.addEventListener("click", (e)=>{
+        if (e.target.tagName.toLowerCase() === "label") {
+            if (!e.target.classList.contains("todo-priority_clicked")){
+                e.target.classList.add("todo-priority_clicked");
+
+            }
+            else {
+                e.target.classList.remove("todo-priority_clicked");
+            }
+        }        
+        priorityArr.forEach(btn =>{
+            if(btn.classList.contains("todo-priority_clicked")){
+                btn.classList.add("todo-priority-btn-"+btn.textContent.toLowerCase()+"_clicked")
+                btn.classList.remove("todo-priority-btn-"+btn.textContent.toLowerCase())
+
+            }
+            else {
+                if (btn.classList.contains("todo-priority-btn-"+btn.textContent.toLowerCase()+"_clicked")){
+                    btn.classList.remove("todo-priority-btn-"+btn.textContent.toLowerCase()+"_clicked")
+                    btn.classList.add("todo-priority-btn-"+btn.textContent.toLowerCase())
+                 }
+
+
+            }
+        })
     })
 }
 let newTodoSubmition = (todoPriorityContainer,todos, newTodoSubmitBtn,newTodoTitle,newTodoDetails,newTodoDueDate ) => {
@@ -356,7 +389,15 @@ let newTodoSubmition = (todoPriorityContainer,todos, newTodoSubmitBtn,newTodoTit
         let todoTitle = newTodoTitle.value;
         let todoDetails = newTodoDetails.value;
         let todoDate = newTodoDueDate.value;
-        todos.push({_id: Date.now().toString(),category: "todo",title: todoTitle,details: todoDetails,dueDate: todoDate});
+        let todoPriority="";
+
+        let priorityArr= Array.from(document.querySelectorAll(".todo-priority-btn"));
+        priorityArr.forEach(btn=>{
+            if(btn.classList.contains("todo-priority_clicked")){
+                todoPriority=btn.value;
+            }
+        })
+        todos.push({_id: Date.now().toString(),category: "todo",title: todoTitle,details: todoDetails,dueDate: todoDate, priority: todoPriority});
 
         (0,_websiteInit__WEBPACK_IMPORTED_MODULE_0__.saveAndLoad)();
         (0,_websiteInit__WEBPACK_IMPORTED_MODULE_0__.autoCloseNewItemPanel)();
