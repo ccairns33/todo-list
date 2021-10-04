@@ -19,27 +19,18 @@ let newProjectPriority = () =>{
     let priorityArr= Array.from(document.querySelectorAll(".project-priority-btn"))
     priorityContainer.addEventListener("click", (e)=>{
         
-        if (e.target.tagName.toLowerCase() === "label") {
-            //if target has not been clicked before...
-            if (!e.target.classList.contains("project-priority_clicked")){
-                e.target.classList.add("project-priority_clicked");
-                e.target.classList.add("project-priority-btn-"+e.target.textContent.toLowerCase()+"_clicked")
-                e.target.classList.remove("project-priority-btn-"+e.target.textContent.toLowerCase())
-
-            }
-            else {
-                e.target.classList.remove("project-priority_clicked");
-                e.target.classList.remove("project-priority-btn-"+e.target.textContent.toLowerCase()+"_clicked")
-                e.target.classList.add("project-priority-btn-"+e.target.textContent.toLowerCase())
-            }
-        }
-        
-        //removes previously clicked btns
+        //removes previously clicked btns and adds class to clicked btn
         priorityArr.forEach(btn =>{
             if(btn.id !== e.target.id){
                 btn.classList.remove("project-priority_clicked");
                 btn.classList.remove("project-priority-btn-"+btn.textContent.toLowerCase()+"_clicked")
                 btn.classList.add("project-priority-btn-"+btn.textContent.toLowerCase())
+            }
+            else {
+                btn.classList.add("project-priority_clicked");
+                btn.classList.add("project-priority-btn-"+btn.textContent.toLowerCase()+"_clicked")
+                btn.classList.remove("project-priority-btn-"+btn.textContent.toLowerCase())
+
             }
         });
             
@@ -124,10 +115,10 @@ let projectItemsArrayAndListeners = (arrayProjectItems) => {
     });
 }
 
-let loadProjects = (projects,itemsContainer,arrayProjectItems) => {
+let loadProjects = (projects,itemsContainer) => {
     let projectsToRender = projects;
-    projectsToRender.forEach(({ _id, category, title, details, dueDate }) => {
-        itemsContainer.innerHTML += `<div id="item-display_page" class="project-item_page d-flex" data-catagory=${category}>
+    projectsToRender.forEach(({ _id, category, title, details, dueDate,priority }) => {
+        itemsContainer.innerHTML += `<div id="item-display_page" class="project-item_page d-flex" data-catagory=${category} data-priority= ${priority}>
         <div class="project-checkmark"></div>
         <div class="project-title"> ${title}</div>
         <div class="project-detail">project details

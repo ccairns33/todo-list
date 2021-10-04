@@ -18,28 +18,18 @@ let newTodoPriority = () =>{
     let priorityContainer = document.querySelector("#new-todo-priority-container");
     let priorityArr= Array.from(document.querySelectorAll(".todo-priority-btn"))
     priorityContainer.addEventListener("click", (e)=>{
-        
-        if (e.target.tagName.toLowerCase() === "label") {
-            //if target has not been clicked before...
-            if (!e.target.classList.contains("todo-priority_clicked")){
-                e.target.classList.add("todo-priority_clicked");
-                e.target.classList.add("todo-priority-btn-"+e.target.textContent.toLowerCase()+"_clicked")
-                e.target.classList.remove("todo-priority-btn-"+e.target.textContent.toLowerCase())
-
-            }
-            else {
-                e.target.classList.remove("todo-priority_clicked");
-                e.target.classList.remove("todo-priority-btn-"+e.target.textContent.toLowerCase()+"_clicked")
-                e.target.classList.add("todo-priority-btn-"+e.target.textContent.toLowerCase())
-            }
-        }
-        
-        //removes previously clicked btns
+        //removes previously clicked btns and sets clicked btn with correct classes
         priorityArr.forEach(btn =>{
             if(btn.id !== e.target.id){
                 btn.classList.remove("todo-priority_clicked");
                 btn.classList.remove("todo-priority-btn-"+btn.textContent.toLowerCase()+"_clicked")
                 btn.classList.add("todo-priority-btn-"+btn.textContent.toLowerCase())
+            }
+            else {
+                btn.classList.add("todo-priority_clicked");
+                btn.classList.add("todo-priority-btn-"+btn.textContent.toLowerCase()+"_clicked")
+                btn.classList.remove("todo-priority-btn-"+btn.textContent.toLowerCase())
+
             }
         });
             
@@ -135,8 +125,8 @@ let todoItemsArrayAndListeners = (arrayTodoItems) => {
 let loadTodos = (todos,itemsContainer,arrayTodoItems) => {
     let todosToRender = todos;
     let todoItemAdded = [];
-    todosToRender.forEach(({ _id, category, title, details, dueDate }) => {
-        todoItemAdded =`<div id="item-display_page" class="todo-item_page d-flex" data-catagory=${category} >
+    todosToRender.forEach(({ _id, category, title, details, dueDate,priority }) => {
+        todoItemAdded =`<div id="item-display_page" class="todo-item_page d-flex" data-catagory=${category} data-priority=${priority} >
         <div class="todo-checkmark"></div>
         <div class="todo-title"> ${title}</div>
         <div class="todo-detail">item details

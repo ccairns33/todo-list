@@ -210,27 +210,18 @@ let newProjectPriority = () =>{
     let priorityArr= Array.from(document.querySelectorAll(".project-priority-btn"))
     priorityContainer.addEventListener("click", (e)=>{
         
-        if (e.target.tagName.toLowerCase() === "label") {
-            //if target has not been clicked before...
-            if (!e.target.classList.contains("project-priority_clicked")){
-                e.target.classList.add("project-priority_clicked");
-                e.target.classList.add("project-priority-btn-"+e.target.textContent.toLowerCase()+"_clicked")
-                e.target.classList.remove("project-priority-btn-"+e.target.textContent.toLowerCase())
-
-            }
-            else {
-                e.target.classList.remove("project-priority_clicked");
-                e.target.classList.remove("project-priority-btn-"+e.target.textContent.toLowerCase()+"_clicked")
-                e.target.classList.add("project-priority-btn-"+e.target.textContent.toLowerCase())
-            }
-        }
-        
-        //removes previously clicked btns
+        //removes previously clicked btns and adds class to clicked btn
         priorityArr.forEach(btn =>{
             if(btn.id !== e.target.id){
                 btn.classList.remove("project-priority_clicked");
                 btn.classList.remove("project-priority-btn-"+btn.textContent.toLowerCase()+"_clicked")
                 btn.classList.add("project-priority-btn-"+btn.textContent.toLowerCase())
+            }
+            else {
+                btn.classList.add("project-priority_clicked");
+                btn.classList.add("project-priority-btn-"+btn.textContent.toLowerCase()+"_clicked")
+                btn.classList.remove("project-priority-btn-"+btn.textContent.toLowerCase())
+
             }
         });
             
@@ -243,7 +234,15 @@ let newProjectSubmition = (projectPriorityContainer,projects, newProjectSubmitBt
         let projTitle = newProjectTitle.value;
         let projDetails = newProjectDetails.value;
         let projDate = newProjectDueDate.value;
-        projects.push({_id: Date.now().toString(),category: "project",title: projTitle,details: projDetails,dueDate: projDate});
+        let projPriority="";
+
+        let priorityArr= Array.from(document.querySelectorAll(".project-priority-btn"));
+        priorityArr.forEach(btn=>{
+            if(btn.classList.contains("project-priority_clicked")){
+                projPriority=btn.textContent.toLowerCase();
+            }
+        })
+        projects.push({_id: Date.now().toString(),category: "project",title: projTitle,details: projDetails,dueDate: projDate , priority: projPriority});
         (0,_websiteInit__WEBPACK_IMPORTED_MODULE_0__.saveAndLoad)();
         (0,_websiteInit__WEBPACK_IMPORTED_MODULE_0__.autoCloseNewItemPanel)();
 
@@ -307,10 +306,10 @@ let projectItemsArrayAndListeners = (arrayProjectItems) => {
     });
 }
 
-let loadProjects = (projects,itemsContainer,arrayProjectItems) => {
+let loadProjects = (projects,itemsContainer) => {
     let projectsToRender = projects;
-    projectsToRender.forEach(({ _id, category, title, details, dueDate }) => {
-        itemsContainer.innerHTML += `<div id="item-display_page" class="project-item_page d-flex" data-catagory=${category}>
+    projectsToRender.forEach(({ _id, category, title, details, dueDate,priority }) => {
+        itemsContainer.innerHTML += `<div id="item-display_page" class="project-item_page d-flex" data-catagory=${category} data-priority= ${priority}>
         <div class="project-checkmark"></div>
         <div class="project-title"> ${title}</div>
         <div class="project-detail">project details
@@ -376,28 +375,18 @@ let newTodoPriority = () =>{
     let priorityContainer = document.querySelector("#new-todo-priority-container");
     let priorityArr= Array.from(document.querySelectorAll(".todo-priority-btn"))
     priorityContainer.addEventListener("click", (e)=>{
-        
-        if (e.target.tagName.toLowerCase() === "label") {
-            //if target has not been clicked before...
-            if (!e.target.classList.contains("todo-priority_clicked")){
-                e.target.classList.add("todo-priority_clicked");
-                e.target.classList.add("todo-priority-btn-"+e.target.textContent.toLowerCase()+"_clicked")
-                e.target.classList.remove("todo-priority-btn-"+e.target.textContent.toLowerCase())
-
-            }
-            else {
-                e.target.classList.remove("todo-priority_clicked");
-                e.target.classList.remove("todo-priority-btn-"+e.target.textContent.toLowerCase()+"_clicked")
-                e.target.classList.add("todo-priority-btn-"+e.target.textContent.toLowerCase())
-            }
-        }
-        
-        //removes previously clicked btns
+        //removes previously clicked btns and sets clicked btn with correct classes
         priorityArr.forEach(btn =>{
             if(btn.id !== e.target.id){
                 btn.classList.remove("todo-priority_clicked");
                 btn.classList.remove("todo-priority-btn-"+btn.textContent.toLowerCase()+"_clicked")
                 btn.classList.add("todo-priority-btn-"+btn.textContent.toLowerCase())
+            }
+            else {
+                btn.classList.add("todo-priority_clicked");
+                btn.classList.add("todo-priority-btn-"+btn.textContent.toLowerCase()+"_clicked")
+                btn.classList.remove("todo-priority-btn-"+btn.textContent.toLowerCase())
+
             }
         });
             
@@ -417,7 +406,7 @@ let newTodoSubmition = (todoPriorityContainer,todos, newTodoSubmitBtn,newTodoTit
         let priorityArr= Array.from(document.querySelectorAll(".todo-priority-btn"));
         priorityArr.forEach(btn=>{
             if(btn.classList.contains("todo-priority_clicked")){
-                todoPriority=btn.value;
+                todoPriority=btn.textContent.toLowerCase();
             }
         })
         todos.push({_id: Date.now().toString(),category: "todo",title: todoTitle,details: todoDetails,dueDate: todoDate, priority: todoPriority});
@@ -493,8 +482,8 @@ let todoItemsArrayAndListeners = (arrayTodoItems) => {
 let loadTodos = (todos,itemsContainer,arrayTodoItems) => {
     let todosToRender = todos;
     let todoItemAdded = [];
-    todosToRender.forEach(({ _id, category, title, details, dueDate }) => {
-        todoItemAdded =`<div id="item-display_page" class="todo-item_page d-flex" data-catagory=${category} >
+    todosToRender.forEach(({ _id, category, title, details, dueDate,priority }) => {
+        todoItemAdded =`<div id="item-display_page" class="todo-item_page d-flex" data-catagory=${category} data-priority=${priority} >
         <div class="todo-checkmark"></div>
         <div class="todo-title"> ${title}</div>
         <div class="todo-detail">item details

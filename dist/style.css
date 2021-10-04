@@ -482,6 +482,15 @@ span.todo-detail_content:after,span.project-detail_content:after {
     color:white;
     background:red;
 }
+[data-priority = "low"]{
+    border-left: 7px solid rgb(39, 156, 39);
+}
+[data-priority = "medium"]{
+    border-left: 7px solid rgb(250, 191, 81);
+}
+[data-priority = "high"]{
+    border-left: 7px solid red;
+}
 /* submition sections */
 .wrapper-priority-submit{
     justify-content: space-between;
