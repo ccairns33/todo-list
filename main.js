@@ -355,30 +355,32 @@ let newTodoPriority = () =>{
     let priorityContainer = document.querySelector("#new-todo-priority-container");
     let priorityArr= Array.from(document.querySelectorAll(".todo-priority-btn"))
     priorityContainer.addEventListener("click", (e)=>{
+        
         if (e.target.tagName.toLowerCase() === "label") {
+            //if target has not been clicked before...
             if (!e.target.classList.contains("todo-priority_clicked")){
                 e.target.classList.add("todo-priority_clicked");
+                e.target.classList.add("todo-priority-btn-"+e.target.textContent.toLowerCase()+"_clicked")
+                e.target.classList.remove("todo-priority-btn-"+e.target.textContent.toLowerCase())
 
             }
             else {
                 e.target.classList.remove("todo-priority_clicked");
+                e.target.classList.remove("todo-priority-btn-"+e.target.textContent.toLowerCase()+"_clicked")
+                e.target.classList.add("todo-priority-btn-"+e.target.textContent.toLowerCase())
             }
-        }        
+        }
+        
+        //removes previously clicked btns
         priorityArr.forEach(btn =>{
-            if(btn.classList.contains("todo-priority_clicked")){
-                btn.classList.add("todo-priority-btn-"+btn.textContent.toLowerCase()+"_clicked")
-                btn.classList.remove("todo-priority-btn-"+btn.textContent.toLowerCase())
-
+            if(btn.id !== e.target.id){
+                btn.classList.remove("todo-priority_clicked");
+                btn.classList.remove("todo-priority-btn-"+btn.textContent.toLowerCase()+"_clicked")
+                btn.classList.add("todo-priority-btn-"+btn.textContent.toLowerCase())
             }
-            else {
-                if (btn.classList.contains("todo-priority-btn-"+btn.textContent.toLowerCase()+"_clicked")){
-                    btn.classList.remove("todo-priority-btn-"+btn.textContent.toLowerCase()+"_clicked")
-                    btn.classList.add("todo-priority-btn-"+btn.textContent.toLowerCase())
-                 }
-
-
-            }
-        })
+        });
+            
+       
     })
 }
 let newTodoSubmition = (todoPriorityContainer,todos, newTodoSubmitBtn,newTodoTitle,newTodoDetails,newTodoDueDate ) => {
