@@ -52,7 +52,15 @@ let newProjectSubmition = (projectPriorityContainer,projects, newProjectSubmitBt
         let projTitle = newProjectTitle.value;
         let projDetails = newProjectDetails.value;
         let projDate = newProjectDueDate.value;
-        projects.push({_id: Date.now().toString(),category: "project",title: projTitle,details: projDetails,dueDate: projDate});
+        let projPriority="";
+
+        let priorityArr= Array.from(document.querySelectorAll(".project-priority-btn"));
+        priorityArr.forEach(btn=>{
+            if(btn.classList.contains("project-priority_clicked")){
+                projPriority=btn.textContent.toLowerCase();
+            }
+        })
+        projects.push({_id: Date.now().toString(),category: "project",title: projTitle,details: projDetails,dueDate: projDate , priority: projPriority});
         saveAndLoad();
         autoCloseNewItemPanel();
 

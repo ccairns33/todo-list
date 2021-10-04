@@ -59,7 +59,7 @@ let newTodoSubmition = (todoPriorityContainer,todos, newTodoSubmitBtn,newTodoTit
         let priorityArr= Array.from(document.querySelectorAll(".todo-priority-btn"));
         priorityArr.forEach(btn=>{
             if(btn.classList.contains("todo-priority_clicked")){
-                todoPriority=btn.value;
+                todoPriority=btn.textContent.toLowerCase();
             }
         })
         todos.push({_id: Date.now().toString(),category: "todo",title: todoTitle,details: todoDetails,dueDate: todoDate, priority: todoPriority});
