@@ -430,7 +430,7 @@ span.todo-detail_content:after,span.project-detail_content:after {
     opacity: 0;
 }
 /*  for all the priority btns and their color changes */
-.project-priority-btn, .todo-priority-btn{
+.project-priority-btn, .todo-priority-btn, .te-priority-btn, .pe-priority-btn{
     display: inline-block;
     margin: 0 .5rem 0 -5px;
     padding: .2rem .5rem;
@@ -441,44 +441,44 @@ span.todo-detail_content:after,span.project-detail_content:after {
     cursor: pointer;
     transition: all .3s;
 }
-.todo-priority-btn-low, .project-priority-btn-low{
+.todo-priority-btn-low, .project-priority-btn-low, .pe-priority-btn-low, .te-priority-btn-low{
     border: 1px solid green;
     color: green;
     transition: all .3s;
 }
-.todo-priority-btn-low:hover, .project-priority-btn-low:hover{
+.todo-priority-btn-low:hover, .project-priority-btn-low:hover, .pe-priority-btn-low:hover, .te-priority-btn-low:hover{
     color:white;
     background:green;
 }
-.todo-priority-btn-low_clicked, .project-priority-btn-low_clicked {
+.todo-priority-btn-low_clicked, .project-priority-btn-low_clicked, .pe-priority-btn-low_clicked, .te-priority-btn-low_clicked {
     color:white;
     background:green;
 }
-.todo-priority-btn-medium, .project-priority-btn-medium{
+.todo-priority-btn-medium, .project-priority-btn-medium, .pe-priority-btn-medium, .te-priority-btn-medium{
     border: 1px solid orange;
     color: orange;
     transition: all .3s;
 
 }
-.todo-priority-btn-medium:hover, .project-priority-btn-medium:hover{
+.todo-priority-btn-medium:hover, .project-priority-btn-medium:hover, .pe-priority-btn-medium:hover, .te-priority-btn-medium:hover{
     color:white;
     background:orange;
 }
-.todo-priority-btn-medium_clicked,.project-priority-btn-medium_clicked{
+.todo-priority-btn-medium_clicked,.project-priority-btn-medium_clicked, .pe-priority-btn-medium_clicked, .te-priority-btn-medium_clicked{
     color:white;
     background:orange;
 }
-.todo-priority-btn-high, .project-priority-btn-high{
+.todo-priority-btn-high, .project-priority-btn-high, .pe-priority-btn-high, .te-priority-btn-high{
     border: 1px solid red;
     color: red;
     transition: all .3s;
 
 }
-.todo-priority-btn-high:hover, .project-priority-btn-high:hover{
+.todo-priority-btn-high:hover, .project-priority-btn-high:hover, .pe-priority-btn-high:hover, .te-priority-btn-high:hover{
     color:white;
     background:red;
 }
-.todo-priority-btn-high_clicked, .project-priority-btn-high_clicked{
+.todo-priority-btn-high_clicked, .project-priority-btn-high_clicked, .pe-priority-btn-high_clicked, .te-priority-btn-high_clicked{
     color:white;
     background:red;
 }
