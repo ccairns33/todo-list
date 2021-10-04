@@ -48,7 +48,7 @@ let newDateSubmition = (dates, newDateSubmitBtn,newDateTitle,newDateDueDate) => 
 let loadDates = (dates, itemsContainer)=>{
     let datesToRender = dates;
     datesToRender.forEach(({ _id, category, title, dueDate }) => {
-        itemsContainer.innerHTML += `<div id="item-display_page" class="date-item_page d-flex  display-none" data-category=${category}>
+        itemsContainer.innerHTML += `<div id="item-display_page" class="date-item_page d-flex " data-category=${category}>
         <div class="date-title_page"> ${title} </div>
         <div class="date-item-date">${dueDate} </div>
         <div class="date-edit date-icon" data-edit-date=${_id}>
@@ -120,15 +120,12 @@ let iconColorChange = ( clickedTab ) => {
     iconArr.forEach(element => {
         if (element.parentElement == clickedTab){
             element.classList.remove("blue");
-            if (element.classList.contains("pink")){
-                //do nothing, but it shouldn't have pink
-            }
-            else {
-                    element.classList.add("pink");
-            }
+            element.classList.add("tab_clicked");
         }
         else {
             element.classList.add("blue");
+            element.classList.remove("tab_clicked");
+
         }
     });
 }
