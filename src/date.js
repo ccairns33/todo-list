@@ -1,4 +1,4 @@
-import {getDivChildrenByClass, deleteItem, saveAndLoad} from "./websiteInit";
+import {getDivChildrenByClass, deleteItem, saveAndLoad, autoCloseNewItemPanel} from "./websiteInit";
 
 let displayDateEditPanel = (editBtn) => {
     if (editBtn.classList.contains("date-edit_clicked")){
@@ -14,6 +14,36 @@ let displayDateEditPanel = (editBtn) => {
         return;
     }
 }
+let newDateSubmition = (dates, newDateSubmitBtn,newDateTitle,newDateDueDate) => {
+    newDateSubmitBtn.addEventListener("click", (e) => {
+            
+        let dateTitle = newDateTitle.value;
+        let date = newDateDueDate.value;
+
+        dates.push({_id: Date.now().toString(),category: "date",title: dateTitle,dueDate: date });
+        saveAndLoad();
+        autoCloseNewItemPanel();
+
+    })
+    
+}
+let loadDates = (dates, itemsContainer)=>{
+    let datesToRender = dates;
+    datesToRender.forEach(({ _id, category, title, dueDate }) => {
+        itemsContainer.innerHTML += `<div id="item-display_page" class="date-item_page d-flex  display-none" data-category=${category}>
+        <div class="date-title_page"> ${title} </div>
+        <div class="date-item-date">${dueDate} </div>
+        <div class="date-edit date-icon" data-edit-date=${_id}>
+          <i class="far fa-edit"></i>
+        </div>
+        <div class="date-delete date-icon" data-delete-date=${_id}>
+          <i class="far fa-trash-alt"></i>
+        </div>
+      </div>`
+    });
+
+}
+
 
 let dateItemsArrayAndListeners = (arrayDateItems) => {
     arrayDateItems = getDivChildrenByClass("items-container","date-item_page");
@@ -48,4 +78,4 @@ let dateItemsArrayAndListeners = (arrayDateItems) => {
 
     });
 }
-export{displayDateEditPanel, dateItemsArrayAndListeners}
+export{displayDateEditPanel, dateItemsArrayAndListeners, newDateSubmition, loadDates}

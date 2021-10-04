@@ -36,7 +36,7 @@ let newTodoPriority = () =>{
        
     })
 }
-let newTodoSubmition = (todoPriorityContainer,todos, newTodoSubmitBtn,newTodoTitle,newTodoDetails,newTodoDueDate ) => {
+let newTodoSubmition = (todos, newTodoSubmitBtn,newTodoTitle,newTodoDetails,newTodoDueDate ) => {
     // finding todo priority
     // let todoPriority = newTodoPriority(todoPriorityContainer);
     newTodoSubmitBtn.addEventListener("click", (e) => {
@@ -122,7 +122,7 @@ let todoItemsArrayAndListeners = (arrayTodoItems) => {
 
     });
 }
-let loadTodos = (todos,itemsContainer,arrayTodoItems) => {
+let loadTodos = (todos,itemsContainer) => {
     let todosToRender = todos;
     let todoItemAdded = [];
     todosToRender.forEach(({ _id, category, title, details, dueDate,priority }) => {

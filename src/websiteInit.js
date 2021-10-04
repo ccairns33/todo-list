@@ -2,7 +2,7 @@ import {loadNewItemPanel, closeNewItemPanel, panelClicked } from "./newItemPanel
 import {iconColorChange} from "./home";
 import {loadTodos, todoItemsArrayAndListeners, newTodoSubmition} from "./todo";
 import { projectItemsArrayAndListeners, loadProjects, newProjectSubmition} from "./project";
-import {dateItemsArrayAndListeners} from "./date.js";
+import {dateItemsArrayAndListeners, newDateSubmition, loadDates} from "./date.js";
 
 // Selector for todos container
 const itemsContainer = document.querySelector('[data-container]');
@@ -38,6 +38,12 @@ let newProjectDetails = document.querySelector("#new-project-details");
 let newProjectDueDate = document.querySelector("#new-project-date");
 let projectPriorityContainer = document.querySelector("#new-project-priority-container")
 
+// date selectors for new date
+let newDateSubmitBtn = document.querySelector(".create-new-date-submit");
+let newDateTitle = document.querySelector("#new-date-title");
+let newDateDueDate = document.querySelector("#new-date");
+
+
 let arrayTodoItems = [];
 let arrayProjectItems = [];
 let arrayDateItems = [];
@@ -48,8 +54,9 @@ let initEventListeners = () => {
     load();
 
     // for utilizing new submitions
-    newTodoSubmition(todoPriorityContainer,todos, newTodoSubmitBtn,newTodoTitle,newTodoDetails,newTodoDueDate);
-    newProjectSubmition(projectPriorityContainer,projects, newProjectSubmitBtn,newProjectTitle,newProjectDetails,newProjectDueDate);
+    newTodoSubmition(todos, newTodoSubmitBtn,newTodoTitle,newTodoDetails,newTodoDueDate);
+    newProjectSubmition(projects, newProjectSubmitBtn,newProjectTitle,newProjectDetails,newProjectDueDate);
+    newDateSubmition(dates, newDateSubmitBtn,newDateTitle,newDateDueDate);
 
     // new item panel open and close
     const newItemBtn = document.querySelector(".new-todo_btn");
@@ -125,12 +132,13 @@ let load = () => {
     // clearing old data
     clearChildElements(itemsContainer);
 
-    loadTodos(todos,itemsContainer,arrayTodoItems);
-    loadProjects(projects,itemsContainer,arrayProjectItems);
+    loadTodos(todos,itemsContainer);
+    loadProjects(projects,itemsContainer);
+    loadDates(dates, itemsContainer);
 
     todoItemsArrayAndListeners(arrayTodoItems)
     projectItemsArrayAndListeners(arrayProjectItems)
-    // dateItemsArrayAndListeners(arrayDateItems);
+    dateItemsArrayAndListeners(arrayDateItems);
 
 
 }
@@ -139,6 +147,8 @@ let saveAndLoad = () =>{
     // console.log(LOCAL_STORAGE_TODOS_KEY)
     localStorage.setItem(LOCAL_STORAGE_TODOS_KEY, JSON.stringify(todos));
     localStorage.setItem(LOCAL_STORAGE_PROJECTS_KEY, JSON.stringify(projects));
+    localStorage.setItem(LOCAL_STORAGE_PROJECTS_KEY, JSON.stringify(dates));
+
 
 
     // loading/ rendering
@@ -150,7 +160,7 @@ let deleteItem = (e) =>{
     let deleteBtn = e.target;
     let item = deleteBtn.parentElement.parentElement;
     let itemParent = item.parentElement;
-    // strange bug will delete items-container, in a certain sequence of events. hard to replicate
+// deleted item from DOM, not localstorage
     if(itemParent.firstChild.id === "items-container"){
         return;
     }

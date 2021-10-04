@@ -37,7 +37,7 @@ let newProjectPriority = () =>{
        
     })
 }
-let newProjectSubmition = (projectPriorityContainer,projects, newProjectSubmitBtn,newProjectTitle,newProjectDetails,newProjectDueDate) => {
+let newProjectSubmition = (projects, newProjectSubmitBtn,newProjectTitle,newProjectDetails,newProjectDueDate) => {
     newProjectSubmitBtn.addEventListener("click", (e) => {
             
         let projTitle = newProjectTitle.value;
