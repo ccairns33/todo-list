@@ -1,13 +1,17 @@
 import {hideInactiveTabs} from "./websiteInit";
 import {newTodoPriority} from "./todo";
+import {newProjectPriority} from "./project";
+
 
 
 let loadNewItemPanel = () =>{
     const itemPanel = document.querySelector(".overlay");
     itemPanel.classList.remove("display-none");
     
-    //adding priority event listeners
+    //adding priority event listener
     newTodoPriority();
+    newProjectPriority();
+
     
 }
 
