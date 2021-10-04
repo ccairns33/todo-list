@@ -429,6 +429,7 @@ span.todo-detail_content:after,span.project-detail_content:after {
     margin: 0;
     opacity: 0;
 }
+/*  for all the priority btns and their color changes */
 .project-priority-btn, .todo-priority-btn{
     display: inline-block;
     margin: 0 .5rem 0 -5px;
@@ -449,7 +450,7 @@ span.todo-detail_content:after,span.project-detail_content:after {
     color:white;
     background:green;
 }
-.todo-priority-btn-low_clicked{
+.todo-priority-btn-low_clicked, .project-priority-btn-low_clicked {
     color:white;
     background:green;
 }
@@ -477,10 +478,11 @@ span.todo-detail_content:after,span.project-detail_content:after {
     color:white;
     background:red;
 }
-.todo-priority-btn-high_clicked, .project-priority-btn-high{
+.todo-priority-btn-high_clicked, .project-priority-btn-high_clicked{
     color:white;
     background:red;
 }
+/* submition sections */
 .wrapper-priority-submit{
     justify-content: space-between;
 }

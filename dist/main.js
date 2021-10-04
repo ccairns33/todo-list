@@ -120,6 +120,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _websiteInit__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./websiteInit */ "./src/websiteInit.js");
 /* harmony import */ var _todo__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./todo */ "./src/todo.js");
+/* harmony import */ var _project__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./project */ "./src/project.js");
+
+
 
 
 
@@ -128,8 +131,10 @@ let loadNewItemPanel = () =>{
     const itemPanel = document.querySelector(".overlay");
     itemPanel.classList.remove("display-none");
     
-    //adding priority event listeners
+    //adding priority event listener
     (0,_todo__WEBPACK_IMPORTED_MODULE_1__.newTodoPriority)();
+    (0,_project__WEBPACK_IMPORTED_MODULE_2__.newProjectPriority)();
+
     
 }
 
@@ -177,6 +182,7 @@ let panelClicked = (clickedTab) => {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "displayProjectEditPanel": () => (/* binding */ displayProjectEditPanel),
+/* harmony export */   "newProjectPriority": () => (/* binding */ newProjectPriority),
 /* harmony export */   "projectItemsArrayAndListeners": () => (/* binding */ projectItemsArrayAndListeners),
 /* harmony export */   "updateArrayProjectItems": () => (/* binding */ updateArrayProjectItems),
 /* harmony export */   "loadProjects": () => (/* binding */ loadProjects),
@@ -199,23 +205,38 @@ let displayProjectEditPanel = (editBtn) => {
         return;
     }
 }
-// let newProjectPriority = (projectPriorityContainer) =>{
-//     let projectPriority = "";
-//     projectPriorityContainer.addEventListener("click", (e) =>  {
-//         if (e.target.tagName.toLowerCase() === "label"){
-//             if (e.target.classList.contains("priority-btn-low")){
-//                 projectPriority = "low";
-//             }
-//             else if (e.target.classList.contains("priority-btn-medium")){
-//                 projectPriority = "medium";
-//             }
-//             else {
-//                 projectPriority = "high";
-//             }
-//         }
-//     })
-//     return projectPriority;
-// }
+let newProjectPriority = () =>{
+    let priorityContainer = document.querySelector("#new-project-priority-container");
+    let priorityArr= Array.from(document.querySelectorAll(".project-priority-btn"))
+    priorityContainer.addEventListener("click", (e)=>{
+        
+        if (e.target.tagName.toLowerCase() === "label") {
+            //if target has not been clicked before...
+            if (!e.target.classList.contains("project-priority_clicked")){
+                e.target.classList.add("project-priority_clicked");
+                e.target.classList.add("project-priority-btn-"+e.target.textContent.toLowerCase()+"_clicked")
+                e.target.classList.remove("project-priority-btn-"+e.target.textContent.toLowerCase())
+
+            }
+            else {
+                e.target.classList.remove("project-priority_clicked");
+                e.target.classList.remove("project-priority-btn-"+e.target.textContent.toLowerCase()+"_clicked")
+                e.target.classList.add("project-priority-btn-"+e.target.textContent.toLowerCase())
+            }
+        }
+        
+        //removes previously clicked btns
+        priorityArr.forEach(btn =>{
+            if(btn.id !== e.target.id){
+                btn.classList.remove("project-priority_clicked");
+                btn.classList.remove("project-priority-btn-"+btn.textContent.toLowerCase()+"_clicked")
+                btn.classList.add("project-priority-btn-"+btn.textContent.toLowerCase())
+            }
+        });
+            
+       
+    })
+}
 let newProjectSubmition = (projectPriorityContainer,projects, newProjectSubmitBtn,newProjectTitle,newProjectDetails,newProjectDueDate) => {
     newProjectSubmitBtn.addEventListener("click", (e) => {
             
