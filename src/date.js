@@ -30,7 +30,7 @@ let newDateSubmition = (dates, newDateSubmitBtn,newDateTitle,newDateDueDate) => 
 let loadDates = (dates, itemsContainer)=>{
     let datesToRender = dates;
     datesToRender.forEach(({ _id, category, title, dueDate }) => {
-        itemsContainer.innerHTML += `<div id="item-display_page" class="date-item_page d-flex  display-none" data-category=${category}>
+        itemsContainer.innerHTML += `<div id="item-display_page" class="date-item_page d-flex " data-category=${category}>
         <div class="date-title_page"> ${title} </div>
         <div class="date-item-date">${dueDate} </div>
         <div class="date-edit date-icon" data-edit-date=${_id}>
