@@ -13,7 +13,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "displayDateEditPanel": () => (/* binding */ displayDateEditPanel),
 /* harmony export */   "dateItemsArrayAndListeners": () => (/* binding */ dateItemsArrayAndListeners),
 /* harmony export */   "newDateSubmition": () => (/* binding */ newDateSubmition),
-/* harmony export */   "loadDates": () => (/* binding */ loadDates)
+/* harmony export */   "loadDates": () => (/* binding */ loadDates),
+/* harmony export */   "clearDatePanel": () => (/* binding */ clearDatePanel)
 /* harmony export */ });
 /* harmony import */ var _websiteInit__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./websiteInit */ "./src/websiteInit.js");
 
@@ -38,12 +39,24 @@ let newDateSubmition = (dates, newDateSubmitBtn,newDateTitle,newDateDueDate) => 
         let dateTitle = newDateTitle.value;
         let date = newDateDueDate.value;
 
+        if (dateTitle === "" || date === ""){
+        // all fields must be filled
+            alert("Please fill out all fields.");
+            return;
+        }
         dates.push({_id: Date.now().toString(),category: "date",title: dateTitle,dueDate: date });
+        
+        // clearing the text areas and button clicks
+        document.querySelector("#new-date-title").value="";
+        document.querySelector("#new-date").value="";
+        
         (0,_websiteInit__WEBPACK_IMPORTED_MODULE_0__.saveAndLoad)();
         (0,_websiteInit__WEBPACK_IMPORTED_MODULE_0__.autoCloseNewItemPanel)();
 
     })
-    
+}
+let clearDatePanel = () =>{
+
 }
 let loadDates = (dates, itemsContainer)=>{
     let datesToRender = dates;
@@ -149,7 +162,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _websiteInit__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./websiteInit */ "./src/websiteInit.js");
 /* harmony import */ var _todo__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./todo */ "./src/todo.js");
-/* harmony import */ var _project__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./project */ "./src/project.js");
+/* harmony import */ var _date__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./date */ "./src/date.js");
+/* harmony import */ var _project__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./project */ "./src/project.js");
+
 
 
 
@@ -162,8 +177,11 @@ let loadNewItemPanel = () =>{
     
     //adding priority event listener
     (0,_todo__WEBPACK_IMPORTED_MODULE_1__.newTodoPriority)();
-    (0,_project__WEBPACK_IMPORTED_MODULE_2__.newProjectPriority)();
+    (0,_project__WEBPACK_IMPORTED_MODULE_3__.newProjectPriority)();
 
+    (0,_todo__WEBPACK_IMPORTED_MODULE_1__.clearTodoPanel)();
+    (0,_project__WEBPACK_IMPORTED_MODULE_3__.clearProjectPanel)();
+    (0,_date__WEBPACK_IMPORTED_MODULE_2__.clearDatePanel)();
     
 }
 
@@ -213,7 +231,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "displayProjectEditPanel": () => (/* binding */ displayProjectEditPanel),
 /* harmony export */   "newProjectPriority": () => (/* binding */ newProjectPriority),
 /* harmony export */   "projectItemsArrayAndListeners": () => (/* binding */ projectItemsArrayAndListeners),
-/* harmony export */   "updateArrayProjectItems": () => (/* binding */ updateArrayProjectItems),
+/* harmony export */   "clearProjectPanel": () => (/* binding */ clearProjectPanel),
 /* harmony export */   "loadProjects": () => (/* binding */ loadProjects),
 /* harmony export */   "newProjectSubmition": () => (/* binding */ newProjectSubmition)
 /* harmony export */ });
@@ -257,6 +275,9 @@ let newProjectPriority = () =>{
        
     })
 }
+let clearProjectPanel = () =>{
+
+}
 let newProjectSubmition = (projects, newProjectSubmitBtn,newProjectTitle,newProjectDetails,newProjectDueDate) => {
     newProjectSubmitBtn.addEventListener("click", (e) => {
             
@@ -271,8 +292,25 @@ let newProjectSubmition = (projects, newProjectSubmitBtn,newProjectTitle,newProj
                 projPriority=btn.textContent.toLowerCase();
             }
         })
+        if( projTitle === "" || projDetails === "" || projDate === "" || projPriority === ""){
+            // all fields must be filled to submit.
+            alert("Please fill out all fields.");
+            return;
+        }
         projects.push({_id: Date.now().toString(),category: "project",title: projTitle,details: projDetails,dueDate: projDate , priority: projPriority});
-        (0,_websiteInit__WEBPACK_IMPORTED_MODULE_0__.saveAndLoad)();
+        
+        // clearing the text areas and button clicks
+        document.querySelector("#new-project-title").value="";
+        document.querySelector("#new-project-details").value="";
+        document.querySelector("#new-project-date").value="";
+
+        priorityArr.forEach(btn =>{
+            btn.classList.remove("project-priority_clicked");
+            btn.classList.remove("project-priority-btn-"+btn.textContent.toLowerCase()+"_clicked");
+            btn.classList.add("project-priority-btn-"+btn.textContent.toLowerCase());
+        })
+        
+        ;(0,_websiteInit__WEBPACK_IMPORTED_MODULE_0__.saveAndLoad)();
         (0,_websiteInit__WEBPACK_IMPORTED_MODULE_0__.autoCloseNewItemPanel)();
 
     })
@@ -359,11 +397,7 @@ let loadProjects = (projects,itemsContainer) => {
     })
 
 }
-let updateArrayProjectItems = (arrayProjectItems) => {
-    arrayProjectItems = (0,_websiteInit__WEBPACK_IMPORTED_MODULE_0__.getDivChildrenByClass)("items-container","project-item_page");
-    console.log("array-projects:" +arrayProjectItems);
-    return arrayProjectItems;
-}
+
 
 
 
@@ -379,6 +413,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "displayTodoEditPanel": () => (/* binding */ displayTodoEditPanel),
 /* harmony export */   "loadTodos": () => (/* binding */ loadTodos),
+/* harmony export */   "clearTodoPanel": () => (/* binding */ clearTodoPanel),
 /* harmony export */   "todoItemsArrayAndListeners": () => (/* binding */ todoItemsArrayAndListeners),
 /* harmony export */   "newTodoSubmition": () => (/* binding */ newTodoSubmition),
 /* harmony export */   "newTodoPriority": () => (/* binding */ newTodoPriority)
@@ -423,8 +458,6 @@ let newTodoPriority = () =>{
     })
 }
 let newTodoSubmition = (todos, newTodoSubmitBtn,newTodoTitle,newTodoDetails,newTodoDueDate ) => {
-    // finding todo priority
-    // let todoPriority = newTodoPriority(todoPriorityContainer);
     newTodoSubmitBtn.addEventListener("click", (e) => {
             
         let todoTitle = newTodoTitle.value;
@@ -432,15 +465,33 @@ let newTodoSubmition = (todos, newTodoSubmitBtn,newTodoTitle,newTodoDetails,newT
         let todoDate = newTodoDueDate.value;
         let todoPriority="";
 
+
         let priorityArr= Array.from(document.querySelectorAll(".todo-priority-btn"));
         priorityArr.forEach(btn=>{
             if(btn.classList.contains("todo-priority_clicked")){
                 todoPriority=btn.textContent.toLowerCase();
             }
         })
+        if( todoTitle === "" || todoDetails === "" || todoDate === "" || todoPriority == ""){
+            // all fields must be filled to submit.
+            alert("Please fill out all fields.");
+            return;
+        }
+
         todos.push({_id: Date.now().toString(),category: "todo",title: todoTitle,details: todoDetails,dueDate: todoDate, priority: todoPriority});
 
-        (0,_websiteInit__WEBPACK_IMPORTED_MODULE_0__.saveAndLoad)();
+        // clearing the text areas and button clicks
+        document.querySelector("#new-todo-title").value="";
+        document.querySelector("#new-todo-details").value="";
+        document.querySelector("#new-todo-date").value="";
+
+        priorityArr.forEach(btn =>{
+            btn.classList.remove("todo-priority_clicked");
+            btn.classList.remove("todo-priority-btn-"+btn.textContent.toLowerCase()+"_clicked");
+            btn.classList.add("todo-priority-btn-"+btn.textContent.toLowerCase());
+        })
+
+        ;(0,_websiteInit__WEBPACK_IMPORTED_MODULE_0__.saveAndLoad)();
         (0,_websiteInit__WEBPACK_IMPORTED_MODULE_0__.autoCloseNewItemPanel)();
 
     })
@@ -507,6 +558,9 @@ let todoItemsArrayAndListeners = (arrayTodoItems) => {
         
 
     });
+}
+let clearTodoPanel = () =>{
+
 }
 let loadTodos = (todos,itemsContainer) => {
     let todosToRender = todos;
