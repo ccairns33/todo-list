@@ -8,15 +8,12 @@ let iconColorChange = ( clickedTab ) => {
     iconArr.forEach(element => {
         if (element.parentElement == clickedTab){
             element.classList.remove("blue");
-            if (element.classList.contains("pink")){
-                //do nothing, but it shouldn't have pink
-            }
-            else {
-                    element.classList.add("pink");
-            }
+            element.classList.add("tab_clicked");
         }
         else {
             element.classList.add("blue");
+            element.classList.remove("tab_clicked");
+
         }
     });
 }
