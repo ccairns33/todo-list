@@ -713,7 +713,7 @@ let saveAndLoad = () =>{
     // console.log(LOCAL_STORAGE_TODOS_KEY)
     localStorage.setItem(LOCAL_STORAGE_TODOS_KEY, JSON.stringify(todos));
     localStorage.setItem(LOCAL_STORAGE_PROJECTS_KEY, JSON.stringify(projects));
-    localStorage.setItem(LOCAL_STORAGE_PROJECTS_KEY, JSON.stringify(dates));
+    localStorage.setItem(LOCAL_STORAGE_DATES_KEY, JSON.stringify(dates));
 
 
 
