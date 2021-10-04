@@ -11,7 +11,9 @@
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "displayDateEditPanel": () => (/* binding */ displayDateEditPanel),
-/* harmony export */   "dateItemsArrayAndListeners": () => (/* binding */ dateItemsArrayAndListeners)
+/* harmony export */   "dateItemsArrayAndListeners": () => (/* binding */ dateItemsArrayAndListeners),
+/* harmony export */   "newDateSubmition": () => (/* binding */ newDateSubmition),
+/* harmony export */   "loadDates": () => (/* binding */ loadDates)
 /* harmony export */ });
 /* harmony import */ var _websiteInit__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./websiteInit */ "./src/websiteInit.js");
 
@@ -30,6 +32,36 @@ let displayDateEditPanel = (editBtn) => {
         return;
     }
 }
+let newDateSubmition = (dates, newDateSubmitBtn,newDateTitle,newDateDueDate) => {
+    newDateSubmitBtn.addEventListener("click", (e) => {
+            
+        let dateTitle = newDateTitle.value;
+        let date = newDateDueDate.value;
+
+        dates.push({_id: Date.now().toString(),category: "date",title: dateTitle,dueDate: date });
+        (0,_websiteInit__WEBPACK_IMPORTED_MODULE_0__.saveAndLoad)();
+        (0,_websiteInit__WEBPACK_IMPORTED_MODULE_0__.autoCloseNewItemPanel)();
+
+    })
+    
+}
+let loadDates = (dates, itemsContainer)=>{
+    let datesToRender = dates;
+    datesToRender.forEach(({ _id, category, title, dueDate }) => {
+        itemsContainer.innerHTML += `<div id="item-display_page" class="date-item_page d-flex  display-none" data-category=${category}>
+        <div class="date-title_page"> ${title} </div>
+        <div class="date-item-date">${dueDate} </div>
+        <div class="date-edit date-icon" data-edit-date=${_id}>
+          <i class="far fa-edit"></i>
+        </div>
+        <div class="date-delete date-icon" data-delete-date=${_id}>
+          <i class="far fa-trash-alt"></i>
+        </div>
+      </div>`
+    });
+
+}
+
 
 let dateItemsArrayAndListeners = (arrayDateItems) => {
     arrayDateItems = (0,_websiteInit__WEBPACK_IMPORTED_MODULE_0__.getDivChildrenByClass)("items-container","date-item_page");
@@ -228,7 +260,7 @@ let newProjectPriority = () =>{
        
     })
 }
-let newProjectSubmition = (projectPriorityContainer,projects, newProjectSubmitBtn,newProjectTitle,newProjectDetails,newProjectDueDate) => {
+let newProjectSubmition = (projects, newProjectSubmitBtn,newProjectTitle,newProjectDetails,newProjectDueDate) => {
     newProjectSubmitBtn.addEventListener("click", (e) => {
             
         let projTitle = newProjectTitle.value;
@@ -393,7 +425,7 @@ let newTodoPriority = () =>{
        
     })
 }
-let newTodoSubmition = (todoPriorityContainer,todos, newTodoSubmitBtn,newTodoTitle,newTodoDetails,newTodoDueDate ) => {
+let newTodoSubmition = (todos, newTodoSubmitBtn,newTodoTitle,newTodoDetails,newTodoDueDate ) => {
     // finding todo priority
     // let todoPriority = newTodoPriority(todoPriorityContainer);
     newTodoSubmitBtn.addEventListener("click", (e) => {
@@ -479,7 +511,7 @@ let todoItemsArrayAndListeners = (arrayTodoItems) => {
 
     });
 }
-let loadTodos = (todos,itemsContainer,arrayTodoItems) => {
+let loadTodos = (todos,itemsContainer) => {
     let todosToRender = todos;
     let todoItemAdded = [];
     todosToRender.forEach(({ _id, category, title, details, dueDate,priority }) => {
@@ -572,6 +604,12 @@ let newProjectDetails = document.querySelector("#new-project-details");
 let newProjectDueDate = document.querySelector("#new-project-date");
 let projectPriorityContainer = document.querySelector("#new-project-priority-container")
 
+// date selectors for new date
+let newDateSubmitBtn = document.querySelector(".create-new-date-submit");
+let newDateTitle = document.querySelector("#new-date-title");
+let newDateDueDate = document.querySelector("#new-date");
+
+
 let arrayTodoItems = [];
 let arrayProjectItems = [];
 let arrayDateItems = [];
@@ -582,8 +620,9 @@ let initEventListeners = () => {
     load();
 
     // for utilizing new submitions
-    (0,_todo__WEBPACK_IMPORTED_MODULE_2__.newTodoSubmition)(todoPriorityContainer,todos, newTodoSubmitBtn,newTodoTitle,newTodoDetails,newTodoDueDate);
-    (0,_project__WEBPACK_IMPORTED_MODULE_3__.newProjectSubmition)(projectPriorityContainer,projects, newProjectSubmitBtn,newProjectTitle,newProjectDetails,newProjectDueDate);
+    (0,_todo__WEBPACK_IMPORTED_MODULE_2__.newTodoSubmition)(todos, newTodoSubmitBtn,newTodoTitle,newTodoDetails,newTodoDueDate);
+    (0,_project__WEBPACK_IMPORTED_MODULE_3__.newProjectSubmition)(projects, newProjectSubmitBtn,newProjectTitle,newProjectDetails,newProjectDueDate);
+    (0,_date_js__WEBPACK_IMPORTED_MODULE_4__.newDateSubmition)(dates, newDateSubmitBtn,newDateTitle,newDateDueDate);
 
     // new item panel open and close
     const newItemBtn = document.querySelector(".new-todo_btn");
@@ -659,12 +698,13 @@ let load = () => {
     // clearing old data
     clearChildElements(itemsContainer);
 
-    (0,_todo__WEBPACK_IMPORTED_MODULE_2__.loadTodos)(todos,itemsContainer,arrayTodoItems);
-    (0,_project__WEBPACK_IMPORTED_MODULE_3__.loadProjects)(projects,itemsContainer,arrayProjectItems);
+    (0,_todo__WEBPACK_IMPORTED_MODULE_2__.loadTodos)(todos,itemsContainer);
+    (0,_project__WEBPACK_IMPORTED_MODULE_3__.loadProjects)(projects,itemsContainer);
+    (0,_date_js__WEBPACK_IMPORTED_MODULE_4__.loadDates)(dates, itemsContainer);
 
     (0,_todo__WEBPACK_IMPORTED_MODULE_2__.todoItemsArrayAndListeners)(arrayTodoItems)
     ;(0,_project__WEBPACK_IMPORTED_MODULE_3__.projectItemsArrayAndListeners)(arrayProjectItems)
-    // dateItemsArrayAndListeners(arrayDateItems);
+    ;(0,_date_js__WEBPACK_IMPORTED_MODULE_4__.dateItemsArrayAndListeners)(arrayDateItems);
 
 
 }
@@ -673,6 +713,8 @@ let saveAndLoad = () =>{
     // console.log(LOCAL_STORAGE_TODOS_KEY)
     localStorage.setItem(LOCAL_STORAGE_TODOS_KEY, JSON.stringify(todos));
     localStorage.setItem(LOCAL_STORAGE_PROJECTS_KEY, JSON.stringify(projects));
+    localStorage.setItem(LOCAL_STORAGE_PROJECTS_KEY, JSON.stringify(dates));
+
 
 
     // loading/ rendering
@@ -684,7 +726,7 @@ let deleteItem = (e) =>{
     let deleteBtn = e.target;
     let item = deleteBtn.parentElement.parentElement;
     let itemParent = item.parentElement;
-    // strange bug will delete items-container, in a certain sequence of events. hard to replicate
+// deleted item from DOM, not localstorage
     if(itemParent.firstChild.id === "items-container"){
         return;
     }
