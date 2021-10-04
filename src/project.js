@@ -14,23 +14,38 @@ let displayProjectEditPanel = (editBtn) => {
         return;
     }
 }
-// let newProjectPriority = (projectPriorityContainer) =>{
-//     let projectPriority = "";
-//     projectPriorityContainer.addEventListener("click", (e) =>  {
-//         if (e.target.tagName.toLowerCase() === "label"){
-//             if (e.target.classList.contains("priority-btn-low")){
-//                 projectPriority = "low";
-//             }
-//             else if (e.target.classList.contains("priority-btn-medium")){
-//                 projectPriority = "medium";
-//             }
-//             else {
-//                 projectPriority = "high";
-//             }
-//         }
-//     })
-//     return projectPriority;
-// }
+let newProjectPriority = () =>{
+    let priorityContainer = document.querySelector("#new-project-priority-container");
+    let priorityArr= Array.from(document.querySelectorAll(".project-priority-btn"))
+    priorityContainer.addEventListener("click", (e)=>{
+        
+        if (e.target.tagName.toLowerCase() === "label") {
+            //if target has not been clicked before...
+            if (!e.target.classList.contains("project-priority_clicked")){
+                e.target.classList.add("project-priority_clicked");
+                e.target.classList.add("project-priority-btn-"+e.target.textContent.toLowerCase()+"_clicked")
+                e.target.classList.remove("project-priority-btn-"+e.target.textContent.toLowerCase())
+
+            }
+            else {
+                e.target.classList.remove("project-priority_clicked");
+                e.target.classList.remove("project-priority-btn-"+e.target.textContent.toLowerCase()+"_clicked")
+                e.target.classList.add("project-priority-btn-"+e.target.textContent.toLowerCase())
+            }
+        }
+        
+        //removes previously clicked btns
+        priorityArr.forEach(btn =>{
+            if(btn.id !== e.target.id){
+                btn.classList.remove("project-priority_clicked");
+                btn.classList.remove("project-priority-btn-"+btn.textContent.toLowerCase()+"_clicked")
+                btn.classList.add("project-priority-btn-"+btn.textContent.toLowerCase())
+            }
+        });
+            
+       
+    })
+}
 let newProjectSubmition = (projectPriorityContainer,projects, newProjectSubmitBtn,newProjectTitle,newProjectDetails,newProjectDueDate) => {
     newProjectSubmitBtn.addEventListener("click", (e) => {
             
@@ -131,4 +146,4 @@ let updateArrayProjectItems = (arrayProjectItems) => {
     return arrayProjectItems;
 }
 
-export{displayProjectEditPanel, projectItemsArrayAndListeners, updateArrayProjectItems, loadProjects,newProjectSubmition}
+export{displayProjectEditPanel,newProjectPriority, projectItemsArrayAndListeners, updateArrayProjectItems, loadProjects,newProjectSubmition}
