@@ -20,12 +20,24 @@ let newDateSubmition = (dates, newDateSubmitBtn,newDateTitle,newDateDueDate) => 
         let dateTitle = newDateTitle.value;
         let date = newDateDueDate.value;
 
+        if (dateTitle === "" || date === ""){
+        // all fields must be filled
+            alert("Please fill out all fields.");
+            return;
+        }
         dates.push({_id: Date.now().toString(),category: "date",title: dateTitle,dueDate: date });
+        
+        // clearing the text areas and button clicks
+        document.querySelector("#new-date-title").value="";
+        document.querySelector("#new-date").value="";
+        
         saveAndLoad();
         autoCloseNewItemPanel();
 
     })
-    
+}
+let clearDatePanel = () =>{
+
 }
 let loadDates = (dates, itemsContainer)=>{
     let datesToRender = dates;
@@ -78,4 +90,4 @@ let dateItemsArrayAndListeners = (arrayDateItems) => {
 
     });
 }
-export{displayDateEditPanel, dateItemsArrayAndListeners, newDateSubmition, loadDates}
+export{displayDateEditPanel, dateItemsArrayAndListeners, newDateSubmition, loadDates, clearDatePanel}

@@ -37,8 +37,6 @@ let newTodoPriority = () =>{
     })
 }
 let newTodoSubmition = (todos, newTodoSubmitBtn,newTodoTitle,newTodoDetails,newTodoDueDate ) => {
-    // finding todo priority
-    // let todoPriority = newTodoPriority(todoPriorityContainer);
     newTodoSubmitBtn.addEventListener("click", (e) => {
             
         let todoTitle = newTodoTitle.value;
@@ -46,13 +44,31 @@ let newTodoSubmition = (todos, newTodoSubmitBtn,newTodoTitle,newTodoDetails,newT
         let todoDate = newTodoDueDate.value;
         let todoPriority="";
 
+
         let priorityArr= Array.from(document.querySelectorAll(".todo-priority-btn"));
         priorityArr.forEach(btn=>{
             if(btn.classList.contains("todo-priority_clicked")){
                 todoPriority=btn.textContent.toLowerCase();
             }
         })
+        if( todoTitle === "" || todoDetails === "" || todoDate === "" || todoPriority == ""){
+            // all fields must be filled to submit.
+            alert("Please fill out all fields.");
+            return;
+        }
+
         todos.push({_id: Date.now().toString(),category: "todo",title: todoTitle,details: todoDetails,dueDate: todoDate, priority: todoPriority});
+
+        // clearing the text areas and button clicks
+        document.querySelector("#new-todo-title").value="";
+        document.querySelector("#new-todo-details").value="";
+        document.querySelector("#new-todo-date").value="";
+
+        priorityArr.forEach(btn =>{
+            btn.classList.remove("todo-priority_clicked");
+            btn.classList.remove("todo-priority-btn-"+btn.textContent.toLowerCase()+"_clicked");
+            btn.classList.add("todo-priority-btn-"+btn.textContent.toLowerCase());
+        })
 
         saveAndLoad();
         autoCloseNewItemPanel();
@@ -122,6 +138,9 @@ let todoItemsArrayAndListeners = (arrayTodoItems) => {
 
     });
 }
+let clearTodoPanel = () =>{
+
+}
 let loadTodos = (todos,itemsContainer) => {
     let todosToRender = todos;
     let todoItemAdded = [];
@@ -150,4 +169,4 @@ let loadTodos = (todos,itemsContainer) => {
 
 }
 
-export{displayTodoEditPanel, loadTodos, todoItemsArrayAndListeners,newTodoSubmition, newTodoPriority}
+export{displayTodoEditPanel, loadTodos,clearTodoPanel, todoItemsArrayAndListeners,newTodoSubmition, newTodoPriority}

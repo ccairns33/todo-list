@@ -37,6 +37,9 @@ let newProjectPriority = () =>{
        
     })
 }
+let clearProjectPanel = () =>{
+
+}
 let newProjectSubmition = (projects, newProjectSubmitBtn,newProjectTitle,newProjectDetails,newProjectDueDate) => {
     newProjectSubmitBtn.addEventListener("click", (e) => {
             
@@ -51,7 +54,24 @@ let newProjectSubmition = (projects, newProjectSubmitBtn,newProjectTitle,newProj
                 projPriority=btn.textContent.toLowerCase();
             }
         })
+        if( projTitle === "" || projDetails === "" || projDate === "" || projPriority === ""){
+            // all fields must be filled to submit.
+            alert("Please fill out all fields.");
+            return;
+        }
         projects.push({_id: Date.now().toString(),category: "project",title: projTitle,details: projDetails,dueDate: projDate , priority: projPriority});
+        
+        // clearing the text areas and button clicks
+        document.querySelector("#new-project-title").value="";
+        document.querySelector("#new-project-details").value="";
+        document.querySelector("#new-project-date").value="";
+
+        priorityArr.forEach(btn =>{
+            btn.classList.remove("project-priority_clicked");
+            btn.classList.remove("project-priority-btn-"+btn.textContent.toLowerCase()+"_clicked");
+            btn.classList.add("project-priority-btn-"+btn.textContent.toLowerCase());
+        })
+        
         saveAndLoad();
         autoCloseNewItemPanel();
 
@@ -139,10 +159,6 @@ let loadProjects = (projects,itemsContainer) => {
     })
 
 }
-let updateArrayProjectItems = (arrayProjectItems) => {
-    arrayProjectItems = getDivChildrenByClass("items-container","project-item_page");
-    console.log("array-projects:" +arrayProjectItems);
-    return arrayProjectItems;
-}
 
-export{displayProjectEditPanel,newProjectPriority, projectItemsArrayAndListeners, updateArrayProjectItems, loadProjects,newProjectSubmition}
+
+export{displayProjectEditPanel,newProjectPriority, projectItemsArrayAndListeners, clearProjectPanel, loadProjects,newProjectSubmition}

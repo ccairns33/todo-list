@@ -1,6 +1,7 @@
 import {hideInactiveTabs} from "./websiteInit";
-import {newTodoPriority} from "./todo";
-import {newProjectPriority} from "./project";
+import {newTodoPriority, clearTodoPanel} from "./todo";
+import {clearDatePanel} from "./date";
+import {newProjectPriority, clearProjectPanel} from "./project";
 
 
 
@@ -12,6 +13,9 @@ let loadNewItemPanel = () =>{
     newTodoPriority();
     newProjectPriority();
 
+    clearTodoPanel();
+    clearProjectPanel();
+    clearDatePanel();
     
 }
 
