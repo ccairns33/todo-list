@@ -135,10 +135,18 @@ let projectItemsArrayAndListeners = (arrayProjectItems) => {
     });
 }
 
-let loadProjects = (projects,itemsContainer) => {
+let loadProjects = (projects,itemsContainer, clicked) => {
     let projectsToRender = projects;
+    let projectItemsAdded = []
+    let display = "";
+    if (clicked === "todo" || clicked === "date" || clicked === "note"){
+       display ="display-none";
+    }
+    else {
+        display = "";
+    }
     projectsToRender.forEach(({ _id, category, title, details, dueDate,priority }) => {
-        itemsContainer.innerHTML += `<div id="item-display_page" class="project-item_page d-flex" data-catagory=${category} data-priority= ${priority}>
+        projectItemsAdded = `<div id="item-display_page" class="project-item_page d-flex ${display}" data-catagory=${category} data-priority= ${priority}>
         <div class="project-checkmark"></div>
         <div class="project-title"> ${title}</div>
         <div class="project-detail">project details
@@ -156,8 +164,10 @@ let loadProjects = (projects,itemsContainer) => {
           <i class="far fa-trash-alt"></i>
         </div>
       </div>`
+       
+      itemsContainer.innerHTML += projectItemsAdded;
     })
-
+   
 }
 
 

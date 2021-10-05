@@ -141,11 +141,19 @@ let todoItemsArrayAndListeners = (arrayTodoItems) => {
 let clearTodoPanel = () =>{
 
 }
-let loadTodos = (todos,itemsContainer) => {
+let loadTodos = (todos,itemsContainer, clicked) => {
     let todosToRender = todos;
     let todoItemAdded = [];
+    let display = "";
+    if (clicked === "project" || clicked === "date" || clicked === "note"){
+        display ="display-none";
+    }
+    else {
+        display = "";
+    }
+
     todosToRender.forEach(({ _id, category, title, details, dueDate,priority }) => {
-        todoItemAdded =`<div id="item-display_page" class="todo-item_page d-flex" data-catagory=${category} data-priority=${priority} >
+        todoItemAdded =`<div id="item-display_page" class="todo-item_page d-flex ${display}" data-catagory=${category} data-priority=${priority} >
         <div class="todo-checkmark"></div>
         <div class="todo-title"> ${title}</div>
         <div class="todo-detail">item details
@@ -163,6 +171,7 @@ let loadTodos = (todos,itemsContainer) => {
           <i class="far fa-trash-alt"></i>
         </div>
       </div>`
+    
       itemsContainer.innerHTML += todoItemAdded;
 
     })

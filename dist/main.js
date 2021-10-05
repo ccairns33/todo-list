@@ -58,10 +58,19 @@ let newDateSubmition = (dates, newDateSubmitBtn,newDateTitle,newDateDueDate) => 
 let clearDatePanel = () =>{
 
 }
-let loadDates = (dates, itemsContainer)=>{
+let loadDates = (dates, itemsContainer, clicked)=>{
     let datesToRender = dates;
+    let datesAdded = [];
+    let display = "";
+    if (clicked === "todo" || clicked === "project" || clicked === "note"){
+        display = "display-none";
+    }
+    else {
+        display= "";
+    }
+    
     datesToRender.forEach(({ _id, category, title, dueDate }) => {
-        itemsContainer.innerHTML += `<div id="item-display_page" class="date-item_page d-flex " data-category=${category}>
+        datesAdded = `<div id="item-display_page" class="date-item_page d-flex ${display}" data-category=${category}>
         <div class="date-title_page"> ${title} </div>
         <div class="date-item-date">${dueDate} </div>
         <div class="date-edit date-icon" data-edit-date=${_id}>
@@ -71,6 +80,8 @@ let loadDates = (dates, itemsContainer)=>{
           <i class="far fa-trash-alt"></i>
         </div>
       </div>`
+      
+        itemsContainer.innerHTML +=datesAdded;
     });
 
 }
@@ -373,10 +384,18 @@ let projectItemsArrayAndListeners = (arrayProjectItems) => {
     });
 }
 
-let loadProjects = (projects,itemsContainer) => {
+let loadProjects = (projects,itemsContainer, clicked) => {
     let projectsToRender = projects;
+    let projectItemsAdded = []
+    let display = "";
+    if (clicked === "todo" || clicked === "date" || clicked === "note"){
+       display ="display-none";
+    }
+    else {
+        display = "";
+    }
     projectsToRender.forEach(({ _id, category, title, details, dueDate,priority }) => {
-        itemsContainer.innerHTML += `<div id="item-display_page" class="project-item_page d-flex" data-catagory=${category} data-priority= ${priority}>
+        projectItemsAdded = `<div id="item-display_page" class="project-item_page d-flex ${display}" data-catagory=${category} data-priority= ${priority}>
         <div class="project-checkmark"></div>
         <div class="project-title"> ${title}</div>
         <div class="project-detail">project details
@@ -394,8 +413,10 @@ let loadProjects = (projects,itemsContainer) => {
           <i class="far fa-trash-alt"></i>
         </div>
       </div>`
+       
+      itemsContainer.innerHTML += projectItemsAdded;
     })
-
+   
 }
 
 
@@ -562,11 +583,19 @@ let todoItemsArrayAndListeners = (arrayTodoItems) => {
 let clearTodoPanel = () =>{
 
 }
-let loadTodos = (todos,itemsContainer) => {
+let loadTodos = (todos,itemsContainer, clicked) => {
     let todosToRender = todos;
     let todoItemAdded = [];
+    let display = "";
+    if (clicked === "project" || clicked === "date" || clicked === "note"){
+        display ="display-none";
+    }
+    else {
+        display = "";
+    }
+
     todosToRender.forEach(({ _id, category, title, details, dueDate,priority }) => {
-        todoItemAdded =`<div id="item-display_page" class="todo-item_page d-flex" data-catagory=${category} data-priority=${priority} >
+        todoItemAdded =`<div id="item-display_page" class="todo-item_page d-flex ${display}" data-catagory=${category} data-priority=${priority} >
         <div class="todo-checkmark"></div>
         <div class="todo-title"> ${title}</div>
         <div class="todo-detail">item details
@@ -584,6 +613,7 @@ let loadTodos = (todos,itemsContainer) => {
           <i class="far fa-trash-alt"></i>
         </div>
       </div>`
+    
       itemsContainer.innerHTML += todoItemAdded;
 
     })
@@ -748,10 +778,43 @@ let autoCloseNewItemPanel = () => {
 let load = () => {
     // clearing old data
     clearChildElements(itemsContainer);
+    let clicked = "";
 
-    (0,_todo__WEBPACK_IMPORTED_MODULE_2__.loadTodos)(todos,itemsContainer);
-    (0,_project__WEBPACK_IMPORTED_MODULE_3__.loadProjects)(projects,itemsContainer);
-    (0,_date_js__WEBPACK_IMPORTED_MODULE_4__.loadDates)(dates, itemsContainer);
+    let tab= document.querySelector(".tab_clicked")
+    if (tab === null){
+        clicked = "none"
+        ;(0,_todo__WEBPACK_IMPORTED_MODULE_2__.loadTodos)(todos,itemsContainer, clicked);
+        (0,_project__WEBPACK_IMPORTED_MODULE_3__.loadProjects)(projects,itemsContainer, clicked);
+        (0,_date_js__WEBPACK_IMPORTED_MODULE_4__.loadDates)(dates, itemsContainer, clicked);
+    }
+    else if (tab.id === "todo_icon" ){
+        clicked = "todo";
+        (0,_todo__WEBPACK_IMPORTED_MODULE_2__.loadTodos)(todos,itemsContainer, clicked);
+        (0,_project__WEBPACK_IMPORTED_MODULE_3__.loadProjects)(projects,itemsContainer, clicked);
+        (0,_date_js__WEBPACK_IMPORTED_MODULE_4__.loadDates)(dates, itemsContainer, clicked);
+
+    }
+    else if (tab.id === "project_icon"){
+        clicked = "project";
+        (0,_project__WEBPACK_IMPORTED_MODULE_3__.loadProjects)(projects,itemsContainer, clicked);
+        (0,_todo__WEBPACK_IMPORTED_MODULE_2__.loadTodos)(todos,itemsContainer, clicked);
+        (0,_date_js__WEBPACK_IMPORTED_MODULE_4__.loadDates)(dates, itemsContainer, clicked);
+
+    }
+    else if (tab.id === "date_icon"){
+        clicked = "date";
+        (0,_todo__WEBPACK_IMPORTED_MODULE_2__.loadTodos)(todos,itemsContainer, clicked);
+        (0,_project__WEBPACK_IMPORTED_MODULE_3__.loadProjects)(projects,itemsContainer, clicked);
+        (0,_date_js__WEBPACK_IMPORTED_MODULE_4__.loadDates)(dates, itemsContainer, clicked);
+    }
+    else{
+        clicked = "note";
+        // loadTodos(todos,itemsContainer, clicked);
+        // loadProjects(projects,itemsContainer, clicked);
+        // loadDates(dates, itemsContainer, clicked);
+    }
+    
+    
 
     (0,_todo__WEBPACK_IMPORTED_MODULE_2__.todoItemsArrayAndListeners)(arrayTodoItems)
     ;(0,_project__WEBPACK_IMPORTED_MODULE_3__.projectItemsArrayAndListeners)(arrayProjectItems)

@@ -24,16 +24,16 @@
     <nav class="left-col content  ">
       <h2 class="title"> <span>To-Do <img class="starfish" src="starfish.png"></span> </h2>
       <div class="todo-list">
-        <h3 class="todo-list_tab"> <i class="fas fa-clipboard-list sidebar_icon pink"></i>To-Do List</h3>
+        <h3 class="todo-list_tab"> <i class="fas fa-clipboard-list sidebar_icon pink" id="todo_icon"></i>To-Do List</h3>
       </div>
       <div class="projects">
-        <h3 class="projects_tab"> <i class="fas fa-folder-open sidebar_icon pink"></i>Projects</h3>
+        <h3 class="projects_tab"> <i class="fas fa-folder-open sidebar_icon pink" id="project_icon"></i>Projects</h3>
       </div>
       <div class="dates">
-        <h3 class="dates_tab"> <i class="far fa-calendar-alt sidebar_icon pink"></i></i>Important Dates</h3>
+        <h3 class="dates_tab"> <i class="far fa-calendar-alt sidebar_icon pink" id="date_icon"></i></i>Important Dates</h3>
       </div>
       <div class="notes">
-        <h3 class="notes_tab"> <i class="fas fa-sticky-note sidebar_icon pink"></i>Notes</h3>
+        <h3 class="notes_tab"> <i class="fas fa-sticky-note sidebar_icon pink" id="note_icon"></i>Notes</h3>
       </div>
       <div class="new-todo_btn d-flex">
         +
@@ -130,7 +130,7 @@
 
               <div class="todo-panel panel-height" id="item-panel">
                 <textarea class="new-input-title new-input-base" placeholder="Title: Pay bills" id="new-todo-title" name="new-todo" maxlength="40" required></textarea>
-                <textarea class="new-input-details new-input-base " placeholder="Details: e.g internet, phone, rent." id="new-todo-details" name="new-todo " required></textarea>
+                <textarea class="new-input-details new-input-base " placeholder="Details: e.g internet, phone, rent." id="new-todo-details" name="new-todo" required></textarea>
 
                 <div class="new-item-date-due d-flex">
                   <div class="date-title">Due Date: </div>
@@ -156,7 +156,7 @@
               <div id="item-panel"class="project-panel d-flex display-none panel-height">
                 <div>
                   <textarea class="new-input-title new-input-base" placeholder="Title: Sew Dress" id="new-project-title" name="new-project" maxlength="40" required></textarea>
-                  <textarea class="new-input-details new-input-base " placeholder="Details: Prep fabric and find buttons." id="new-project-details" name="new-project" required></textarea>
+                  <textarea class="new-input-details new-input-base" placeholder="Details: Prep fabric and find buttons." id="new-project-details" name="new-project" required></textarea>
                 </div>
                 <div class="new-item-date-due d-flex">
                   <div class="date-title">Due Date: </div>

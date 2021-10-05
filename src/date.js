@@ -39,10 +39,19 @@ let newDateSubmition = (dates, newDateSubmitBtn,newDateTitle,newDateDueDate) => 
 let clearDatePanel = () =>{
 
 }
-let loadDates = (dates, itemsContainer)=>{
+let loadDates = (dates, itemsContainer, clicked)=>{
     let datesToRender = dates;
+    let datesAdded = [];
+    let display = "";
+    if (clicked === "todo" || clicked === "project" || clicked === "note"){
+        display = "display-none";
+    }
+    else {
+        display= "";
+    }
+    
     datesToRender.forEach(({ _id, category, title, dueDate }) => {
-        itemsContainer.innerHTML += `<div id="item-display_page" class="date-item_page d-flex " data-category=${category}>
+        datesAdded = `<div id="item-display_page" class="date-item_page d-flex ${display}" data-category=${category}>
         <div class="date-title_page"> ${title} </div>
         <div class="date-item-date">${dueDate} </div>
         <div class="date-edit date-icon" data-edit-date=${_id}>
@@ -52,6 +61,8 @@ let loadDates = (dates, itemsContainer)=>{
           <i class="far fa-trash-alt"></i>
         </div>
       </div>`
+      
+        itemsContainer.innerHTML +=datesAdded;
     });
 
 }

@@ -131,10 +131,43 @@ let autoCloseNewItemPanel = () => {
 let load = () => {
     // clearing old data
     clearChildElements(itemsContainer);
+    let clicked = "";
 
-    loadTodos(todos,itemsContainer);
-    loadProjects(projects,itemsContainer);
-    loadDates(dates, itemsContainer);
+    let tab= document.querySelector(".tab_clicked")
+    if (tab === null){
+        clicked = "none"
+        loadTodos(todos,itemsContainer, clicked);
+        loadProjects(projects,itemsContainer, clicked);
+        loadDates(dates, itemsContainer, clicked);
+    }
+    else if (tab.id === "todo_icon" ){
+        clicked = "todo";
+        loadTodos(todos,itemsContainer, clicked);
+        loadProjects(projects,itemsContainer, clicked);
+        loadDates(dates, itemsContainer, clicked);
+
+    }
+    else if (tab.id === "project_icon"){
+        clicked = "project";
+        loadProjects(projects,itemsContainer, clicked);
+        loadTodos(todos,itemsContainer, clicked);
+        loadDates(dates, itemsContainer, clicked);
+
+    }
+    else if (tab.id === "date_icon"){
+        clicked = "date";
+        loadTodos(todos,itemsContainer, clicked);
+        loadProjects(projects,itemsContainer, clicked);
+        loadDates(dates, itemsContainer, clicked);
+    }
+    else{
+        clicked = "note";
+        // loadTodos(todos,itemsContainer, clicked);
+        // loadProjects(projects,itemsContainer, clicked);
+        // loadDates(dates, itemsContainer, clicked);
+    }
+    
+    
 
     todoItemsArrayAndListeners(arrayTodoItems)
     projectItemsArrayAndListeners(arrayProjectItems)
