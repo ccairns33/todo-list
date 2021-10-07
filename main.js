@@ -97,25 +97,35 @@ let editDateItem = (editBtn, e, dates) =>{
 
     let dateEditSumbitBtn = document.querySelector(".date-edit-submit");
     let dateToEdit = null;
-    let dateItem = e.target.parentElement.parentNode;
-    let dateItemEditId = dateItem.dataset.editDate;
-    console.log(dateItemEditId);
-    let dateTitle = dateItem.querySelector(".date-title_page").textContent.split(' ').join('');
-    let dateDate = dateItem.querySelector(".date-item-date").textContent.split(' ').join('');
-    
-    console.log(dateDate);
 
+    let dateItem = e.target.parentElement.parentNode;
+    let dateTitleElement = dateItem.querySelector(".date-title_page");
+    let dateDateElement = dateItem.querySelector(".date-item-date")
+
+    let dateTitle = dateTitleElement.textContent.split('  ').join(' ');
+    let dateDate = dateDateElement.textContent.split(' ').join('');
+    
+    //setting date panel values
     editDateTitle_panel.value = dateTitle;
     editDateDate_panel.value = dateDate;
 
     
     dateEditSumbitBtn.addEventListener("click", (e) => {
-        dateToEdit = dates.find((date) => date._id === dateItem.dataset.editDate);
-        console.log(dateToEdit);
+        e.preventDefault();
+        //finding the corret date and changing the values on local storage
+        dateToEdit = dates.find((date) => date._id === editBtn.dataset.editDate);
+        dateToEdit.title = editDateTitle_panel.value;
+        dateToEdit.dueDate = editDateDate_panel.value;
+
+        dateEditAutoClose();
+        (0,_websiteInit__WEBPACK_IMPORTED_MODULE_0__.saveAndLoad)();
     });
 } 
 
-
+let dateEditAutoClose = () =>{
+    let dateEditPanel = document.querySelector(".date-item-edit");
+    dateEditPanel.classList.add("display-none");
+}
 let dateItemsArrayAndListeners = (arrayDateItems, dates) => {
     arrayDateItems = (0,_websiteInit__WEBPACK_IMPORTED_MODULE_0__.getDivChildrenByClass)("items-container","date-item_page");
     console.log(arrayDateItems);
