@@ -146,7 +146,7 @@ let loadProjects = (projects,itemsContainer, clicked) => {
         display = "";
     }
     projectsToRender.forEach(({ _id, category, title, details, dueDate,priority }) => {
-        projectItemsAdded = `<div id="item-display_page" class="project-item_page d-flex ${display}" data-catagory=${category} data-priority= ${priority}>
+        projectItemsAdded = `<div id="item-display_page" class="project-item_page d-flex ${display}" data-catagory=${category} data-priority= ${priority} data-item-id=${_id}>
         <div class="project-checkmark"></div>
         <div class="project-title"> ${title}</div>
         <div class="project-detail">project details

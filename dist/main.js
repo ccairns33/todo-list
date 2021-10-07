@@ -24,6 +24,8 @@ let displayDateEditPanel = (editBtn) => {
         let dateEditPanel = document.querySelector(".date-item-edit")
         if (dateEditPanel.classList.contains("display-none")){
             dateEditPanel.classList.remove("display-none");
+            let dateTitle = "";
+            let dateDay = "";
         }
         else{
             return;
@@ -68,9 +70,8 @@ let loadDates = (dates, itemsContainer, clicked)=>{
     else {
         display= "";
     }
-    
     datesToRender.forEach(({ _id, category, title, dueDate }) => {
-        datesAdded = `<div id="item-display_page" class="date-item_page d-flex ${display}" data-category=${category}>
+        datesAdded = `<div id="item-display_page" class="date-item_page d-flex ${display}" data-category=${category} data-item-id=${_id}>
         <div class="date-title_page"> ${title} </div>
         <div class="date-item-date">${dueDate} </div>
         <div class="date-edit date-icon" data-edit-date=${_id}>
@@ -85,9 +86,37 @@ let loadDates = (dates, itemsContainer, clicked)=>{
     });
 
 }
+let editDateItem = (editBtn, e, dates) =>{
+    let editDateTitle_panel = document.querySelector(".edit-date-title");
+    let editDateDate_panel = document.querySelector("#edit-date_date");
+
+    //reset values
+    editDateTitle_panel.value = "";
+    editDateDate_panel.value= "";
 
 
-let dateItemsArrayAndListeners = (arrayDateItems) => {
+    let dateEditSumbitBtn = document.querySelector(".date-edit-submit");
+    let dateToEdit = null;
+    let dateItem = e.target.parentElement.parentNode;
+    let dateItemEditId = dateItem.dataset.editDate;
+    console.log(dateItemEditId);
+    let dateTitle = dateItem.querySelector(".date-title_page").textContent.split(' ').join('');
+    let dateDate = dateItem.querySelector(".date-item-date").textContent.split(' ').join('');
+    
+    console.log(dateDate);
+
+    editDateTitle_panel.value = dateTitle;
+    editDateDate_panel.value = dateDate;
+
+    
+    dateEditSumbitBtn.addEventListener("click", (e) => {
+        dateToEdit = dates.find((date) => date._id === dateItem.dataset.editDate);
+        console.log(dateToEdit);
+    });
+} 
+
+
+let dateItemsArrayAndListeners = (arrayDateItems, dates) => {
     arrayDateItems = (0,_websiteInit__WEBPACK_IMPORTED_MODULE_0__.getDivChildrenByClass)("items-container","date-item_page");
     console.log(arrayDateItems);
     arrayDateItems.forEach(element => {
@@ -101,6 +130,7 @@ let dateItemsArrayAndListeners = (arrayDateItems) => {
             else{
                 editBtn.classList.add("date-edit_clicked");
                 displayDateEditPanel(editBtn);
+                editDateItem(editBtn, e, dates);
             }
         })
 
@@ -189,11 +219,6 @@ let loadNewItemPanel = () =>{
     //adding priority event listener
     (0,_todo__WEBPACK_IMPORTED_MODULE_1__.newTodoPriority)();
     (0,_project__WEBPACK_IMPORTED_MODULE_3__.newProjectPriority)();
-
-    (0,_todo__WEBPACK_IMPORTED_MODULE_1__.clearTodoPanel)();
-    (0,_project__WEBPACK_IMPORTED_MODULE_3__.clearProjectPanel)();
-    (0,_date__WEBPACK_IMPORTED_MODULE_2__.clearDatePanel)();
-    
 }
 
 let closeNewItemPanel = () =>{
@@ -395,7 +420,7 @@ let loadProjects = (projects,itemsContainer, clicked) => {
         display = "";
     }
     projectsToRender.forEach(({ _id, category, title, details, dueDate,priority }) => {
-        projectItemsAdded = `<div id="item-display_page" class="project-item_page d-flex ${display}" data-catagory=${category} data-priority= ${priority}>
+        projectItemsAdded = `<div id="item-display_page" class="project-item_page d-flex ${display}" data-catagory=${category} data-priority= ${priority} data-item-id=${_id}>
         <div class="project-checkmark"></div>
         <div class="project-title"> ${title}</div>
         <div class="project-detail">project details
@@ -595,7 +620,7 @@ let loadTodos = (todos,itemsContainer, clicked) => {
     }
 
     todosToRender.forEach(({ _id, category, title, details, dueDate,priority }) => {
-        todoItemAdded =`<div id="item-display_page" class="todo-item_page d-flex ${display}" data-catagory=${category} data-priority=${priority} >
+        todoItemAdded =`<div id="item-display_page" class="todo-item_page d-flex ${display}" data-catagory=${category} data-priority=${priority} data-item-id=${_id} >
         <div class="todo-checkmark"></div>
         <div class="todo-title"> ${title}</div>
         <div class="todo-detail">item details
@@ -816,9 +841,9 @@ let load = () => {
     
     
 
-    (0,_todo__WEBPACK_IMPORTED_MODULE_2__.todoItemsArrayAndListeners)(arrayTodoItems)
-    ;(0,_project__WEBPACK_IMPORTED_MODULE_3__.projectItemsArrayAndListeners)(arrayProjectItems)
-    ;(0,_date_js__WEBPACK_IMPORTED_MODULE_4__.dateItemsArrayAndListeners)(arrayDateItems);
+    (0,_todo__WEBPACK_IMPORTED_MODULE_2__.todoItemsArrayAndListeners)(arrayTodoItems, todos)
+    ;(0,_project__WEBPACK_IMPORTED_MODULE_3__.projectItemsArrayAndListeners)(arrayProjectItems, projects)
+    ;(0,_date_js__WEBPACK_IMPORTED_MODULE_4__.dateItemsArrayAndListeners)(arrayDateItems, dates);
 
 
 }

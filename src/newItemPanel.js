@@ -1,7 +1,7 @@
 import {hideInactiveTabs} from "./websiteInit";
-import {newTodoPriority, clearTodoPanel} from "./todo";
+import {newTodoPriority} from "./todo";
 import {clearDatePanel} from "./date";
-import {newProjectPriority, clearProjectPanel} from "./project";
+import {newProjectPriority} from "./project";
 
 
 
@@ -12,11 +12,6 @@ let loadNewItemPanel = () =>{
     //adding priority event listener
     newTodoPriority();
     newProjectPriority();
-
-    clearTodoPanel();
-    clearProjectPanel();
-    clearDatePanel();
-    
 }
 
 let closeNewItemPanel = () =>{

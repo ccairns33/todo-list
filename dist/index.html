@@ -214,11 +214,11 @@
           </div>
           <form class="item-edit-content todo-edit-content"> 
             <div class="item-edit-content_container todo-edit-content_container d-flex">
-              <textarea class="edit-input edit-input_small" maxlength="40" required="" data-index="0" data-project="todo">Example</textarea>
-              <textarea class="edit-input edit-input_big" placeholder="Details:">Here is some content for the tooltip.</textarea>
+              <textarea class="edit-input edit-input_small edit-todo-title" maxlength="40" required="" data-index="0" data-project="todo" placeholder="Title:"></textarea>
+              <textarea class="edit-input edit-input_big edit-todo-details" placeholder="Details:"></textarea>
               <div class="new-item-date-due d-flex">
                 <div class="date-title">Due Date: </div>
-                <input type="date" class="new-item-date-input" id="new-item-date" name="new-todo" required="">
+                <input type="date" class="edit-date-input" id="edit-date_todo" name="new-todo" required="">
               </div>
               <div class="wrapper-priority-submit d-flex"> 
                 <div class="new-item-priority d-flex">
@@ -233,7 +233,7 @@
                     <input type="radio" id="edit-todo-high" name="new-item-priority" value="high" required="">
                     <label id="edit-todo-high" for="edit-todo-high" class="te-priority-btn te-priority-btn-high">high</label>
                 </div>
-                <input type="submit" class="create-new-todo-submit" id="todo-submit" value="Confirm Edit">
+                <input type="submit" class="item-edit-submit todo-edit-submit" id="todo-submit" value="Confirm Edit">
               </div> 
             </div>
           </form>
@@ -247,11 +247,11 @@
           </div>
           <form class="item-edit-content project-edit-content"> 
             <div class="item-edit-content_container project-edit-content_container d-flex">
-              <textarea class="edit-input edit-input_small" maxlength="40" required="" data-index="0" data-project="todo">Example</textarea>
-              <textarea class="edit-input edit-input_big" placeholder="Details:">Here is some content for the tooltip.</textarea>
+              <textarea class="edit-input edit-input_small edit-project-title" maxlength="40" required="" data-index="0" data-project="todo" placeholder="Title:"></textarea>
+              <textarea class="edit-input edit-input_big edit-project-details" placeholder="Details:"></textarea>
               <div class="new-item-date-due d-flex">
                 <div class="date-title">Due Date: </div>
-                <input type="date" class="new-item-date-input" id="new-item-date" name="new-todo" required="">
+                <input type="date" class="edit-date-input " id="edit-date_project" name="new-todo" required="">
               </div>
               <div class="wrapper-priority-submit d-flex"> 
                 <div class="new-item-priority d-flex">
@@ -266,7 +266,7 @@
                     <input type="radio" id="edit-project-high" name="new-item-priority" value="high" required="">
                     <label id="edit-project-high" for="edit-project-high" class="pe-priority-btn pe-priority-btn-high">high</label>
                 </div>
-                <input type="submit" class="create-new-todo-submit" id="todo-submit" value="Confirm Edit">
+                <input type="submit" class="item-edit-submit project-edit-submit" id="todo-submit" value="Confirm Edit">
               </div> 
             </div>
           </form>
@@ -280,14 +280,13 @@
           </div>
           <form class="item-edit-content date-edit-content"> 
             <div class="item-edit-content_container date-edit-content_container d-flex">
-              <textarea class="edit-input edit-input_small" maxlength="40" required="" data-index="0" data-project="todo">Example</textarea>
-              <textarea class="edit-input edit-input_big" placeholder="Details:">Here is some content for the tooltip.</textarea>
+              <textarea class="edit-input edit-input_small edit-date-title" maxlength="40" required="" data-index="0" data-project="todo" placeholder="Title:"></textarea>
               <div class="new-item-date-due d-flex">
                 <div class="date-title">Due Date: </div>
-                <input type="date" class="new-item-date-input" id="new-item-date" name="new-todo" required="">
+                <input type="date" class="edit-date-input" id="edit-date_date" name="new-todo" required="">
               </div>
               <div class="wrapper-priority-submit d-flex right-justify"> 
-                <input type="submit" class="create-new-todo-submit" id="todo-submit" value="Confirm Edit">
+                <input type="submit" class="item-edit-submit date-edit-submit" id="date-edit-submit" value="Confirm Edit">
               </div> 
             </div>
           </form>

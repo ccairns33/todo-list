@@ -169,9 +169,9 @@ let load = () => {
     
     
 
-    todoItemsArrayAndListeners(arrayTodoItems)
-    projectItemsArrayAndListeners(arrayProjectItems)
-    dateItemsArrayAndListeners(arrayDateItems);
+    todoItemsArrayAndListeners(arrayTodoItems, todos)
+    projectItemsArrayAndListeners(arrayProjectItems, projects)
+    dateItemsArrayAndListeners(arrayDateItems, dates);
 
 
 }

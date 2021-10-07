@@ -403,7 +403,7 @@ span.todo-detail_content:after,span.project-detail_content:after {
 .priority-title{
     margin-right:1.7rem;
 }
-.new-item-date-input{
+.new-item-date-input, .edit-date-input{
     padding: .3rem .2rem;
     border: 1px solid #3ba395;
     border-radius: 5px;
@@ -501,7 +501,7 @@ span.todo-detail_content:after,span.project-detail_content:after {
 .height2{
     height:2rem;
 }
-.create-new-todo-submit{
+.create-new-todo-submit, .item-edit-submit{
     text-align: center;
     align-self: center;
     padding: .5rem .5rem;
@@ -515,7 +515,7 @@ span.todo-detail_content:after,span.project-detail_content:after {
     cursor: pointer;
     transition: all .3s;
 }
-.create-new-todo-submit:hover{
+.create-new-todo-submit:hover, .item-edit-submit:hover{
     background-color:#3ba395;
     color:white;
 }

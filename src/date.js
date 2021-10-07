@@ -5,6 +5,8 @@ let displayDateEditPanel = (editBtn) => {
         let dateEditPanel = document.querySelector(".date-item-edit")
         if (dateEditPanel.classList.contains("display-none")){
             dateEditPanel.classList.remove("display-none");
+            let dateTitle = "";
+            let dateDay = "";
         }
         else{
             return;
@@ -49,9 +51,8 @@ let loadDates = (dates, itemsContainer, clicked)=>{
     else {
         display= "";
     }
-    
     datesToRender.forEach(({ _id, category, title, dueDate }) => {
-        datesAdded = `<div id="item-display_page" class="date-item_page d-flex ${display}" data-category=${category}>
+        datesAdded = `<div id="item-display_page" class="date-item_page d-flex ${display}" data-category=${category} data-item-id=${_id}>
         <div class="date-title_page"> ${title} </div>
         <div class="date-item-date">${dueDate} </div>
         <div class="date-edit date-icon" data-edit-date=${_id}>
@@ -66,9 +67,37 @@ let loadDates = (dates, itemsContainer, clicked)=>{
     });
 
 }
+let editDateItem = (editBtn, e, dates) =>{
+    let editDateTitle_panel = document.querySelector(".edit-date-title");
+    let editDateDate_panel = document.querySelector("#edit-date_date");
+
+    //reset values
+    editDateTitle_panel.value = "";
+    editDateDate_panel.value= "";
 
 
-let dateItemsArrayAndListeners = (arrayDateItems) => {
+    let dateEditSumbitBtn = document.querySelector(".date-edit-submit");
+    let dateToEdit = null;
+    let dateItem = e.target.parentElement.parentNode;
+    let dateItemEditId = dateItem.dataset.editDate;
+    console.log(dateItemEditId);
+    let dateTitle = dateItem.querySelector(".date-title_page").textContent.split(' ').join('');
+    let dateDate = dateItem.querySelector(".date-item-date").textContent.split(' ').join('');
+    
+    console.log(dateDate);
+
+    editDateTitle_panel.value = dateTitle;
+    editDateDate_panel.value = dateDate;
+
+    
+    dateEditSumbitBtn.addEventListener("click", (e) => {
+        dateToEdit = dates.find((date) => date._id === dateItem.dataset.editDate);
+        console.log(dateToEdit);
+    });
+} 
+
+
+let dateItemsArrayAndListeners = (arrayDateItems, dates) => {
     arrayDateItems = getDivChildrenByClass("items-container","date-item_page");
     console.log(arrayDateItems);
     arrayDateItems.forEach(element => {
@@ -82,6 +111,7 @@ let dateItemsArrayAndListeners = (arrayDateItems) => {
             else{
                 editBtn.classList.add("date-edit_clicked");
                 displayDateEditPanel(editBtn);
+                editDateItem(editBtn, e, dates);
             }
         })
 
