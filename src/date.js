@@ -83,7 +83,7 @@ let editDateItem = (editBtn, e, dates) =>{
     let dateTitleElement = dateItem.querySelector(".date-title_page");
     let dateDateElement = dateItem.querySelector(".date-item-date")
 
-    let dateTitle = dateTitleElement.textContent.split('  ').join(' ');
+    let dateTitle = dateTitleElement.textContent.split('  ').join('');
     let dateDate = dateDateElement.textContent.split(' ').join('');
     
     //setting date panel values

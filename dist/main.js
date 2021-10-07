@@ -102,7 +102,7 @@ let editDateItem = (editBtn, e, dates) =>{
     let dateTitleElement = dateItem.querySelector(".date-title_page");
     let dateDateElement = dateItem.querySelector(".date-item-date")
 
-    let dateTitle = dateTitleElement.textContent.split('  ').join(' ');
+    let dateTitle = dateTitleElement.textContent.split('  ').join('');
     let dateDate = dateDateElement.textContent.split(' ').join('');
     
     //setting date panel values
@@ -329,6 +329,29 @@ let newProjectPriority = () =>{
        
     })
 }
+let editProjectPriority = () =>{
+    let priorityContainer = document.querySelector(".edit-project-priority");
+    let priorityArr= Array.from(document.querySelectorAll(".pe-priority-btn"))
+    priorityContainer.addEventListener("click", (e)=>{
+        
+        //removes previously clicked btns and adds class to clicked btn
+        priorityArr.forEach(btn =>{
+            if(btn.id !== e.target.id){
+                btn.classList.remove("pe-priority_clicked");
+                btn.classList.remove("pe-priority-btn-"+btn.textContent.toLowerCase()+"_clicked")
+                btn.classList.add("pe-priority-btn-"+btn.textContent.toLowerCase())
+            }
+            else {
+                btn.classList.add("pe-priority_clicked");
+                btn.classList.add("pe-priority-btn-"+btn.textContent.toLowerCase()+"_clicked")
+                btn.classList.remove("pe-priority-btn-"+btn.textContent.toLowerCase())
+
+            }
+        });
+            
+       
+    })
+}
 let clearProjectPanel = () =>{
 
 }
@@ -372,7 +395,7 @@ let newProjectSubmition = (projects, newProjectSubmitBtn,newProjectTitle,newProj
 }
 
     // event listeners for the project items in project sidebar
-let projectItemsArrayAndListeners = (arrayProjectItems) => {
+let projectItemsArrayAndListeners = (arrayProjectItems, projects) => {
     arrayProjectItems = (0,_websiteInit__WEBPACK_IMPORTED_MODULE_0__.getDivChildrenByClass)("items-container","project-item_page");
     arrayProjectItems.forEach(element => {
         let checkmark = element.querySelector(".project-checkmark");
@@ -407,6 +430,7 @@ let projectItemsArrayAndListeners = (arrayProjectItems) => {
             else{
                 editBtn.classList.add("project-edit_clicked");
                 displayProjectEditPanel(editBtn);
+                editProjectItem(editBtn, e, projects)
             }
         })
 
@@ -421,7 +445,8 @@ let projectItemsArrayAndListeners = (arrayProjectItems) => {
         })
 
         // deleting the todo items on click
-        deleteBtn.addEventListener("click", _websiteInit__WEBPACK_IMPORTED_MODULE_0__.deleteItem , (e) => {
+        deleteBtn.addEventListener("click", (e) => {
+            deleteProjectItem(deleteBtn, e, projects)
         })
 
     });
@@ -460,6 +485,82 @@ let loadProjects = (projects,itemsContainer, clicked) => {
       itemsContainer.innerHTML += projectItemsAdded;
     })
    
+}
+let editProjectItem = (editBtn, e, projects) =>{
+    let editProjectTitle_panel = document.querySelector(".edit-project-title");
+    let editProjectDetails_panel = document.querySelector(".edit-project-details");
+    let editProjectPriority_panel = document.querySelector(".edit-project-priority");
+    let editProjectDate_panel = document.querySelector("#edit-date_project");
+
+    editProjectPriority_panel.addEventListener("click", (e) =>{
+        editProjectPriority();
+    })
+    let priorityArr= Array.from(document.querySelectorAll(".pe-priority-btn"));
+    
+    //reset values
+    editProjectTitle_panel.value = "";
+    editProjectDetails_panel.value= "";
+    editProjectDate_panel.value="";
+    priorityArr.forEach(btn =>{
+        btn.classList.remove("pe-priority_clicked");
+        btn.classList.remove("pe-priority-btn-"+btn.textContent.toLowerCase()+"_clicked");
+        btn.classList.add("pe-priority-btn-"+btn.textContent.toLowerCase());
+    })
+
+    let projectEditSumbitBtn = document.querySelector(".project-edit-submit");
+    let projectToEdit = null;
+
+    let projectItem = e.target.parentElement.parentElement;
+    let projectPriority = projectItem.dataset.priority;
+    let projectTitleElement = projectItem.querySelector(".project-title");
+    let projectDetailsElement = projectItem.querySelector(".project-detail");
+    let projectDateElement = projectItem.querySelector(".project-date")
+
+    let projectTitle = projectTitleElement.textContent.split('  ').join('');
+    let projectDetail = projectDetailsElement.textContent.split("project details").join("").split("\n").join("").split("  ").join("");
+    let projectDate = projectDateElement.textContent.split(' ').join('');
+    
+    //setting project edit starting panel values
+    editProjectTitle_panel.value = projectTitle;
+    editProjectDetails_panel.value = projectDetail;
+    editProjectDate_panel.value=projectDate;
+    priorityArr.forEach(btn =>{
+        if (btn.textContent.toLowerCase() == projectPriority){
+            btn.classList.add("pe-priority_clicked");
+            btn.classList.add("pe-priority-btn-"+btn.textContent.toLowerCase()+"_clicked")
+            btn.classList.remove("pe-priority-btn-"+btn.textContent.toLowerCase())
+        }
+    })
+   
+    projectEditSumbitBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+        //finding the corret date and changing the values on local storage
+        projectToEdit = projects.find((project) => project._id === editBtn.dataset.editProject);
+        projectToEdit.title = editProjectTitle_panel.value;
+        projectToEdit.details = editProjectDetails_panel.value;
+        projectToEdit.dueDate = editProjectDate_panel.value;
+        priorityArr= Array.from(document.querySelectorAll(".pe-priority-btn"));
+        priorityArr.forEach(btn =>{
+            if (btn.classList.contains("pe-priority_clicked")){
+                projectToEdit.priority = btn.textContent.toLowerCase();
+
+            }
+        })
+
+
+        projectEditAutoClose();
+        (0,_websiteInit__WEBPACK_IMPORTED_MODULE_0__.saveAndLoad)();
+    });
+}
+let deleteProjectItem = (deleteBtn, e, projects) =>{
+    let projectToDeleteIndex = projects.findIndex((project) => project._id === deleteBtn.dataset.deleteProject);
+    projects.splice(projectToDeleteIndex, 1);
+
+    (0,_websiteInit__WEBPACK_IMPORTED_MODULE_0__.saveAndLoad)();
+}
+let projectEditAutoClose = () =>{
+    let projectEditPanel = document.querySelector(".project-item-edit");
+    projectEditPanel.classList.add("display-none");
 }
 
 
