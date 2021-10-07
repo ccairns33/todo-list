@@ -120,7 +120,13 @@ let editDateItem = (editBtn, e, dates) =>{
         dateEditAutoClose();
         (0,_websiteInit__WEBPACK_IMPORTED_MODULE_0__.saveAndLoad)();
     });
-} 
+}
+let deleteDateItem = (deleteBtn, e, dates) =>{
+    let dateToDeleteIndex = dates.findIndex((date) => date._id === deleteBtn.dataset.deleteDate);
+    dates.splice(dateToDeleteIndex, 1);
+
+    (0,_websiteInit__WEBPACK_IMPORTED_MODULE_0__.saveAndLoad)();
+}
 
 let dateEditAutoClose = () =>{
     let dateEditPanel = document.querySelector(".date-item-edit");
@@ -155,7 +161,9 @@ let dateItemsArrayAndListeners = (arrayDateItems, dates) => {
         })
 
         // deleting the item on clicking on the trash bin
-        deleteBtn.addEventListener("click", _websiteInit__WEBPACK_IMPORTED_MODULE_0__.deleteItem , (e) => {
+        deleteBtn.addEventListener("click", (e) => {
+            deleteDateItem(deleteBtn, e, dates);
+
         })
 
     });
