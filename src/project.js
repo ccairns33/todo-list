@@ -1,4 +1,4 @@
-import {getDivChildrenByClass, deleteItem, saveAndLoad, autoCloseNewItemPanel} from "./websiteInit";
+import {getDivChildrenByClass, saveAndLoad, autoCloseNewItemPanel} from "./websiteInit";
 
 let displayProjectEditPanel = (editBtn) => {
     if (editBtn.classList.contains("project-edit_clicked")){

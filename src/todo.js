@@ -1,4 +1,4 @@
-import {getDivChildrenByClass, deleteItem, saveAndLoad, autoCloseNewItemPanel} from "./websiteInit";
+import {getDivChildrenByClass, saveAndLoad, autoCloseNewItemPanel} from "./websiteInit";
 
 let displayTodoEditPanel = (editBtn) => {
     if (editBtn.classList.contains("todo-edit_clicked")){
@@ -142,9 +142,6 @@ let todoItemsArrayAndListeners = (arrayTodoItems, todos) => {
 
     });
 }
-let clearTodoPanel = () =>{
-
-}
 let loadTodos = (todos,itemsContainer, clicked) => {
     let todosToRender = todos;
     let todoItemAdded = [];
@@ -281,4 +278,4 @@ let todoEditAutoClose = () =>{
     todoEditPanel.classList.add("display-none");
 }
 
-export{displayTodoEditPanel, loadTodos,clearTodoPanel, todoItemsArrayAndListeners,newTodoSubmition, newTodoPriority}
+export{displayTodoEditPanel, loadTodos, todoItemsArrayAndListeners,newTodoSubmition, newTodoPriority}

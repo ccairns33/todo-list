@@ -8,7 +8,6 @@ import {dateItemsArrayAndListeners, newDateSubmition, loadDates} from "./date.js
 const itemsContainer = document.querySelector('[data-container]');
 
 // Local storage keys
-const LOCAL_STORAGE_CATEGORIES_KEY = 'LOCAL_STORAGE_CATEGORIES_KEY';
 const LOCAL_STORAGE_TODOS_KEY = 'LOCAL_STORAGE_TODOS_KEY';
 const LOCAL_STORAGE_PROJECTS_KEY = 'LOCAL_STORAGE_PROJECTS_KEY';
 const LOCAL_STORAGE_DATES_KEY = 'LOCAL_STORAGE_DATES_KEY';
@@ -17,8 +16,6 @@ const LOCAL_STORAGE_NOTES_KEY = 'LOCAL_STORAGE_NOTES_KEY';
 
 const LOCAL_STORAGE_SELECTED_CATEGORY_ID_KEY = 'LOCAL_STORAGE_SELECTED_CATEGORY_ID_KEY';
 
-let selectedCategoryId = localStorage.getItem(LOCAL_STORAGE_SELECTED_CATEGORY_ID_KEY);
-let categories = JSON.parse(localStorage.getItem(LOCAL_STORAGE_CATEGORIES_KEY)) || [];
 let todos = JSON.parse(localStorage.getItem(LOCAL_STORAGE_TODOS_KEY)) || [];
 let projects = JSON.parse(localStorage.getItem(LOCAL_STORAGE_PROJECTS_KEY)) || [];
 let dates = JSON.parse(localStorage.getItem(LOCAL_STORAGE_DATES_KEY)) || [];
@@ -29,14 +26,12 @@ let newTodoSubmitBtn = document.querySelector(".create-new-todo-submit");
 let newTodoTitle = document.querySelector("#new-todo-title");
 let newTodoDetails = document.querySelector("#new-todo-details");
 let newTodoDueDate = document.querySelector("#new-todo-date");
-let todoPriorityContainer = document.querySelector("#new-todo-priority-container")
 
 // project selectors for new project
 let newProjectSubmitBtn = document.querySelector(".create-new-project-submit");
 let newProjectTitle = document.querySelector("#new-project-title");
 let newProjectDetails = document.querySelector("#new-project-details");
 let newProjectDueDate = document.querySelector("#new-project-date");
-let projectPriorityContainer = document.querySelector("#new-project-priority-container")
 
 // date selectors for new date
 let newDateSubmitBtn = document.querySelector(".create-new-date-submit");
@@ -161,6 +156,7 @@ let load = () => {
         loadDates(dates, itemsContainer, clicked);
     }
     else{
+        // can do note at a later time! very redundant work at this point.
         clicked = "note";
         // loadTodos(todos,itemsContainer, clicked);
         // loadProjects(projects,itemsContainer, clicked);
@@ -187,19 +183,6 @@ let saveAndLoad = () =>{
     // loading/ rendering
     load();
     
-}
-
-let deleteItem = (e) =>{
-    let deleteBtn = e.target;
-    let item = deleteBtn.parentElement.parentElement;
-    let itemParent = item.parentElement;
-// deleted item from DOM, not localstorage
-    if(itemParent.firstChild.id === "items-container"){
-        return;
-    }
-    else {
-        itemParent.removeChild(item);
-    }
 }
 let getDivChildrenByClass = (containerClass, elementsClass) =>{
     let div = document.querySelector("."+containerClass),
@@ -258,4 +241,4 @@ let hideInactiveTabs = (activePanel, container, children, clickedTab) =>{
     }
 }
 
-export {initEventListeners, getDivChildren, hideInactiveTabs, getDivChildrenByClass, deleteItem, saveAndLoad, autoCloseNewItemPanel};
+export {initEventListeners, getDivChildren, hideInactiveTabs, getDivChildrenByClass, saveAndLoad, autoCloseNewItemPanel};

@@ -1,12 +1,11 @@
-import {getDivChildrenByClass, deleteItem, saveAndLoad, autoCloseNewItemPanel} from "./websiteInit";
+import {getDivChildrenByClass, saveAndLoad, autoCloseNewItemPanel} from "./websiteInit";
 
 let displayDateEditPanel = (editBtn) => {
     if (editBtn.classList.contains("date-edit_clicked")){
         let dateEditPanel = document.querySelector(".date-item-edit")
         if (dateEditPanel.classList.contains("display-none")){
             dateEditPanel.classList.remove("display-none");
-            let dateTitle = "";
-            let dateDay = "";
+           
         }
         else{
             return;
@@ -37,9 +36,6 @@ let newDateSubmition = (dates, newDateSubmitBtn,newDateTitle,newDateDueDate) => 
         autoCloseNewItemPanel();
 
     })
-}
-let clearDatePanel = () =>{
-
 }
 let loadDates = (dates, itemsContainer, clicked)=>{
     let datesToRender = dates;
@@ -149,4 +145,4 @@ let dateItemsArrayAndListeners = (arrayDateItems, dates) => {
 
     });
 }
-export{displayDateEditPanel, dateItemsArrayAndListeners, newDateSubmition, loadDates, clearDatePanel}
+export{displayDateEditPanel, dateItemsArrayAndListeners, newDateSubmition, loadDates}

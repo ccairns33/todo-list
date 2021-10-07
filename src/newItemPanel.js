@@ -1,6 +1,5 @@
 import {hideInactiveTabs} from "./websiteInit";
 import {newTodoPriority} from "./todo";
-import {clearDatePanel} from "./date";
 import {newProjectPriority} from "./project";
 
 
