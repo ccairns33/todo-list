@@ -18,12 +18,26 @@
 
   <p align="center">
  Todo List with todos, projects and dates that each a title, description, date and priority (excluding the dates section). Built using Javascript, Webpack, and utilizes localStorage.
- Capabilities include: 
-    1. View each category (todo, projects, imporant dates)
-    2. View an item's details and edit them.
-    3. Delete an item.
-    4. Create a new item.
-    5. Inputs saved to localStorage
+ </br>
+ <ul>Capabilities include: </ul>
+    <li>   
+      1. View each category (todo, projects, imporant dates)
+    </li>
+    <li>
+      2. View an item's details and edit them.
+    </li>
+    <li>
+      3. Delete an item.
+    </li>
+    <li>
+      4. Create a new item.
+    </li>
+    <li>
+      5. Inputs saved to localStorage
+    </li>
+    
+    
+    
  <br />
     <a href="https://github.com/ccairns33"><strong>Explore the docs »</strong></a>
     <a href="https://ccairns33.github.io/todo-list/"><strong>Live Demo! »</strong></a>
