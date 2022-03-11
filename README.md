@@ -26,7 +26,7 @@
  <br />
   </p>
 </div>
-<ul>Capabilities include: </ul>
+<ul>Capabilities include: 
     <li>   
       View each category (todo, projects, imporant dates)
     </li>
@@ -42,6 +42,7 @@
     <li>
       Inputs saved to localStorage
     </li>
+  </ul>
     <br />
     <br />
     <a href="https://github.com/ccairns33"><strong>Explore the docs »</strong></a>
