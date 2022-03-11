@@ -26,7 +26,7 @@
  <br />
   </p>
 </div>
-<ul align="right">Capabilities include: </ul>
+<ul>Capabilities include: </ul>
     <li>   
       View each category (todo, projects, imporant dates)
     </li>
