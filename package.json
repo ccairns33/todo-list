@@ -11,7 +11,13 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "webpack": "^5.50.0",
+    "@babel/core": "^7.15.8",
+    "@babel/preset-env": "^7.15.8",
+    "babel-loader": "^8.2.2",
+    "webpack": "^5.58.1",
     "webpack-cli": "^4.7.2"
+  },
+  "dependencies": {
+    "eslint": "^7.32.0"
   }
 }
