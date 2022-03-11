@@ -18,7 +18,7 @@
 
   <p align="center">
  Todo List with todos, projects and dates that each a title, description, date and priority (excluding the dates section). Built using Javascript, Webpack, and utilizes localStorage.
- </br>
+ <br />
  <ul>Capabilities include: </ul>
     <li>   
       1. View each category (todo, projects, imporant dates)
