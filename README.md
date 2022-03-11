@@ -25,7 +25,7 @@
 </div>
 <ul>Capabilities include: 
     <li>   
-      View each category (todo, projects, imporant dates)
+      View each category (todo, projects, important dates)
     </li>
     <li>
       View an item's details and edit them.
