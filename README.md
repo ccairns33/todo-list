@@ -28,20 +28,22 @@
 </div>
 <ul align="right">Capabilities include: </ul>
     <li>   
-      1. View each category (todo, projects, imporant dates)
+      View each category (todo, projects, imporant dates)
     </li>
     <li>
-      2. View an item's details and edit them.
+      View an item's details and edit them.
     </li>
     <li>
-      3. Delete an item.
+      Delete an item.
     </li>
     <li>
-      4. Create a new item.
+      Create a new item.
     </li>
     <li>
-      5. Inputs saved to localStorage
+      Inputs saved to localStorage
     </li>
+    <br />
+    <br />
     <a href="https://github.com/ccairns33"><strong>Explore the docs »</strong></a>
     <a href="https://ccairns33.github.io/todo-list/"><strong>Live Demo! »</strong></a>
     <br />
