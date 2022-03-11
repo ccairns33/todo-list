@@ -18,7 +18,7 @@
   <a href="https://github.com/ccairns33"><strong>Explore the docs »</strong></a>
   <a href="https://ccairns33.github.io/todo-list/"><strong>Live Demo! »</strong></a>
   <p align="center">
- Todo List with todos, projects and dates that each a title, description, date and priority (excluding the dates section). Built using Javascript, Webpack, and utilizes localStorage.
+ Todo List with todos, projects and dates that each have a title, description, date and priority (priority is excluded in the dates section). Built using Javascript, Webpack, and utilizes localStorage.
  <br />
  
   </p>
