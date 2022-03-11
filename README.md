@@ -19,7 +19,14 @@
   <p align="center">
  Todo List with todos, projects and dates that each a title, description, date and priority (excluding the dates section). Built using Javascript, Webpack, and utilizes localStorage.
  <br />
- <ul align="right">Capabilities include: </ul>
+ 
+    
+    
+    
+ <br />
+  </p>
+</div>
+<ul align="right">Capabilities include: </ul>
     <li>   
       1. View each category (todo, projects, imporant dates)
     </li>
@@ -35,16 +42,9 @@
     <li>
       5. Inputs saved to localStorage
     </li>
-    
-    
-    
- <br />
     <a href="https://github.com/ccairns33"><strong>Explore the docs »</strong></a>
     <a href="https://ccairns33.github.io/todo-list/"><strong>Live Demo! »</strong></a>
     <br />
-
-  </p>
-</div>
 
 <!-- TABLE OF CONTENTS -->
 <details>
